@@ -14,20 +14,13 @@ public class Login extends javax.swing.JFrame {
     
     public Login() {
         
-         // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.
+        // Inicializa todas las variables (o mejor dicho componentes) que usa el JFrame.
         initComponents();
-        
-        // Ubica el JFrame en el centro de la pantalla.
-        setLocationRelativeTo(null);
-        
-        // Muestra el JFrame.
-        setVisible(true);
-        
-        // Cambia el ícono del JFrame.
-        //this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
         
         support = new SupportFunctions();
         
+        support.initialOps(this);
+                
     }
 
     /**
@@ -79,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         panButtonsTopBar.setPreferredSize(new java.awt.Dimension(215, 40));
 
         btnMin.setBackground(new java.awt.Color(249, 249, 249));
-        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/expandArrow(Gray)-32px.png"))); // NOI18N
+        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/minIcon32.png"))); // NOI18N
         btnMin.setToolTipText("Minimizar");
         btnMin.setBorder(null);
         btnMin.setBorderPainted(false);
@@ -99,7 +92,7 @@ public class Login extends javax.swing.JFrame {
         });
 
         btnExit.setBackground(new java.awt.Color(249, 249, 249));
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/multiply(Red)-32px.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/closeIcon32.png"))); // NOI18N
         btnExit.setToolTipText("Cerrar");
         btnExit.setBorder(null);
         btnExit.setBorderPainted(false);
@@ -135,10 +128,11 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnMin)
                     .addComponent(btnExit))
-                .addGap(0, 40, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/giant/logoGiant.png"))); // NOI18N
 
         txtEmailField.setBackground(new java.awt.Color(249, 249, 249));
         txtEmailField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
@@ -177,14 +171,13 @@ public class Login extends javax.swing.JFrame {
         sptPassField.setForeground(new java.awt.Color(75, 0, 145));
 
         tgbShowPass.setBackground(new java.awt.Color(249, 249, 249));
-        tgbShowPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/hideIcon.png"))); // NOI18N
+        tgbShowPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/hideIcon.png"))); // NOI18N
         tgbShowPass.setBorder(null);
         tgbShowPass.setBorderPainted(false);
         tgbShowPass.setContentAreaFilled(false);
         tgbShowPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tgbShowPass.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/hideIcon.png"))); // NOI18N
         tgbShowPass.setFocusPainted(false);
-        tgbShowPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/showIcon.png"))); // NOI18N
+        tgbShowPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/showIcon.png"))); // NOI18N
 
         panClearBtn.setBackground(new java.awt.Color(239, 232, 244));
         panClearBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
@@ -332,7 +325,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(panLoginLayout.createSequentialGroup()
                 .addComponent(panButtonsTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblIcon)
+                .addComponent(lblIcon, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -349,7 +342,7 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(panOkBtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnForgotPass)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

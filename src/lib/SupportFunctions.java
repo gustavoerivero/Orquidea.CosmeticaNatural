@@ -1,12 +1,10 @@
 package lib;
 
 // Se importan las librerías a utilizar.
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseEvent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Image;
+import java.util.regex.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 /**
  *
@@ -306,6 +304,234 @@ public class SupportFunctions {
         
         // Se ubica la aplicación en la nueva ubicación.
         frame.setLocation(x - xx, y - xy);
+        
+    }
+    
+    /**
+     * Realiza las configuraciones visuales iniciales que debe tener el JFrame.
+     * @param frame JFrame que se va a configurar.
+     * @param iconPath Ruta de la imagen que se colocará como ícono.
+     */
+    public void initialOps(JFrame frame){
+                
+        // Ubica el JFrame en el centro de la pantalla.
+        frame.setLocationRelativeTo(null);
+        
+        // Muestra el JFrame.
+        frame.setVisible(true);
+        
+        // Cambia el ícono del JFrame.
+        frame.setIconImage(imageResource("/views/images/giant/flowerLogo.png"));
+                        
+    }
+    
+        /**
+     * Realiza las configuraciones visuales iniciales que debe tener el JFrame.
+     * @param dialog JDialog que se va a configurar.
+     * @param iconPath Ruta de la imagen que se colocará como ícono.
+     */
+    public void initialOps(JDialog dialog){
+                
+        // Ubica el JFrame en el centro de la pantalla.
+        dialog.setLocationRelativeTo(null);
+        
+        // Muestra el JFrame.
+        dialog.setVisible(true);
+        
+        // Cambia el ícono del JFrame.
+        dialog.setIconImage(imageResource("/views/images/giant/flowerLogo.png"));
+                
+    }
+    
+    /**
+     * Devuelve la imagen en la ruta pasada por parámetro.
+     * @param imagePath Ruta de la imagen que se desea obtener.
+     * @return Retorna imagen.
+     */
+    public Image imageResource(String imagePath){
+        
+        return new ImageIcon(getClass().getResource(imagePath)).getImage();
+        
+    }
+    
+    /**
+     * Devuelve el icono en la ruta pasada por parámetro.
+     * @param iconPath Ruta de la imagen que se desea obtener.
+     * @return Retorna imagen.
+     */
+    public ImageIcon iconResource(String iconPath){
+        
+        return new ImageIcon(getClass().getResource(iconPath));
+        
+    }
+        
+    /**
+     * Le da un ícono al JLabel pasado por parámetro. Cabe destacar que el ícono 
+     * es de 50px.
+     * @param type Depende del tipo de ícono que se desea agregar:
+     * '0'  :   About
+     * '1'  :   Alarm
+     * '2'  :   Approved
+     * '3'  :   Atention
+     * '4'  :   Birthday
+     * '5'  :   Delivery
+     * '6'  :   Error
+     * '7'  :   Expired
+     * '8'  :   Help
+     * '9'  :   Hide
+     * '10' :   HighPriority
+     * '11' :   Idea
+     * '12' :   Information
+     * '13' :   LowPriority
+     * '14' :   MediumPriority
+     * '15' :   Ok
+     * '16' :   Private
+     * '17' :   Proactivity
+     * '18' :   Remember
+     * '19' :   Show
+     * '20' :   Talk
+     * '21' :   Verified Account
+     * '22' :   Verified
+     * '23' :   Wake Up
+     * '24' :   Warning
+     * @return JLabel configurado.
+     */
+    public Icon iconForLabels(int type){
+        
+        Icon icon = null;
+        
+        // Identificar el tipo de mensaje
+        switch(type){
+            
+            // type == 0 -> About
+            case 0:
+                icon = iconResource("/views/images/large/aboutIcon.png");
+                break;
+            
+            // type == 1 -> Alarm
+            case 1:
+                icon = iconResource("/views/images/large/alarmIcon.png");
+                break;
+                
+            // type == 2 -> Approved
+            case 2:
+                icon = iconResource("/views/images/large/approvedIcon.png");
+                break;
+                
+            // type == 3 -> Atention
+            case 3:
+                icon = iconResource("/views/images/large/atentionIcon.png");
+                break;
+                
+            // type == 4 -> Birthday
+            case 4:
+                icon = iconResource("/views/images/large/birthdayIcon.png");
+                break;
+                
+            // type == 5 -> Delivery
+            case 5:
+                icon = iconResource("/views/images/large/deliveryIcon.png");
+                break;
+                
+            // type == 6 -> Error
+            case 6:
+                icon = iconResource("/views/images/large/errorIcon.png");
+                break;
+            
+            // type == 7 -> Expired
+            case 7:
+                icon = iconResource("/views/images/large/expiredIcon.png");
+                break;
+                            
+            // type == 8 -> Help
+            case 8:
+                icon = iconResource("/views/images/large/helpIcon.png");
+                break;
+                
+            // type == 9 -> Hide
+            case 9:
+                icon = iconResource("/views/images/large/hideIcon.png");
+                break;
+                
+            // type == 10 -> HighPriority
+            case 10:
+                icon = iconResource("/views/images/large/highPriorityIcon.png");
+                break;
+                
+            // type == 11 -> Idea
+            case 11:
+                icon = iconResource("/views/images/large/ideaIcon.png");
+                break;
+                
+            // type == 12 -> Information
+            case 12:
+                icon = iconResource("/views/images/large/informationIcon.png");
+                break;
+                
+            // type == 13 -> LowPriority
+            case 13:
+                icon = iconResource("/views/images/large/lowPriorityIcon.png");
+                break;
+                
+            // type == 14 -> MediumPriority
+            case 14:
+                icon = iconResource("/views/images/large/mediumPriorityIcon.png");
+                break;
+                
+            // type == 15 -> Ok
+            case 15:
+                icon = iconResource("/views/images/large/okIcon.png");
+                break;
+                
+            // type == 16 -> Private
+            case 16:
+                icon = iconResource("/views/images/large/privateIcon.png");
+                break;
+                
+            // type == 17 -> Proactivity 
+            case 17:
+                icon = iconResource("/views/images/large/proactivityIcon.png");
+                break;
+                
+            // type == 18 -> Remember
+            case 18:
+                icon = iconResource("/views/images/large/rememberIcon.png");
+                break;
+                
+            // type == 19 -> Show
+            case 19:
+                icon = iconResource("/views/images/large/showIcon.png");
+                break;
+                
+            // type == 20 -> Talk
+            case 20:
+                icon = iconResource("/views/images/large/talkIcon.png");
+                break;
+                
+            // type == 21 -> Verified Account
+            case 21:
+                icon = iconResource("/views/images/large/verifiedAccountIcon.png");
+                break;
+                
+            // type == 22 -> Verified
+            case 22:
+                icon = iconResource("/views/images/large/verifiedIcon.png");
+                break;
+                
+            // type == 23 -> WakeUp
+            case 23:
+                icon = iconResource("/views/images/large/wakeUpIcon.png");
+                break;
+                
+            // type == 24 -> Warning
+            case 24:
+                icon = iconResource("/views/images/large/warningIcon.png");
+                break;
+                
+        }
+        
+        // Devuelve el ícono deseado.
+        return icon;
         
     }
     

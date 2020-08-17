@@ -9,9 +9,9 @@ import lib.SupportFunctions;
  */
 public class ForgotPass extends javax.swing.JFrame {
 
-    int xx = 0, xy = 0;
+    private int xx = 0, xy = 0;
     
-    private SupportFunctions suport;
+    private SupportFunctions support;
     
     public ForgotPass() {
                 
@@ -19,19 +19,13 @@ public class ForgotPass extends javax.swing.JFrame {
         initComponents();
         
         // Se instancia la clase de Soporte.
-        suport = new SupportFunctions();
+        support = new SupportFunctions();
         
-        // Ubica el JFrame en el centro de la pantalla.
-        setLocationRelativeTo(null);
-        
-        // Muestra el JFrame.
-        setVisible(true);
-        
-        // Cambia el ícono del JFrame.
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
+        // Se realizan las configuraciones iniciales del JFrame.
+        support.initialOps(this);
         
         // Al iniciar, muestra la pantalla del paso número uno.
-        suport.cardSelection(panContent, panStepOne);
+        support.cardSelection(panContent, panStepOne);
         
     }
 
@@ -106,7 +100,7 @@ public class ForgotPass extends javax.swing.JFrame {
         panButtonsTopBar.setPreferredSize(new java.awt.Dimension(215, 40));
 
         btnMin.setBackground(new java.awt.Color(249, 249, 249));
-        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/expandArrow(Gray)-32px.png"))); // NOI18N
+        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/minIcon32.png"))); // NOI18N
         btnMin.setToolTipText("Minimizar");
         btnMin.setBorder(null);
         btnMin.setBorderPainted(false);
@@ -126,7 +120,7 @@ public class ForgotPass extends javax.swing.JFrame {
         });
 
         btnExit.setBackground(new java.awt.Color(249, 249, 249));
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/multiply(Red)-32px.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/closeIcon32.png"))); // NOI18N
         btnExit.setToolTipText("Cerrar");
         btnExit.setBorder(null);
         btnExit.setBorderPainted(false);
@@ -657,14 +651,13 @@ public class ForgotPass extends javax.swing.JFrame {
         lblDescr2.setText("<html><p align='center'>Ingresa tu nueva contraseña y confírmala.</p></html>");
 
         tgbShowPass.setBackground(new java.awt.Color(249, 249, 249));
-        tgbShowPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/hideIcon.png"))); // NOI18N
+        tgbShowPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/hideIcon.png"))); // NOI18N
         tgbShowPass.setBorder(null);
         tgbShowPass.setBorderPainted(false);
         tgbShowPass.setContentAreaFilled(false);
         tgbShowPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        tgbShowPass.setDisabledIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/hideIcon.png"))); // NOI18N
         tgbShowPass.setFocusPainted(false);
-        tgbShowPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/showIcon.png"))); // NOI18N
+        tgbShowPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/showIcon.png"))); // NOI18N
 
         pssPasswordField.setBackground(new java.awt.Color(249, 249, 249));
         pssPasswordField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N

@@ -103,7 +103,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="panButtonsTopBar" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="lblIcon" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblIcon" min="-2" pref="100" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="txtEmailField" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -122,7 +122,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnForgotPass" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="21" max="32767" attributes="0"/>
+                  <EmptySpace pref="23" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -169,7 +169,7 @@
                   <Color blue="f9" green="f9" red="f9" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/views/images/expandArrow(Gray)-32px.png"/>
+                  <Image iconType="3" name="/views/images/medium/minIcon32.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Minimizar"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -197,7 +197,7 @@
                   <Color blue="f9" green="f9" red="f9" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/views/images/multiply(Red)-32px.png"/>
+                  <Image iconType="3" name="/views/images/medium/closeIcon32.png"/>
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Cerrar"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -224,6 +224,9 @@
         <Component class="javax.swing.JLabel" name="lblIcon">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/views/images/giant/logoGiant.png"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txtEmailField">
@@ -302,7 +305,7 @@
               <Color blue="f9" green="f9" red="f9" type="rgb"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/views/images/hideIcon.png"/>
+              <Image iconType="3" name="/views/images/large/hideIcon.png"/>
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="null"/>
@@ -312,12 +315,9 @@
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor de Mano"/>
             </Property>
-            <Property name="disabledIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/views/images/hideIcon.png"/>
-            </Property>
             <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="selectedIcon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/views/images/showIcon.png"/>
+              <Image iconType="3" name="/views/images/large/showIcon.png"/>
             </Property>
           </Properties>
           <AuxValues>

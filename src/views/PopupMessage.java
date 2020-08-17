@@ -1,13 +1,17 @@
 
 package views;
 
+import lib.SupportFunctions;
+
 /**
  * 
  * @author Gustavo
  */
 public class PopupMessage extends javax.swing.JDialog {
 
-    int xx = 0, xy = 0;
+    private int xx = 0, xy = 0;
+    
+    private SupportFunctions support;
     
     /**
      * Constructor de mensaje emergente dedicado a Frames.
@@ -20,38 +24,16 @@ public class PopupMessage extends javax.swing.JDialog {
         
         super(parent, modal);
         
+        support = new SupportFunctions();
+        
         initComponents();
         
-        // Identificar el tipo de mensaje
-        switch(type){
-            // type == 1 -> Error
-            case 1:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/errorIcon.png")));
-                break;
-            // type == 2 -> High Priority
-            case 2:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/highPriorityIcon.png")));
-                break;
-            // type == 3 -> Help
-            case 3:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
-                break;
-            // type == 4 -> Ok
-            case 4:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
-        }
+        lblIcon.setIcon(support.iconForLabels(type));
         
         // Colocar el mensaje pasado por parámetro en el JDialog
         lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
                 
-        // Cambia el ícono del JDialog.
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
-        
-        // Ubicar el JDialog en el centro de la pantalla.
-        setLocationRelativeTo(null);
-        
-        // Hacer visible el JDialog
-        setVisible(true);
+        support.initialOps(this);
         
     }
     

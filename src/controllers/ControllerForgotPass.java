@@ -94,7 +94,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     ((email.equals("Ingrese su correo electrónico") ^ 
                     emailConfirmation.equals("Ingrese nuevamente su correo electrónico")))){
                 
-                popup = new PopupMessage(forgot, true, 1, "Debe ingresar los "
+                popup = new PopupMessage(forgot, true, 6, "Debe ingresar los "
                         + "datos solicitados.");
                 
             }
@@ -127,7 +127,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                                             + "confirmación para poder recuperar"
                                             + " tu contraseña es: " + codex)){
                             
-                            popup = new PopupMessage(forgot, true, 2, "El correo con el "
+                            popup = new PopupMessage(forgot, true, 15, "El correo con el "
                                 + "código de verificación ha sido enviado");
                             
                             // Se cambia la pantalla.
@@ -135,7 +135,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                             
                         } else
                             
-                            popup = new PopupMessage(forgot, true, 2, "El correo con el "
+                            popup = new PopupMessage(forgot, true, 10, "El correo con el "
                                 + "código de verificación no pudo ser enviado, "
                                     + "verifique los datos ingresados");
                                                   
@@ -146,12 +146,12 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                         
                         // Si los correos proporcionados no son iguales.
                         if(!email.equals(emailConfirmation))
-                            popup = new PopupMessage(forgot, true, 1, "Los correos "
+                            popup = new PopupMessage(forgot, true, 6, "Los correos "
                                     + "electrónicos no son iguales.");
                         
                         // Si el usuario no está registrado
                         else
-                            popup = new PopupMessage(forgot, true, 1, "El usuario "
+                            popup = new PopupMessage(forgot, true, 6, "El usuario "
                                     + "no está registrado.");
 
                     }
@@ -161,7 +161,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                 else{
                     
                     // Se muestra un mensaje emergente de "Datos faltantes".
-                    popup = new PopupMessage(forgot, true, 1, 
+                    popup = new PopupMessage(forgot, true, 6, 
                             "El correo electrónico no tiene un formato válido.");
                     
                 }
@@ -177,7 +177,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         // Volver al paso anterior.
         else if(evt.getSource() == forgot.btnBackStepOne){
             
-            select = new SelectOption(forgot, true, 2,
+            select = new SelectOption(forgot, true, 10,
                     "¿Está seguro que desea volver al paso anterior?", null, null);
             
             if(select.getOpc() == true)
@@ -191,14 +191,14 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     forgot.txtEmailField2.getText().equals("Ingresa código de "
                             + "verificación")){
                 
-                popup = new PopupMessage(forgot, true, 1, "Ingrese el código de "
+                popup = new PopupMessage(forgot, true, 6, "Ingrese el código de "
                         + "confirmación");
                 
             }
             
             else if (!forgot.txtEmailField2.getText().equals(codex)){
                 
-                popup = new PopupMessage(forgot, true, 1, "El código de "
+                popup = new PopupMessage(forgot, true, 6, "El código de "
                         + "confirmación es incorrecto.");
                 
             }
@@ -272,7 +272,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                         + "su contraseña por " + pass + ".");
                 
                 // Se muestra en pantalla mensaje de que la actualización fue exitosa.
-                popup = new PopupMessage(forgot, true, 4, 
+                popup = new PopupMessage(forgot, true, 15, 
                         "La contraseña ha sido actualizada.");
                 
                 // Se cierra pantalla.
@@ -287,14 +287,14 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     forgot.pssPasswordField.getPassword().toString().isEmpty() ^ 
                     forgot.pssPasswordField1.getPassword().toString().isEmpty())){
                 
-                popup = new PopupMessage(forgot, true, 1, 
+                popup = new PopupMessage(forgot, true, 6, 
                         "Debe ingresar una nueva contraseña.");
                 
             }
             // Si las contraseñas no son iguales.
             else{
                 
-                popup = new PopupMessage(forgot, true, 1, 
+                popup = new PopupMessage(forgot, true, 6, 
                         "Las contraseñas no son iguales.");
                 
             }

@@ -100,7 +100,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 pass.isEmpty() || pass.equals("Ingrese su contraseña"))){
                 
                 // Se muestra un mensaje emergente de "Datos faltantes".
-                popup = new PopupMessage(login, true, 1, 
+                popup = new PopupMessage(login, true, 6, 
                         "Debe ingresar los datos correspondientes.");
                 
             // Si todo está correcto, se accede al sistema.
@@ -143,7 +143,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                     else{
                     
                         // Se muestra un mensaje emergente de "Datos faltantes".
-                        popup = new PopupMessage(login, true, 1, 
+                        popup = new PopupMessage(login, true, 6, 
                                 "El correo electrónico o la contraseña son "
                                         + "incorrectos.");
 
@@ -154,7 +154,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 else{
                     
                     // Se muestra un mensaje emergente de "Datos faltantes".
-                    popup = new PopupMessage(login, true, 1, 
+                    popup = new PopupMessage(login, true, 6, 
                             "El correo electrónico no tiene un formato válido.");
                     
                 }
