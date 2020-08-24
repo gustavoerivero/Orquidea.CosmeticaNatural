@@ -5,6 +5,7 @@ package lib;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Clase para la conexión de la Base de Datos.
@@ -13,9 +14,8 @@ import java.sql.ResultSet;
 public class ConnectionDB {
     
     // Se declaran las variables que indican la Base de Datos, el usuario y la contraseña.
-    private final String url = "jdbc:postgresql://localhost:5432/LaRiveraDelValle",
-                        user = "postgres",
-                        pass = "1234";
+    private final String    info = "jdbc: sqlite: data.db",
+                            clss = "org.sqlite.JDBC";
     
     // Se instancia la clase de Connection.
     private Connection con;
@@ -33,10 +33,11 @@ public class ConnectionDB {
      */
     public Connection connect(){
         try {
+            Class.forName(clss);
             //Nos permitira abrir una conexion a nuestra Base de Datos.
-            con = DriverManager.getConnection(url, user, pass);
+            con = DriverManager.getConnection(info);
             System.out.println("La conexión con la Base de Datos se realizó correctamente.");
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Fallo al conectar " + e.getMessage());
         }
         return con;
@@ -47,12 +48,12 @@ public class ConnectionDB {
      * @param sql Sentencia SQL para consultas.
      * @return 
      */
-    public ResultSet queryConsultar(String sql){
+    public ResultSet queryConsult(String sql){
         try {
             //Nos permitira realizar sentencias sobre la Base de Datos
-            java.sql.Statement ejecutorQuery = con.createStatement();
+            java.sql.Statement ejecutionQuery = con.createStatement();
             //Variable que nos ayudara a realizar consultas a la Base de Datos
-            ResultSet r = ejecutorQuery.executeQuery(sql);
+            ResultSet r = ejecutionQuery.executeQuery(sql);
             System.out.println("Se han obtenido datos.");
             return r;
             
@@ -100,7 +101,7 @@ public class ConnectionDB {
             String SQL = "SELECT \"id\" FROM \"" + data + "\";";
             
             // Se realiza la consulta y se obtiene el resultado.
-            ResultSet rs = queryConsultar(SQL);
+            ResultSet rs = queryConsult(SQL);
             
             // Se desconecta la BD.
             disconnect();
@@ -133,7 +134,7 @@ public class ConnectionDB {
             con.close();
             System.out.println("Exito al Desconectar la Base de Datos.");
         } catch (Exception e) {
-            System.out.println("Fallo al desconectar Error: "+ e.getMessage());
+            System.out.println("Fallo al desconectar. Error: "+ e.getMessage());
         }
     }
     

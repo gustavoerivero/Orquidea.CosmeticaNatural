@@ -9,7 +9,8 @@ public class Notification {
     
     private int     id;
     
-    private String  message;
+    private String  name,
+                    message;
     
     private char    showUp,
                     type,
@@ -18,15 +19,17 @@ public class Notification {
     /**
      * Constructor de la clase Notificación.
      * @param id Atributo identificador (Autoincrementable).
+     * @param name Nombre de la notifiación,
      * @param message Mensaje de la notificación.
      * @param showUp Mensaje mostrado.
      * @param type Tipo de mensaje.
      * @param state Estado (Activo o Inactivo).
      */
-    public Notification(int id, String message, char showUp,
+    public Notification(int id, String name, String message, char showUp,
             char type, char state) {
         
         this.id = id;
+        this.name = name;
         this.message = message;
         this.showUp = showUp;
         this.type = type;
@@ -40,6 +43,14 @@ public class Notification {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getMessage() {

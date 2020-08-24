@@ -1,6 +1,8 @@
 
 package models;
 
+import java.util.Date;
+
 /**
  * Clase de Gasto Fijo.
  * @author Gustavo
@@ -13,6 +15,8 @@ public class FixedExpense {
     private String  name,
                     description;
     
+    private Date    date;
+    
     private double  cost;
     
     private char    type,
@@ -24,17 +28,19 @@ public class FixedExpense {
      * @param enterpriseId Atributo identificador de la empresa.
      * @param name Nombre del gasto fijo.
      * @param description Descripción del gasto fijo.
+     * @param date Fecha del gasto fijo.
      * @param cost Monto del gasto.
      * @param type Tipo de gasto.
      * @param state Estado del gasto.
      */
     public FixedExpense(int id, int enterpriseId, String name, 
-            String description, double cost, char type, char state) {
+            String description, Date date, double cost, char type, char state) {
         
         this.id = id;
         this.enterpriseId = enterpriseId;
         this.name = name;
         this.description = description;
+        this.date = date;
         this.cost = cost;
         this.type = type;
         this.state = state;
@@ -73,6 +79,14 @@ public class FixedExpense {
         this.description = description;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+    
     public double getCost() {
         return cost;
     }

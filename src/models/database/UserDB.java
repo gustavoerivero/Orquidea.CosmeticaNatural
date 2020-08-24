@@ -40,7 +40,7 @@ public class UserDB {
                             "' AND \"state\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
+            java.sql.ResultSet rs = con.queryConsult(SQL);
             
             // Se desconecta la BD.
             con.disconnect();
@@ -76,7 +76,7 @@ public class UserDB {
                             + email + "' AND \"state\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
+            java.sql.ResultSet rs = con.queryConsult(SQL);
             
             // Se desconecta la BD.
             con.disconnect();
@@ -107,7 +107,7 @@ public class UserDB {
                             + email + "' AND \"state\" = '" + estatus + "';";
             
             // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
+            java.sql.ResultSet rs = con.queryConsult(SQL);
             
             // Se desconecta la BD.
             con.disconnect();
@@ -169,7 +169,7 @@ public class UserDB {
         con.connect();
         
         // Se realiza y se recibe la consulta.
-        result = con.queryConsultar(SQL);
+        result = con.queryConsult(SQL);
         
         System.out.println("La consulta se realizó con éxito.");
         
@@ -294,7 +294,7 @@ public class UserDB {
                             + email + "' AND \"state\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsultar(SQL);
+            java.sql.ResultSet rs = con.queryConsult(SQL);
             
             // Se ubica el resultado obtenido.
             rs.next();
@@ -377,7 +377,7 @@ public class UserDB {
         con.connect();
         
         // Se realiza y se recibe la consulta.
-        ResultSet result = con.queryConsultar(SQL);
+        ResultSet result = con.queryConsult(SQL);
         
         System.out.println("La consulta se realizó con éxito.");
         

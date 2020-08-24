@@ -12,6 +12,7 @@ public class Enterprise {
     private String  dni,
                     name,
                     description,
+                    direction,
                     email;
     
     private long    phone;
@@ -24,17 +25,19 @@ public class Enterprise {
      * @param dni DNI de la Empresa.
      * @param name Nombre de la Empresa.
      * @param description Descripción de la Empresa.
+     * @param direction Dirección de la Empresa.
      * @param email Correo electrónico de la Empresa.
      * @param phone Teléfono de la Empresa.
      * @param state Estado (Activo o Inactivo).
      */
     public Enterprise(int id, String dni, String name, String description, 
-            String email, long phone, char state) {
+            String direction, String email, long phone, char state) {
         
         this.id = id;
         this.dni = dni;
         this.name = name;
         this.description = description;
+        this.direction = direction;
         this.email = email;
         this.phone = phone;
         this.state = state;
@@ -63,6 +66,14 @@ public class Enterprise {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+    
+    public String getDirection() {
+        return direction;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
     }
 
     public String getEmail() {

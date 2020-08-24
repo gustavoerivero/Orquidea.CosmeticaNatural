@@ -1,6 +1,7 @@
 
 package models;
 
+import java.awt.Image;
 import java.util.Date;
 
 /**
@@ -9,40 +10,45 @@ import java.util.Date;
  */
 public class User {
     
-    private int     id;
+    private int     id,
+                    userTypeId;
     
     private String  email,
                     password;
     
-    private char    type,
-                    rememberData,
+    private char    rememberData,
                     state;
     
     private Date    firstSession,
                     lastSession;
+    
+    private Image   photo;
 
     /**
      * Constructor de la clase Usuario.
      * @param id Atributo identificador (Autoincrementable).
+     * @param userTypeId Atributo identificador del Tipo de Usuario.
      * @param email Correo electrónico del usuario.
      * @param password Contraseña del usuario.
      * @param type Tipo de usuario.
-     * @param rememberData Se recuerda la información del usuario.
      * @param state Estado (Activo o Inactivo).
      * @param firstSession Primer inicio de sesión del usuario.
      * @param lastSession Último inicio de sesión del usuario.
+     * @param photo Foto del usuario.
      */
-    public User(int id, String email, String password, char type, 
-            char rememberData, char state, Date firstSession, Date lastSession) {
+    public User(int id, int userTypeId, String email, String password,
+            char rememberData, char state, Date firstSession, Date lastSession,
+            Image photo) {
         
         this.id = id;
+        this.userTypeId = userTypeId;
         this.email = email;
         this.password = password;
-        this.type = type;
         this.rememberData = rememberData;
         this.state = state;
         this.firstSession = firstSession;
         this.lastSession = lastSession;
+        this.photo = photo;
         
     }
 
@@ -52,6 +58,14 @@ public class User {
     
     public void setId(int id){
         this.id = id;
+    }
+
+    public int getUserTypeId() {
+        return userTypeId;
+    }
+
+    public void setUserTypeId(int userTypeId) {
+        this.userTypeId = userTypeId;
     }
     
     public String getEmail() {
@@ -69,15 +83,7 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
-
-    public char getType() {
-        return type;
-    }
-
-    public void setType(char type) {
-        this.type = type;
-    }
-
+    
     public char getRememberData() {
         return rememberData;
     }
@@ -108,6 +114,14 @@ public class User {
 
     public void setLastSession(Date lastSession) {
         this.lastSession = lastSession;
+    }
+
+    public Image getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Image photo) {
+        this.photo = photo;
     }
         
 }

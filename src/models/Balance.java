@@ -8,11 +8,12 @@ package models;
 public class Balance {
     
     private int     id,
-                    walletId;
+                    enterpriseWalletId;
     
     private String  name;
     
-    private double  amount;
+    private double  percentage,
+                    amount;
     
     private char    type,
                     state;
@@ -20,18 +21,20 @@ public class Balance {
     /**
      * Constructor de la clase Saldo.
      * @param id Atributo identificador (Autoincrementable).
-     * @param walletId Atributo identificador de la billetera.
+     * @param enterpriseWalletId Atributo identificador de la billetera.
      * @param name
+     * @param percentage
      * @param amount
      * @param type
      * @param state 
      */
-    public Balance(int id, int walletId, String name, double amount, 
+    public Balance(int id, int enterpriseWalletId, String name, double amount, 
             char type, char state) {
         
         this.id = id;
-        this.walletId = walletId;
+        this.enterpriseWalletId = enterpriseWalletId;
         this.name = name;
+        this.percentage = percentage;
         this.amount = amount;
         this.type = type;
         this.state = state;
@@ -46,12 +49,12 @@ public class Balance {
         this.id = id;
     }
 
-    public int getWalletId() {
-        return walletId;
+    public int getEnterpriseWalletId() {
+        return enterpriseWalletId;
     }
 
-    public void setWalletId(int walletId) {
-        this.walletId = walletId;
+    public void setEnterpriseWalletId(int enterpriseWalletId) {
+        this.enterpriseWalletId = enterpriseWalletId;
     }
 
     public String getName() {
@@ -62,6 +65,14 @@ public class Balance {
         this.name = name;
     }
 
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+    
     public double getAmount() {
         return amount;
     }

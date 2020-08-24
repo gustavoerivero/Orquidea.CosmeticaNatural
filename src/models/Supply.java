@@ -15,8 +15,7 @@ public class Supply {
     private double  stockMinimun,
                     stockMaximun,
                     quantity,
-                    cost,
-                    price;
+                    cost;
     
     private char    state;
 
@@ -29,12 +28,10 @@ public class Supply {
      * @param stockMaximun Stock Máximo de insumo.
      * @param quantity Cantidad de insumos.
      * @param cost Costo del insumo.
-     * @param price Precio del insumo
      * @param state Estado del insumo.
      */
     public Supply(int id, String name, String description, double stockMinimun, 
-            double stockMaximun, double quantity, double cost, double price, 
-            char state) {
+            double stockMaximun, double quantity, double cost, char state) {
         
         this.id = id;
         this.name = name;
@@ -43,7 +40,6 @@ public class Supply {
         this.stockMaximun = stockMaximun;
         this.quantity = quantity;
         this.cost = cost;
-        this.price = price;
         this.state = state;
         
     }
@@ -102,18 +98,6 @@ public class Supply {
 
     public void setCost(double cost) {
         this.cost = cost;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public char getState() {
-        return state;
     }
 
     public void setState(char state) {
