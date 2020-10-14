@@ -80,8 +80,8 @@ public class ForgotPass extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        panForgot.setBackground(new java.awt.Color(249, 249, 249));
-        panForgot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(75, 0, 145), 1, true));
+        panForgot.setBackground(new java.awt.Color(255, 245, 249));
+        panForgot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 144, 158), 1, true));
         panForgot.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panForgotMouseDragged(evt);
@@ -96,10 +96,10 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        panButtonsTopBar.setBackground(new java.awt.Color(249, 249, 249));
+        panButtonsTopBar.setBackground(new java.awt.Color(255, 245, 249));
         panButtonsTopBar.setPreferredSize(new java.awt.Dimension(215, 40));
 
-        btnMin.setBackground(new java.awt.Color(249, 249, 249));
+        btnMin.setBackground(new java.awt.Color(255, 245, 249));
         btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/minIcon32.png"))); // NOI18N
         btnMin.setToolTipText("Minimizar");
         btnMin.setBorder(null);
@@ -119,7 +119,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setBackground(new java.awt.Color(249, 249, 249));
+        btnExit.setBackground(new java.awt.Color(255, 245, 249));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/closeIcon32.png"))); // NOI18N
         btnExit.setToolTipText("Cerrar");
         btnExit.setBorder(null);
@@ -162,9 +162,9 @@ public class ForgotPass extends javax.swing.JFrame {
         panContent.setBackground(new java.awt.Color(249, 249, 249));
         panContent.setLayout(new java.awt.CardLayout());
 
-        panStepOne.setBackground(new java.awt.Color(249, 249, 249));
+        panStepOne.setBackground(new java.awt.Color(255, 245, 249));
 
-        txtEmailField.setBackground(new java.awt.Color(249, 249, 249));
+        txtEmailField.setBackground(new java.awt.Color(255, 245, 249));
         txtEmailField.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtEmailField.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtEmailField.setText("Ingrese su correo electrónico");
@@ -181,11 +181,11 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        sptEmailField.setBackground(new java.awt.Color(75, 0, 145));
-        sptEmailField.setForeground(new java.awt.Color(75, 0, 145));
+        sptEmailField.setBackground(new java.awt.Color(0, 144, 158));
+        sptEmailField.setForeground(new java.awt.Color(0, 144, 158));
 
-        panClearBtn1.setBackground(new java.awt.Color(239, 232, 244));
-        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panClearBtn1.setBackground(new java.awt.Color(254, 220, 234));
+        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panClearBtn1.setPreferredSize(new java.awt.Dimension(156, 62));
         panClearBtn1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -198,7 +198,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnClear1.setBackground(new java.awt.Color(245, 245, 245));
+        btnClear1.setBackground(new java.awt.Color(254, 220, 234));
         btnClear1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnClear1.setForeground(new java.awt.Color(0, 0, 0));
         btnClear1.setText("Limpiar");
@@ -233,8 +233,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnClear1, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        panOkBtn.setBackground(new java.awt.Color(239, 232, 244));
-        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panOkBtn.setBackground(new java.awt.Color(254, 220, 234));
+        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panOkBtn.setPreferredSize(new java.awt.Dimension(156, 62));
         panOkBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -247,7 +247,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnOk.setBackground(new java.awt.Color(245, 245, 245));
+        btnOk.setBackground(new java.awt.Color(254, 220, 234));
         btnOk.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnOk.setForeground(new java.awt.Color(0, 0, 0));
         btnOk.setText("Enviar");
@@ -282,7 +282,7 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        txtEmailField1.setBackground(new java.awt.Color(249, 249, 249));
+        txtEmailField1.setBackground(new java.awt.Color(255, 245, 249));
         txtEmailField1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         txtEmailField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtEmailField1.setText("Ingrese nuevamente su correo electrónico");
@@ -299,11 +299,11 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        sptEmailField1.setBackground(new java.awt.Color(75, 0, 145));
-        sptEmailField1.setForeground(new java.awt.Color(75, 0, 145));
+        sptEmailField1.setBackground(new java.awt.Color(0, 144, 158));
+        sptEmailField1.setForeground(new java.awt.Color(0, 144, 158));
 
         lblTittleOne.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lblTittleOne.setForeground(new java.awt.Color(75, 0, 145));
+        lblTittleOne.setForeground(new java.awt.Color(0, 144, 158));
         lblTittleOne.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTittleOne.setText("Recuperemos tu contraseña");
 
@@ -380,11 +380,11 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        sptEmailField2.setBackground(new java.awt.Color(75, 0, 145));
-        sptEmailField2.setForeground(new java.awt.Color(75, 0, 145));
+        sptEmailField2.setBackground(new java.awt.Color(0, 144, 158));
+        sptEmailField2.setForeground(new java.awt.Color(0, 144, 158));
 
-        panBackStepOneBtn.setBackground(new java.awt.Color(239, 232, 244));
-        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panBackStepOneBtn.setBackground(new java.awt.Color(254, 220, 234));
+        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panBackStepOneBtn.setPreferredSize(new java.awt.Dimension(156, 62));
         panBackStepOneBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -397,7 +397,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnBackStepOne.setBackground(new java.awt.Color(245, 245, 245));
+        btnBackStepOne.setBackground(new java.awt.Color(254, 220, 234));
         btnBackStepOne.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnBackStepOne.setForeground(new java.awt.Color(0, 0, 0));
         btnBackStepOne.setText("Atrás");
@@ -432,8 +432,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnBackStepOne, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        panOkBtn1.setBackground(new java.awt.Color(239, 232, 244));
-        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panOkBtn1.setBackground(new java.awt.Color(254, 220, 234));
+        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panOkBtn1.setPreferredSize(new java.awt.Dimension(156, 62));
         panOkBtn1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -446,7 +446,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnOk1.setBackground(new java.awt.Color(245, 245, 245));
+        btnOk1.setBackground(new java.awt.Color(254, 220, 234));
         btnOk1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnOk1.setForeground(new java.awt.Color(0, 0, 0));
         btnOk1.setText("Aceptar");
@@ -482,7 +482,7 @@ public class ForgotPass extends javax.swing.JFrame {
         );
 
         lblTittleOne1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lblTittleOne1.setForeground(new java.awt.Color(75, 0, 145));
+        lblTittleOne1.setForeground(new java.awt.Color(0, 144, 158));
         lblTittleOne1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTittleOne1.setText("Recuperemos tu contraseña");
 
@@ -537,11 +537,11 @@ public class ForgotPass extends javax.swing.JFrame {
 
         panStepThree.setBackground(new java.awt.Color(249, 249, 249));
 
-        sptEmailField3.setBackground(new java.awt.Color(75, 0, 145));
-        sptEmailField3.setForeground(new java.awt.Color(75, 0, 145));
+        sptEmailField3.setBackground(new java.awt.Color(0, 144, 158));
+        sptEmailField3.setForeground(new java.awt.Color(0, 144, 158));
 
-        panClearBtn2.setBackground(new java.awt.Color(239, 232, 244));
-        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panClearBtn2.setBackground(new java.awt.Color(254, 220, 234));
+        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panClearBtn2.setPreferredSize(new java.awt.Dimension(156, 62));
         panClearBtn2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -554,7 +554,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnClear2.setBackground(new java.awt.Color(245, 245, 245));
+        btnClear2.setBackground(new java.awt.Color(254, 220, 234));
         btnClear2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnClear2.setForeground(new java.awt.Color(0, 0, 0));
         btnClear2.setText("Limpiar");
@@ -589,8 +589,8 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnClear2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        panOkBtn2.setBackground(new java.awt.Color(239, 232, 244));
-        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 232, 244)));
+        panOkBtn2.setBackground(new java.awt.Color(254, 220, 234));
+        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panOkBtn2.setPreferredSize(new java.awt.Dimension(156, 62));
         panOkBtn2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
@@ -603,7 +603,7 @@ public class ForgotPass extends javax.swing.JFrame {
             }
         });
 
-        btnOk2.setBackground(new java.awt.Color(245, 245, 245));
+        btnOk2.setBackground(new java.awt.Color(254, 220, 234));
         btnOk2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnOk2.setForeground(new java.awt.Color(0, 0, 0));
         btnOk2.setText("Actualizar");
@@ -638,11 +638,11 @@ public class ForgotPass extends javax.swing.JFrame {
                 .addComponent(btnOk2, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE))
         );
 
-        sptEmailField4.setBackground(new java.awt.Color(75, 0, 145));
-        sptEmailField4.setForeground(new java.awt.Color(75, 0, 145));
+        sptEmailField4.setBackground(new java.awt.Color(0, 144, 158));
+        sptEmailField4.setForeground(new java.awt.Color(0, 144, 158));
 
         lblTittleOne2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
-        lblTittleOne2.setForeground(new java.awt.Color(75, 0, 145));
+        lblTittleOne2.setForeground(new java.awt.Color(0, 144, 158));
         lblTittleOne2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTittleOne2.setText("Recuperemos tu contraseña");
 
@@ -798,7 +798,7 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMinMouseMoved
 
     private void btnMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseExited
-        btnMin.setBackground(new java.awt.Color(249,249,249));
+        btnMin.setBackground(new java.awt.Color(255, 245, 249));
     }//GEN-LAST:event_btnMinMouseExited
 
     private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
@@ -806,7 +806,7 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitMouseMoved
 
     private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
-        btnExit.setBackground(new java.awt.Color(249,249,249));
+        btnExit.setBackground(new java.awt.Color(255, 245, 249));
     }//GEN-LAST:event_btnExitMouseExited
 
     private void panForgotMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panForgotMouseDragged
@@ -862,51 +862,51 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailFieldKeyTyped
 
     private void btnClear1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClear1MouseMoved
-        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnClear1.setForeground(new java.awt.Color(255,255,255));
-        panClearBtn1.setBackground(new java.awt.Color(66,0,124));
+        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnClear1.setForeground(new java.awt.Color(255, 245, 249));
+        panClearBtn1.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnClear1MouseMoved
 
     private void btnClear1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClear1MouseExited
-        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnClear1.setForeground(new java.awt.Color(0,0,0));
-        panClearBtn1.setBackground(new java.awt.Color(239,232,244));
+        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnClear1.setForeground(new java.awt.Color(0, 0, 0));
+        panClearBtn1.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnClear1MouseExited
 
     private void panClearBtn1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panClearBtn1MouseMoved
-        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnClear1.setForeground(new java.awt.Color(255,255,255));
-        panClearBtn1.setBackground(new java.awt.Color(66,0,124));
+        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnClear1.setForeground(new java.awt.Color(255, 245, 249));
+        panClearBtn1.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panClearBtn1MouseMoved
 
     private void panClearBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panClearBtn1MouseExited
-        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnClear1.setForeground(new java.awt.Color(0,0,0));
-        panClearBtn1.setBackground(new java.awt.Color(239,232,244));
+        panClearBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnClear1.setForeground(new java.awt.Color(0, 0, 0));
+        panClearBtn1.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panClearBtn1MouseExited
 
     private void btnOkMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseMoved
-        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnOkMouseMoved
 
     private void btnOkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseExited
-        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnOkMouseExited
 
     private void panOkBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtnMouseMoved
-        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panOkBtnMouseMoved
 
     private void panOkBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtnMouseExited
-        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panOkBtnMouseExited
 
     private void txtEmailField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtEmailField1MouseClicked
@@ -926,99 +926,99 @@ public class ForgotPass extends javax.swing.JFrame {
     }//GEN-LAST:event_txtEmailField2KeyTyped
 
     private void btnBackStepOneMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackStepOneMouseMoved
-        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnBackStepOne.setForeground(new java.awt.Color(255,255,255));
-        panBackStepOneBtn.setBackground(new java.awt.Color(66,0,124));
+        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnBackStepOne.setForeground(new java.awt.Color(255, 245, 249));
+        panBackStepOneBtn.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnBackStepOneMouseMoved
 
     private void btnBackStepOneMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBackStepOneMouseExited
-        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnBackStepOne.setForeground(new java.awt.Color(0,0,0));
-        panBackStepOneBtn.setBackground(new java.awt.Color(239,232,244));
+        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnBackStepOne.setForeground(new java.awt.Color(0, 0, 0));
+        panBackStepOneBtn.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnBackStepOneMouseExited
 
     private void panBackStepOneBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panBackStepOneBtnMouseMoved
-        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnBackStepOne.setForeground(new java.awt.Color(255,255,255));
-        panBackStepOneBtn.setBackground(new java.awt.Color(66,0,124));
+        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnBackStepOne.setForeground(new java.awt.Color(255, 245, 249));
+        panBackStepOneBtn.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panBackStepOneBtnMouseMoved
 
     private void panBackStepOneBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panBackStepOneBtnMouseExited
-        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnBackStepOne.setForeground(new java.awt.Color(0,0,0));
-        panBackStepOneBtn.setBackground(new java.awt.Color(239,232,244));
+        panBackStepOneBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnBackStepOne.setForeground(new java.awt.Color(0, 0, 0));
+        panBackStepOneBtn.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panBackStepOneBtnMouseExited
 
     private void btnOk1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOk1MouseMoved
-        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk1.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn1.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk1.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn1.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnOk1MouseMoved
 
     private void btnOk1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOk1MouseExited
-        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk1.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn1.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk1.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn1.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnOk1MouseExited
 
     private void panOkBtn1MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtn1MouseMoved
-        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk1.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn1.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk1.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn1.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panOkBtn1MouseMoved
 
     private void panOkBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtn1MouseExited
-        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk1.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn1.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk1.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn1.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panOkBtn1MouseExited
 
     private void btnClear2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClear2MouseMoved
-        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnClear2.setForeground(new java.awt.Color(255,255,255));
-        panClearBtn2.setBackground(new java.awt.Color(66,0,124));
+        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnClear2.setForeground(new java.awt.Color(255, 245, 249));
+        panClearBtn2.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnClear2MouseMoved
 
     private void btnClear2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClear2MouseExited
-        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnClear2.setForeground(new java.awt.Color(0,0,0));
-        panClearBtn2.setBackground(new java.awt.Color(239,232,244));
+        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnClear2.setForeground(new java.awt.Color(0, 0, 0));
+        panClearBtn2.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnClear2MouseExited
 
     private void panClearBtn2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panClearBtn2MouseMoved
-        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnClear2.setForeground(new java.awt.Color(255,255,255));
-        panClearBtn2.setBackground(new java.awt.Color(66,0,124));
+        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnClear2.setForeground(new java.awt.Color(255, 245, 249));
+        panClearBtn2.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panClearBtn2MouseMoved
 
     private void panClearBtn2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panClearBtn2MouseExited
-        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnClear2.setForeground(new java.awt.Color(0,0,0));
-        panClearBtn2.setBackground(new java.awt.Color(239,232,244));
+        panClearBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnClear2.setForeground(new java.awt.Color(0, 0, 0));
+        panClearBtn2.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panClearBtn2MouseExited
 
     private void btnOk2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOk2MouseMoved
-        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk2.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn2.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk2.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn2.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnOk2MouseMoved
 
     private void btnOk2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOk2MouseExited
-        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk2.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn2.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk2.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn2.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnOk2MouseExited
 
     private void panOkBtn2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtn2MouseMoved
-        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk2.setForeground(new java.awt.Color(255,255,255));
-        panOkBtn2.setBackground(new java.awt.Color(66,0,124));
+        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk2.setForeground(new java.awt.Color(255, 245, 249));
+        panOkBtn2.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_panOkBtn2MouseMoved
 
     private void panOkBtn2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panOkBtn2MouseExited
-        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
-        btnOk2.setForeground(new java.awt.Color(0,0,0));
-        panOkBtn2.setBackground(new java.awt.Color(239,232,244));
+        panOkBtn2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
+        btnOk2.setForeground(new java.awt.Color(0, 0, 0));
+        panOkBtn2.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_panOkBtn2MouseExited
 
     private void pssPasswordFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pssPasswordFieldMouseClicked

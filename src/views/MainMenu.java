@@ -35,7 +35,11 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public void addActionEvents(java.awt.event.ActionListener evt){
         
-        
+        btnExit.addActionListener(evt);
+        btnMin.addActionListener(evt);
+        btnSeeNotification.addActionListener(evt);
+        btnSeeProfile.addActionListener(evt);
+        btnSignOff.addActionListener(evt);
         
     }
     
@@ -65,16 +69,26 @@ public class MainMenu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panMainMenu = new javax.swing.JPanel();
         panTopBar = new javax.swing.JPanel();
-        panLateralMenu = new javax.swing.JPanel();
+        btnMin = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        btnSignOff = new javax.swing.JButton();
+        btnSeeProfile = new javax.swing.JButton();
+        btnSeeNotification = new javax.swing.JButton();
         panMainPanel = new javax.swing.JPanel();
+        panLateralMenu = new javax.swing.JPanel();
+        lblCaelestiDevelopment = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(249, 249, 249));
         setUndecorated(true);
         setResizable(false);
 
-        panTopBar.setBackground(new java.awt.Color(249, 249, 249));
+        panMainMenu.setBackground(new java.awt.Color(255, 245, 249));
+        panMainMenu.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 144, 158)));
+
+        panTopBar.setBackground(new java.awt.Color(255, 245, 249));
         panTopBar.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panTopBarMouseDragged(evt);
@@ -89,78 +103,251 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
+        btnMin.setBackground(new java.awt.Color(255, 245, 249));
+        btnMin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/minIcon32.png"))); // NOI18N
+        btnMin.setToolTipText("Minimizar");
+        btnMin.setBorder(null);
+        btnMin.setBorderPainted(false);
+        btnMin.setContentAreaFilled(false);
+        btnMin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMin.setFocusPainted(false);
+        btnMin.setOpaque(true);
+        btnMin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnMinMouseMoved(evt);
+            }
+        });
+        btnMin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinMouseExited(evt);
+            }
+        });
+
+        btnExit.setBackground(new java.awt.Color(255, 245, 249));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/closeIcon32.png"))); // NOI18N
+        btnExit.setToolTipText("Cerrar");
+        btnExit.setBorder(null);
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.setFocusPainted(false);
+        btnExit.setOpaque(true);
+        btnExit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnExitMouseMoved(evt);
+            }
+        });
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExitMouseExited(evt);
+            }
+        });
+
+        btnSignOff.setBackground(new java.awt.Color(255, 245, 249));
+        btnSignOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/signOffIcon32.png"))); // NOI18N
+        btnSignOff.setToolTipText("Cerrar Sesión");
+        btnSignOff.setBorder(null);
+        btnSignOff.setBorderPainted(false);
+        btnSignOff.setContentAreaFilled(false);
+        btnSignOff.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSignOff.setFocusPainted(false);
+        btnSignOff.setOpaque(true);
+        btnSignOff.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSignOffMouseMoved(evt);
+            }
+        });
+        btnSignOff.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSignOffMouseExited(evt);
+            }
+        });
+
+        btnSeeProfile.setBackground(new java.awt.Color(255, 245, 249));
+        btnSeeProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/accountProfileIcon32.png"))); // NOI18N
+        btnSeeProfile.setToolTipText("Ver Perfil");
+        btnSeeProfile.setBorder(null);
+        btnSeeProfile.setBorderPainted(false);
+        btnSeeProfile.setContentAreaFilled(false);
+        btnSeeProfile.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeeProfile.setFocusPainted(false);
+        btnSeeProfile.setOpaque(true);
+        btnSeeProfile.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSeeProfileMouseMoved(evt);
+            }
+        });
+        btnSeeProfile.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeeProfileMouseExited(evt);
+            }
+        });
+
+        btnSeeNotification.setBackground(new java.awt.Color(255, 245, 249));
+        btnSeeNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/notificationOffIcon32.png"))); // NOI18N
+        btnSeeNotification.setToolTipText("Ver notificaciones");
+        btnSeeNotification.setBorder(null);
+        btnSeeNotification.setBorderPainted(false);
+        btnSeeNotification.setContentAreaFilled(false);
+        btnSeeNotification.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSeeNotification.setFocusPainted(false);
+        btnSeeNotification.setOpaque(true);
+        btnSeeNotification.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSeeNotificationMouseMoved(evt);
+            }
+        });
+        btnSeeNotification.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeeNotificationMouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout panTopBarLayout = new javax.swing.GroupLayout(panTopBar);
         panTopBar.setLayout(panTopBarLayout);
         panTopBarLayout.setHorizontalGroup(
             panTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panTopBarLayout.createSequentialGroup()
+                .addContainerGap(516, Short.MAX_VALUE)
+                .addComponent(btnSeeNotification)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSeeProfile)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnSignOff)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnMin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnExit)
+                .addGap(14, 14, 14))
         );
         panTopBarLayout.setVerticalGroup(
             panTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 50, Short.MAX_VALUE)
+            .addComponent(btnMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSignOff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSeeProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnSeeNotification, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnExit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panLateralMenu.setBackground(new java.awt.Color(249, 249, 249));
+        panMainPanel.setBackground(new java.awt.Color(255, 245, 249));
+        panMainPanel.setLayout(new java.awt.CardLayout());
+
+        panLateralMenu.setBackground(new java.awt.Color(255, 230, 240));
+        panLateralMenu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panLateralMenuMouseDragged(evt);
+            }
+        });
+        panLateralMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panLateralMenuMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panLateralMenuMouseReleased(evt);
+            }
+        });
+
+        lblCaelestiDevelopment.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        lblCaelestiDevelopment.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/small/Caelesti Small.png"))); // NOI18N
+        lblCaelestiDevelopment.setText("Caelesti Development");
 
         javax.swing.GroupLayout panLateralMenuLayout = new javax.swing.GroupLayout(panLateralMenu);
         panLateralMenu.setLayout(panLateralMenuLayout);
         panLateralMenuLayout.setHorizontalGroup(
             panLateralMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 350, Short.MAX_VALUE)
+            .addComponent(lblCaelestiDevelopment, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
         );
         panLateralMenuLayout.setVerticalGroup(
             panLateralMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 598, Short.MAX_VALUE)
+            .addComponent(lblCaelestiDevelopment, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        panMainPanel.setBackground(new java.awt.Color(249, 249, 249));
-
-        javax.swing.GroupLayout panMainPanelLayout = new javax.swing.GroupLayout(panMainPanel);
-        panMainPanel.setLayout(panMainPanelLayout);
-        panMainPanelLayout.setHorizontalGroup(
-            panMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 698, Short.MAX_VALUE)
+        javax.swing.GroupLayout panMainMenuLayout = new javax.swing.GroupLayout(panMainMenu);
+        panMainMenu.setLayout(panMainMenuLayout);
+        panMainMenuLayout.setHorizontalGroup(
+            panMainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panMainMenuLayout.createSequentialGroup()
+                .addComponent(panLateralMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panMainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        panMainPanelLayout.setVerticalGroup(
-            panMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        panMainMenuLayout.setVerticalGroup(
+            panMainMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panMainMenuLayout.createSequentialGroup()
+                .addComponent(panTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 632, Short.MAX_VALUE))
+            .addComponent(panLateralMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panTopBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panLateralMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panMainMenu, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panLateralMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panMainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(panMainMenu, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnMinMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseMoved
+        btnMin.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnMinMouseMoved
+
+    private void btnMinMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinMouseExited
+        btnMin.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnMinMouseExited
+
+    private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
+        btnExit.setBackground(new java.awt.Color(255,183,183));
+    }//GEN-LAST:event_btnExitMouseMoved
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        btnExit.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnExitMouseExited
+
+    private void btnSignOffMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignOffMouseMoved
+        btnSignOff.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnSignOffMouseMoved
+
+    private void btnSignOffMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSignOffMouseExited
+        btnSignOff.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnSignOffMouseExited
+
+    private void btnSeeProfileMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeProfileMouseMoved
+        btnSeeProfile.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnSeeProfileMouseMoved
+
+    private void btnSeeProfileMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeProfileMouseExited
+        btnSeeProfile.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnSeeProfileMouseExited
+
+    private void btnSeeNotificationMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeNotificationMouseMoved
+        btnSeeNotification.setBackground(new java.awt.Color(254, 220, 234));
+    }//GEN-LAST:event_btnSeeNotificationMouseMoved
+
+    private void btnSeeNotificationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeNotificationMouseExited
+        btnSeeNotification.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnSeeNotificationMouseExited
+
     private void panTopBarMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panTopBarMouseDragged
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
-         * Este método permite mover la aplicación por toda la pantalla del
-         * computador del usuario.
-         */
-        
+        * Este método permite mover la aplicación por toda la pantalla del
+        * computador del usuario.
+        */
+
         // Se declaran las variables que obtienen la ubicación de la aplicación.
         //</editor-fold>
         int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
         int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
-        
+
         // Se ubica la aplicación en la nueva ubicación.
         setLocation(x - xx, y - xy);
     }//GEN-LAST:event_panTopBarMouseDragged
@@ -168,15 +355,15 @@ public class MainMenu extends javax.swing.JFrame {
     private void panTopBarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panTopBarMousePressed
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
-         * Este método posee dos características:
-         *      1) La opacidad de la aplicación disminuye un 20%.
-         *      2) Se obtiene la ubicación del Mouse en el momento.
-         */
-        
+        * Este método posee dos características:
+        *      1) La opacidad de la aplicación disminuye un 20%.
+        *      2) Se obtiene la ubicación del Mouse en el momento.
+        */
+
         // Se coloca la opacidad de la aplicación en 80%.
         //</editor-fold>
         setOpacity((float)0.8);
-        
+
         // Se obtiene la ubicación del Mouse en el momento.
         xx = evt.getX(); // Ubicación con respecto al eje X.
         xy = evt.getY(); // Ubicación con respecto al eje Y.
@@ -185,16 +372,67 @@ public class MainMenu extends javax.swing.JFrame {
     private void panTopBarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panTopBarMouseReleased
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
-         * Este método devuelve la opacidad de la aplicación a su valor base.
-         */
-        
+        * Este método devuelve la opacidad de la aplicación a su valor base.
+        */
+
         // Se coloca la opacidad de la aplicación en 100%.
         //</editor-fold>
         setOpacity((float)1.0);
     }//GEN-LAST:event_panTopBarMouseReleased
 
+    private void panLateralMenuMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLateralMenuMouseDragged
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método permite mover la aplicación por toda la pantalla del
+        * computador del usuario.
+        */
+
+        // Se declaran las variables que obtienen la ubicación de la aplicación.
+        //</editor-fold>
+        int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
+        int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
+
+        // Se ubica la aplicación en la nueva ubicación.
+        setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_panLateralMenuMouseDragged
+
+    private void panLateralMenuMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLateralMenuMousePressed
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método posee dos características:
+        *      1) La opacidad de la aplicación disminuye un 20%.
+        *      2) Se obtiene la ubicación del Mouse en el momento.
+        */
+
+        // Se coloca la opacidad de la aplicación en 80%.
+        //</editor-fold>
+        setOpacity((float)0.8);
+
+        // Se obtiene la ubicación del Mouse en el momento.
+        xx = evt.getX(); // Ubicación con respecto al eje X.
+        xy = evt.getY(); // Ubicación con respecto al eje Y.
+    }//GEN-LAST:event_panLateralMenuMousePressed
+
+    private void panLateralMenuMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLateralMenuMouseReleased
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método devuelve la opacidad de la aplicación a su valor base.
+        */
+
+        // Se coloca la opacidad de la aplicación en 100%.
+        //</editor-fold>
+        setOpacity((float)1.0);
+    }//GEN-LAST:event_panLateralMenuMouseReleased
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnExit;
+    public javax.swing.JButton btnMin;
+    public javax.swing.JButton btnSeeNotification;
+    public javax.swing.JButton btnSeeProfile;
+    public javax.swing.JButton btnSignOff;
+    public javax.swing.JLabel lblCaelestiDevelopment;
     private javax.swing.JPanel panLateralMenu;
+    private javax.swing.JPanel panMainMenu;
     public javax.swing.JPanel panMainPanel;
     private javax.swing.JPanel panTopBar;
     // End of variables declaration//GEN-END:variables

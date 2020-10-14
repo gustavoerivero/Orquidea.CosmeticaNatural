@@ -1,6 +1,8 @@
 
 package views;
 
+import lib.SupportFunctions;
+
 /**
  * 
  * @author Gustavo
@@ -9,6 +11,8 @@ public class SelectOption extends javax.swing.JDialog {
     
     // Se declaran e inicializan las variables de soporte.
     int xx = 0, xy = 0; 
+    
+    private SupportFunctions support = new SupportFunctions();
     
     // Se declaran e inicializan las variables.
     boolean opc = false;
@@ -29,44 +33,54 @@ public class SelectOption extends javax.swing.JDialog {
         
         initComponents();
         
-        // Identificar el tipo de mensaje
-        switch(type){
-            // type == 1 -> Error
-            case 1:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/errorIcon.png")));
-                break;
-            // type == 2 -> High Priority
-            case 2:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/highPriorityIcon.png")));
-                break;
-            // type == 3 -> Help
-            case 3:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
-                break;
-            // type == 4 -> Ok
-            case 4:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
-        }
-        
+        lblIcon.setIcon(support.iconForLabels(type));
+          
         // Si la opción 1 es distinto a default.
         if(opc1 != null)
-            btnOk.setText(opc1);
+            btnOk.setText("<html><p align='center'>" + opc1 + "</p></html>");
         
         // Si la opción 2 es distinto a default.
         if(opc2 != null)
-            btnCancel.setText(opc2);
+            btnCancel.setText("<html><p align='center'>" + opc2 + "</p></html>");
         
         // Colocar el mensaje pasado por parámetro en el JFrame
-        lblMessage.setText(message);
+        lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
                 
-        // Cambia el ícono del JFrame.
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
+        support.initialOps(this);
         
-        // Ubicar el JFrame en el centro de la pantalla.
-        setLocationRelativeTo(null);
+    }
+    
+    /**
+     * Constructor SelectOption
+     * @param parent JDialog padre.
+     * @param modal Indica si el JDialog es modal o no.
+     * @param type Que tipo de JDialog se muestra.
+     * @param message Mensaje a mostrar.
+     * @param opc1 Si la opción 1 tiene un valor distinto al default.
+     * @param opc2 Si la opción 2 tiene un valor distinto al default.
+     */
+    public SelectOption(java.awt.Dialog parent, boolean modal, int type,
+            String message, String opc1, String opc2) {
+                
+        super(parent, modal);
         
-        // Hacer visible el JFrame
-        this.setVisible(true);
+        initComponents();
+        
+        lblIcon.setIcon(support.iconForLabels(type));
+          
+        // Si la opción 1 es distinto a default.
+        if(opc1 != null)
+            btnOk.setText("<html><p align='center'>" + opc1 + "</p></html>");
+        
+        // Si la opción 2 es distinto a default.
+        if(opc2 != null)
+            btnCancel.setText("<html><p align='center'>" + opc2 + "</p></html>");
+        
+        // Colocar el mensaje pasado por parámetro en el JFrame
+        lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
+                
+        support.initialOps(this);
+        
     }
 
     /**
@@ -90,8 +104,8 @@ public class SelectOption extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        panPopupMessage.setBackground(new java.awt.Color(249, 249, 249));
-        panPopupMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
+        panPopupMessage.setBackground(new java.awt.Color(255, 245, 249));
+        panPopupMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 144, 158)));
         panPopupMessage.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panPopupMessageMouseDragged(evt);
@@ -109,15 +123,15 @@ public class SelectOption extends javax.swing.JDialog {
         lblIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         lblMessage.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblMessage.setForeground(new java.awt.Color(75, 0, 145));
+        lblMessage.setForeground(new java.awt.Color(0, 144, 158));
         lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMessage.setText("Contenido");
 
-        panOk.setBackground(new java.awt.Color(239, 232, 244));
+        panOk.setBackground(new java.awt.Color(254, 220, 234));
         panOk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         panOk.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnOk.setBackground(new java.awt.Color(245, 245, 245));
+        btnOk.setBackground(new java.awt.Color(254, 220, 234));
         btnOk.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnOk.setForeground(new java.awt.Color(0, 0, 0));
         btnOk.setText("Aceptar");
@@ -157,11 +171,11 @@ public class SelectOption extends javax.swing.JDialog {
                 .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE))
         );
 
-        panCancel.setBackground(new java.awt.Color(239, 232, 244));
+        panCancel.setBackground(new java.awt.Color(254, 220, 234));
         panCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
         panCancel.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnCancel.setBackground(new java.awt.Color(245, 245, 245));
+        btnCancel.setBackground(new java.awt.Color(254, 220, 234));
         btnCancel.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnCancel.setForeground(new java.awt.Color(0, 0, 0));
         btnCancel.setText("Cancelar");
@@ -255,15 +269,15 @@ public class SelectOption extends javax.swing.JDialog {
     }
     
     private void btnOkMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseMoved
-        panOk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOk.setForeground(new java.awt.Color(255,255,255));
-        panOk.setBackground(new java.awt.Color(66,0,124));
+        panOk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOk.setForeground(new java.awt.Color(255, 245, 249));
+        panOk.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnOkMouseMoved
 
     private void btnOkMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkMouseExited
-        panOk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        panOk.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         btnOk.setForeground(new java.awt.Color(0,0,0));
-        panOk.setBackground(new java.awt.Color(239,232,244));
+        panOk.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnOkMouseExited
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
@@ -316,15 +330,15 @@ public class SelectOption extends javax.swing.JDialog {
     }//GEN-LAST:event_panPopupMessageMouseReleased
 
     private void btnCancelMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseMoved
-        panCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnCancel.setForeground(new java.awt.Color(255,255,255));
-        panCancel.setBackground(new java.awt.Color(66,0,124));
+        panCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnCancel.setForeground(new java.awt.Color(255, 245, 249));
+        panCancel.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnCancelMouseMoved
 
     private void btnCancelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelMouseExited
-        panCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        panCancel.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         btnCancel.setForeground(new java.awt.Color(0,0,0));
-        panCancel.setBackground(new java.awt.Color(239,232,244));
+        panCancel.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnCancelMouseExited
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed

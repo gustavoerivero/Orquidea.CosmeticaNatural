@@ -35,27 +35,28 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
     
     
     // Se declaran las variables a utilizar.
-    String correo, codex;
+    private String correo, codex;
     
     public ControllerForgotPass(){
     
         // Se instancia clase de soporte.
-        support = new SupportFunctions();
-        userDB = new UserDB();
-        mail = new Mail();
+        support     = new SupportFunctions();
+        userDB      = new UserDB();
+        mail        = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
         
         // Se instancia view a utilizar.
-        forgot = new ForgotPass();
+        forgot      = new ForgotPass();
         
         // Se activan los eventos de los botones.
         forgot.addEvents(this);
         
         // Se inicializan las variables.
-        correo = null;
-        codex = null;
+        correo      = null;
+        codex       = null;
                 
     }
     
+        @Override
     public void actionPerformed(java.awt.event.ActionEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
@@ -63,7 +64,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         // Minimizar aplicación.
         if(evt.getSource() == forgot.btnMin){
             forgot.setExtendedState(java.awt.Frame.ICONIFIED);
-            forgot.btnMin.setBackground(new java.awt.Color(249,249,249));
+            forgot.btnMin.setBackground(new java.awt.Color(255,245,249));
         } 
         
         // Salir de la aplicación.
@@ -113,19 +114,15 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                         System.out.println("El correo con código de confirmación está"
                                 + " siendo preparado.");
 
-                        // Datos del usuario emisor.
-                        String  from = "cinesdevenezuela.nacional@gmail.com",
-                                pass = "cines1234venezuela";
-
                         // Obtener el código de confirmación.
                         codex = support.randomCharacterString('1', 6);
                             
                         // Se procede a enviar el mensaje con el código de verificación.
-                        if(mail.sendMessage(mail.authentication(from, pass), 
-                                from, correo, "Código de confirmación para "
-                                    + "recuperar contraseña", "El código de "
-                                            + "confirmación para poder recuperar"
-                                            + " tu contraseña es: " + codex)){
+                        if(mail.sendMessage(
+                                correo, 
+                                "Código de confirmación para recuperar contraseña", 
+                                "El código de confirmación para poder recuperar "
+                                        + "tu contraseña es: " + codex)) {
                             
                             popup = new PopupMessage(forgot, true, 15, "El correo con el "
                                 + "código de verificación ha sido enviado");

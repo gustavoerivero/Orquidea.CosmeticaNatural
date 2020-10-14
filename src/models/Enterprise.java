@@ -52,6 +52,14 @@ public class Enterprise {
         this.id = id;
     }
 
+    public String getDni() {
+        return dni;
+    }
+    
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+    
     public String getName() {
         return name;
     }

@@ -12,7 +12,7 @@ import models.User;
  */
 public class UserDB {
     
-    private ConnectionDB con;
+    private ConnectionDB con = new ConnectionDB();
     
     /**
      * Constructor.
@@ -30,12 +30,10 @@ public class UserDB {
         
         try{
             
-            // Se instancia la clase para la conexión con la BD y se establece la conexión.
-            con = new ConnectionDB();
             con.connect();
           
             // Se descrie la sentencia SQL.
-            String SQL =    "SELECT * FROM \"user\" WHERE \"email\" = '"
+            String SQL =    "SELECT * FROM \"User\" WHERE \"email\" = '"
                             + email + "' AND \"password\" = '" + pass + 
                             "' AND \"state\" = 'A';";
             
@@ -67,12 +65,10 @@ public class UserDB {
         
         try{
             
-            // Se instancia la clase de conexión con BD y se establece una conexión.
-            con = new ConnectionDB();
             con.connect();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"user\" WHERE \"email\" = '"
+            String SQL =    "SELECT * FROM \"User\" WHERE \"email\" = '"
                             + email + "' AND \"state\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -94,17 +90,15 @@ public class UserDB {
         
     }
   
-    public boolean userExist(String email, char estatus){
+    public boolean userExist(String email, char state){
         
         try{
             
-            // Se instancia la clase de conexión con BD y se establece una conexión.
-            con = new ConnectionDB();
             con.connect();
           
             // Se declara una sentencia SQL.
-            String SQL =    "SELECT * FROM \"user\" WHERE \"email\" = '"
-                            + email + "' AND \"state\" = '" + estatus + "';";
+            String SQL =    "SELECT * FROM \"User\" WHERE \"email\" = '"
+                            + email + "' AND \"state\" = '" + state + "';";
             
             // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsult(SQL);
@@ -132,12 +126,10 @@ public class UserDB {
      */
     public void insertNewPass(String email, String pass){
        
-        // Se instancia la clase de conexión de la BD y se establece conexión.
-        con = new ConnectionDB();
         con.connect();
           
         // Se declara la sentencia SQL.
-        String SQL =    "UPDATE \"user\" SET \"password\" = '" + pass + 
+        String SQL =    "UPDATE \"User\" SET \"password\" = '" + pass + 
                         "' WHERE \"email\" = '" + email + "';";
             
         // Se realiza la actualización.
@@ -159,13 +151,11 @@ public class UserDB {
         
         // Se define la sentencia SQL a aplicar en la BD.
         String SQL = "SELECT \"dni\", \"name\", \"surname\", \"userEmail\", "
-                    + "\"type\", \"firstSession\", \"lastSession\" FROM \"user\", "
-                    + "\"employee\" WHERE \"email\" = \"userEmail\" AND \"email\" = '" 
-                    + email + "' AND \"user\".\"state\" = employee.\"state\" AND "
-                    + "employee.\"state\" = 'A';";
+                    + "\"type\", \"firstSession\", \"lastSession\" FROM \"User\", "
+                    + "\"Employee\" WHERE \"email\" = \"userEmail\" AND \"email\" = '" 
+                    + email + "' AND \"User\".\"state\" = Employee.\"state\" AND "
+                    + "Employee.\"state\" = 'A';";
         
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
         con.connect();
         
         // Se realiza y se recibe la consulta.
@@ -187,19 +177,17 @@ public class UserDB {
      */
     public void registerUser(User user) {
             
-        // Se instancia la clase para la conexiÃ³n con la BD y se establece la conexiÃ³n.
-        con = new ConnectionDB();
         con.connect();
           
         // Se desclara la sentencia SQL.
-        String SQL = "INSERT INTO \"user\" (\"id\", \"email\", "
-                    + "\"password\", \"type\", \"firstSession\", \"lastSession\", "
+        String SQL = "INSERT INTO \"User\" (\"id\", \"email\", "
+                    + "\"password\", \"UserTypeid\", \"firstSession\", \"lastSession\", "
                     + "\"rememberData\", \"state\") "
                     + "VALUES ("
                     + "'" + user.getId() + "', "
                     + "'" + user.getEmail() + "', "
                     + "'" + user.getPassword() + "', "
-                    + "'" + user.getType() + "', "
+                    + "'" + user.getUserTypeId() + "', "
                     + "'" + user.getFirstSession() + "', "
                     + "'" + user.getLastSession() + "', "
                     + "'" + user.getRememberData() + "', "
@@ -220,14 +208,12 @@ public class UserDB {
    
     public void updateUser(User user, String id) {
          
-        // Se instancia la clase para la conexion con la BD y se establece la conexion.
-        con = new ConnectionDB();
         con.connect(); 
 
         // Se descrie la sentencia SQL.
-        String SQL = "UPDATE \"user\" SET \"email\" = '" + user.getEmail() + 
+        String SQL = "UPDATE \"User\" SET \"email\" = '" + user.getEmail() + 
                     "', \"password\" = '" + user.getPassword() + 
-                    "', \"type\" = '" + user.getType() + 
+                    "', \"userTypeId\" = '" + user.getUserTypeId() + 
                     "', \"state\" = '" + user.getState() + 
                     "' WHERE \"id\" = " + id + ";";
             
@@ -250,14 +236,12 @@ public class UserDB {
         
         // Dependiendo del valor de type, se elimina (lógica) o se reactiva el empleado.
         if(type == 0)
-            SQL     = "UPDATE \"user\" SET \"state\" = 'I' "
+            SQL     = "UPDATE \"User\" SET \"state\" = 'I' "
                     + "WHERE \"email\" = '" + email + "';";
         else
-            SQL     = "UPDATE \"user\" SET \"state\" = 'A' "
+            SQL     = "UPDATE \"User\" SET \"state\" = 'A' "
                     + "WHERE \"email\" = '" + email + "';";
         
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
         con.connect();
         
         // Se realiza y se recibe la consulta.
@@ -273,6 +257,7 @@ public class UserDB {
                 
         // Se desconecta la BD.
         con.disconnect();
+        
     }
     
     /**
@@ -285,12 +270,10 @@ public class UserDB {
         
         try{
             
-            // Se instancia la clase para la conexión con la BD y se establece la conexión.
-            con = new ConnectionDB();
             con.connect();
           
             // Se descrie la sentencia SQL.
-            String SQL =    "SELECT \"firstSession\" FROM \"user\" WHERE \"email\" = '"
+            String SQL =    "SELECT \"firstSession\" FROM \"User\" WHERE \"email\" = '"
                             + email + "' AND \"state\" = 'A';";
             
             // Se realiza la consulta y se obtiene el resultado.
@@ -302,8 +285,11 @@ public class UserDB {
             // Se obtiene la fecha de la base de datos.
             Date obtainedDate = rs.getDate("firstSession");
             
+            java.util.Calendar nulleable = java.util.Calendar.getInstance();
+            nulleable.set(1900, 01, 01);
+            
             // Se comparan las fechas. Si no hay "primer inicio" retorna 'true'..
-            if(obtainedDate == null)
+            if(obtainedDate == null || obtainedDate == nulleable.getTime())
                 return true;
             
             // Se desconecta la BD.
@@ -327,13 +313,11 @@ public class UserDB {
         // Se declara la variable de sentencia SQL.
         String SQL = "";
                 
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
         con.connect();
             
         if(firstSessionUser(email)){
             
-            SQL = "UPDATE \"user\" SET \"firstSession\" = '" + new Date()
+            SQL = "UPDATE \"User\" SET \"firstSession\" = '" + new Date()
                 + "' WHERE \"email\" = '" + email + "';";
             
             // Se realiza la inserción de datos.
@@ -345,7 +329,7 @@ public class UserDB {
             
         }
             
-        SQL = "UPDATE \"user\" SET \"lastSession\" = '" + new Date()
+        SQL = "UPDATE \"User\" SET \"lastSession\" = '" + new Date()
             + "' WHERE \"email\" = '" + email + "';";        
         
         // Se realiza la inserción de datos.
@@ -357,6 +341,7 @@ public class UserDB {
           
         // Se desconecta la BD.
         con.disconnect();
+        
     }
  
     /**
@@ -368,12 +353,9 @@ public class UserDB {
     public ResultSet getDataAccess(String email){
         
         // Se declara e instancia la variable con la sentencia SQL para la consulta.
-        String SQL  = "SELECT \"name\", \"surname\", \"type\" FROM \"user\", "
-                    + "\"employee\" WHERE \"email\" = '" + email + "' AND "
-                    + "\"user\".\"state\" = 'A' AND \"employee\".\"state\" = 'A';";
+        String SQL  = "SELECT * FROM \"User\" WHERE \"email\" = '" + email + "' "
+                    + "AND \"state\" = 'A';";
         
-        // Se instancia y se establece una conexión con la BD.
-        con = new ConnectionDB();
         con.connect();
         
         // Se realiza y se recibe la consulta.
@@ -386,6 +368,92 @@ public class UserDB {
         
         // Retorna consulta.
         return result;
+        
+    }
+   
+    /**
+     * Método que permite actualizar la foto de un usuario.
+     * @param id Campo identificador del usuario.
+     * @param photo Foto que se va a actualizar.
+     * @return 'Verdadero' si se pudo realizar la actualización de foto, 'Falso' 
+     * para caso contrario.
+     */
+    public boolean updatePhoto(int id, java.io.File photo) {
+        
+        java.io.FileInputStream fis = null;
+        
+        try {
+            
+            fis = new java.io.FileInputStream(photo);
+            
+            java.sql.PreparedStatement pstm = con.connect().prepareStatement(
+                    "UPDATE \"User\" SET \"photo\" = ? WHERE \"id\" = ?;"
+            );
+            
+            pstm.setBinaryStream(1, fis, (int) photo.length());
+            pstm.setInt(2, id);
+            
+            pstm.execute();
+            pstm.close();
+            
+            return true;
+            
+        } catch (java.io.FileNotFoundException ex) {
+            System.out.println("Error: " + ex);
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error: " + ex);
+        } finally {
+            try {
+                fis.close();
+            } catch (java.io.IOException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
+        
+        return false;
+        
+    }
+    
+    /**
+     * Método que permite actualizar la foto de un usuario.
+     * @param email Correo electrónico del usuario.
+     * @param photo Foto que se va a actualizar.
+     * @return 'Verdadero' si se pudo realizar la actualización de foto, 'Falso' 
+     * para caso contrario.
+     */
+    public boolean updatePhoto(String email, java.io.File photo) {
+        
+        java.io.FileInputStream fis = null;
+        
+        try {
+            
+            fis = new java.io.FileInputStream(photo);
+            
+            java.sql.PreparedStatement pstm = con.connect().prepareStatement(
+                    "UPDATE \"User\" SET \"photo\" = ? WHERE \"email\" = ?;"
+            );
+            
+            pstm.setBinaryStream(1, fis, (int) photo.length());
+            pstm.setString(2, email);
+            
+            pstm.execute();
+            pstm.close();
+            
+            return true;
+            
+        } catch (java.io.FileNotFoundException ex) {
+            System.out.println("Error: " + ex);
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error: " + ex);
+        } finally {
+            try {
+                fis.close();
+            } catch (java.io.IOException ex) {
+                System.out.println("Error: " + ex);
+            }
+        }
+        
+        return false;
         
     }
     

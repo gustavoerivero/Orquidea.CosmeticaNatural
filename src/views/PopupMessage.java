@@ -50,39 +50,18 @@ public class PopupMessage extends javax.swing.JDialog {
         
         initComponents();
         
-        // Identificar el tipo de mensaje
-        switch(type){
-            // type == 1 -> Error
-            case 1:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/errorIcon.png")));
-                break;
-            // type == 2 -> High Priority
-            case 2:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/highPriorityIcon.png")));
-                break;
-            // type == 3 -> Help
-            case 3:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/helpIcon.png")));
-                break;
-            // type == 4 -> Ok
-            case 4:
-                lblIcon.setIcon(new javax.swing.ImageIcon(getClass().getResource("images/okIcon.png")));
-        }
+        support = new SupportFunctions();
         
+        // Identificar el tipo de mensaje
+        lblIcon.setIcon(support.iconForLabels(type));
+                
         // Colocar el mensaje pasado por parámetro en el JDialog
         lblMessage.setText("<html><p align='center'>" + message + "</p></html>");
                 
-        // Cambia el ícono del JDialog.
-        this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("images/CDV-icon.png")).getImage());
-        
-        // Ubicar el JDialog en el centro de la pantalla.
-        setLocationRelativeTo(null);
-        
-        // Hacer visible el JDialog
-        setVisible(true);
+        support.initialOps(this);
         
     }    
-
+     
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,8 +81,8 @@ public class PopupMessage extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
 
-        panPopupMessage.setBackground(new java.awt.Color(249, 249, 249));
-        panPopupMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75, 0, 145)));
+        panPopupMessage.setBackground(new java.awt.Color(255, 245, 249));
+        panPopupMessage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 144, 158)));
         panPopupMessage.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 panPopupMessageMouseDragged(evt);
@@ -119,15 +98,15 @@ public class PopupMessage extends javax.swing.JDialog {
         });
 
         lblMessage.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        lblMessage.setForeground(new java.awt.Color(75, 0, 145));
+        lblMessage.setForeground(new java.awt.Color(0, 144, 158));
         lblMessage.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMessage.setText("Contenido");
 
-        panOkSelectSucursal.setBackground(new java.awt.Color(239, 232, 244));
-        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249, 249, 249)));
+        panOkSelectSucursal.setBackground(new java.awt.Color(254, 220, 234));
+        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         panOkSelectSucursal.setForeground(new java.awt.Color(255, 255, 255));
 
-        btnOkSelectSucursal.setBackground(new java.awt.Color(245, 245, 245));
+        btnOkSelectSucursal.setBackground(new java.awt.Color(254, 220, 234));
         btnOkSelectSucursal.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         btnOkSelectSucursal.setForeground(new java.awt.Color(0, 0, 0));
         btnOkSelectSucursal.setText("Aceptar");
@@ -209,15 +188,15 @@ public class PopupMessage extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOkSelectSucursalMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkSelectSucursalMouseMoved
-        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(75,0,145)));
-        btnOkSelectSucursal.setForeground(new java.awt.Color(255,255,255));
-        panOkSelectSucursal.setBackground(new java.awt.Color(66,0,124));
+        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+        btnOkSelectSucursal.setForeground(new java.awt.Color(255, 245, 249));
+        panOkSelectSucursal.setBackground(new java.awt.Color(194, 48, 111));
     }//GEN-LAST:event_btnOkSelectSucursalMouseMoved
 
     private void btnOkSelectSucursalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnOkSelectSucursalMouseExited
-        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(249,249,249)));
+        panOkSelectSucursal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(254, 220, 234)));
         btnOkSelectSucursal.setForeground(new java.awt.Color(0,0,0));
-        panOkSelectSucursal.setBackground(new java.awt.Color(239,232,244));
+        panOkSelectSucursal.setBackground(new java.awt.Color(254, 220, 234));
     }//GEN-LAST:event_btnOkSelectSucursalMouseExited
 
     private void btnOkSelectSucursalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkSelectSucursalActionPerformed

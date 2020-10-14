@@ -104,7 +104,7 @@ public class Person {
         this.email = email;
     }
 
-    public int getEstatus() {
+    public char getState() {
         return state;
     }
 

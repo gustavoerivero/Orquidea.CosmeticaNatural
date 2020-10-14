@@ -2,15 +2,21 @@
 package controllers;
 
 // Se importan las views a utilizar
-import java.util.ArrayList;
 import views.Login;
 import views.PopupMessage;
 
 // Se importan los models a utilizar
+import models.User;
 import models.database.UserDB;
 
 // Se importan las clases de soporte.
 import lib.SupportFunctions;
+import lib.ConnectionDB;
+import lib.Mail;
+
+// Se importan las librerías necesarias.
+import java.util.Date;
+import javax.swing.ImageIcon;
 
 /**
  * 
@@ -25,15 +31,19 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         private PopupMessage popup;
         
         // Models
+        private User   user;
         private UserDB userDB;
         
         // Controllers
         private ControllerForgotPass ctrlForgot;
+        private ControllerWelcomeForm ctrlWelcome;
         private ControllerMainMenu ctrlMainMenu;
     
         
     // Se declaran clases de soporte.
     private SupportFunctions support;
+    private ConnectionDB con;
+    private Mail mail;
         
     // Constructor del Login
     public ControllerLogin(){
@@ -41,19 +51,28 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Se instancian las clases de soporte.
         support = new SupportFunctions();
         userDB = new UserDB();
+        con = new ConnectionDB();
+        mail = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
                 
         // Se instancia la view de Login.
         login = new Login();
         
         // Se añaden los eventos.
         login.addEvents(this);
-                
+        
+        // Si no existen registros en la tabla 'User'.
+        if(!con.dataExist("User")) {
+            ctrlWelcome = new ControllerWelcomeForm();
+            login.dispose();
+        }
+            
     }
     
     /**
      * Se describen los eventos provocados por las acciones de los botones.
      * @param evt parámetro que corresponde a la acción de los botónes.
      */
+        @Override
     public void actionPerformed(java.awt.event.ActionEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
@@ -61,7 +80,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Minimizar aplicación.
         if(evt.getSource() == login.btnMin){
             login.setExtendedState(java.awt.Frame.ICONIFIED);
-            login.btnMin.setBackground(new java.awt.Color(249,249,249));
+            login.btnMin.setBackground(new java.awt.Color(255,245,249));
         } 
         
         // Salir de la aplicación.
@@ -83,17 +102,10 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         
         // Botón para ingresar al sistema.
         else if(evt.getSource() == login.btnOk){
-                 
-            // Se obtiene la contraseña ingresada.
-            char[] password = login.pssPasswordField.getPassword();
-            
+                             
             // Se obtienen los datos de tipo String.
             String  email   = login.txtEmailField.getText(),
-                    pass    = new String(password); /*
-                                                     * -> Se transforma la contraseña en String
-                                                     *    por el hecho que esta se encuentra
-                                                     *    encriptada por sí sola.
-                                                     */
+                    pass    = new String(login.pssPasswordField.getPassword());
             
             // Si el contenido de los campos es igual a vacío o el mensaje predeterminado.
             if((email.isEmpty() || email.equals("Ingrese su correo electrónico")) || ( 
@@ -115,18 +127,25 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         // Se muestra quién ingresó al sistema.
                         System.out.println("El usuario '" + email + "' ha ingresado al"
                                 + " sistema con la contraseña '" + pass + "'.");
-/*
+
                         // Se muestra un mensaje emergente de "Bienvenido".
-                        popup = new PopupMessage(login, true, 4, 
-                                "Bienvenido");
-                        */
-                        ArrayList<String> support = new ArrayList<>();
+                        popup = new PopupMessage(login, true, 2, "Bienvenido");
                         
-                        // Se obtienen los datos de acceso del usuario.
-                        support = getDataAccess(email);
+                        // Se notifica al usuario vía correo que ha iniciado sesión en la aplicación.
+                        mail.sendMessage(
+                                email, 
+                                "Inicio de sesión " + new Date(), 
+                                "El usuario " + email + " ha iniciado sesión el "
+                                        + new Date() + " en el gestor \"Caelesti Management\". "
+                                        + "\n\nSi usted desconoce de esta actividad "
+                                        + "póngase en contacto inmediatamente con el "
+                                        + "administrador del sistema."
+                        );
+                                                
+                        user = getDataAccess(email);
                         
                         System.out.println("Los datos de acceso del usuario son: " +
-                                "Tipo: " + support.get(1) + ". Nombre: " + support.get(0));
+                                "Tipo: " + user.getUserTypeId() + ". Correo: " + user.getEmail());
                         
                         // Se oculta la view de Login.
                         login.dispose();
@@ -135,7 +154,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         userDB.changeDateUser(email);
                         
                         // Se instancia el Controlador de MainMenu.
-                        ctrlMainMenu = new ControllerMainMenu(support.get(1), support.get(0));
+                        ctrlMainMenu = new ControllerMainMenu(user);
 
                     } 
                     
@@ -146,7 +165,17 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         popup = new PopupMessage(login, true, 6, 
                                 "El correo electrónico o la contraseña son "
                                         + "incorrectos.");
-
+                        
+                        // Se notifica al usuario vía correo que hubo un intento de inicio de sesión en la aplicación.
+                        mail.sendMessage(email, 
+                                "Inicio de sesión " + new Date() + " fallido.", 
+                                "Hubo un intento de inicio de sesión el " + new Date() + ""
+                                        + " en el gestor \"Caelesti Management\". \n\nSi "
+                                        + "desconoce esta actividad pónganse en"
+                                        + "contacto inmediatamente con el administrador"
+                                        + " del sistema."
+                        );
+                        
                     }
                     
                 }
@@ -189,31 +218,40 @@ public class ControllerLogin implements java.awt.event.ActionListener {
      * Método para obtener los datos de acceso de un usuario.
      * @param email Correo electrónico del usuario que va a ingresar al sistema.
      */
-    private ArrayList<String> getDataAccess(String email){
+    private User getDataAccess(String email) {
         
         // Se instancia la clase a utilizar.
         userDB = new UserDB();
         
+        User supportUser = null;
+        
         // Se declara la variable que devuelve el resultado.
         java.sql.ResultSet result;
-        
-        ArrayList<String> support = new ArrayList<>();
-        
+                
         try {
+            
             result = userDB.getDataAccess(email);
+            
             while(result.next()){
-                support.add(result.getString("name") + " " + result.getString("surname"));
-                support.add(result.getString("type"));
+                supportUser = new User(
+                        result.getInt("id"), 
+                        result.getInt("UserTypeid"), 
+                        result.getString("email"), 
+                        result.getString("password"),
+                        result.getString("rememberData").charAt(0),
+                        result.getString("state").charAt(0),
+                        result.getDate("firstSession"),
+                        result.getDate("lastSession"), 
+                        new ImageIcon(support.convertImage(result.getBytes("photo")))
+                );
             }
                                     
             System.out.println("Éxito.");
             
-            return support;
+            return supportUser;
                                     
-        } catch (java.sql.SQLException e) {
-            
+        } catch (java.sql.SQLException | java.io.IOException e) {
             System.out.println("Error: " + e);
-            
         }
         
         return null;

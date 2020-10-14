@@ -3,9 +3,7 @@ package lib;
 
 // Se importan las librerías a utilizar.
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * Clase para la conexión de la Base de Datos.
@@ -14,8 +12,9 @@ import java.sql.SQLException;
 public class ConnectionDB {
     
     // Se declaran las variables que indican la Base de Datos, el usuario y la contraseña.
-    private final String    info = "jdbc: sqlite: data.db",
-                            clss = "org.sqlite.JDBC";
+    private final String url = "jdbc:postgresql://localhost:5432/Orquidea",
+                        user = "postgres",
+                        pass = "1234";
     
     // Se instancia la clase de Connection.
     private Connection con;
@@ -26,18 +25,17 @@ public class ConnectionDB {
     public ConnectionDB(){
         this.con = null;
     }
-    
+        
     /**
      * Método para conectar la app con la Base de Datos.
      * @return 
      */
     public Connection connect(){
         try {
-            Class.forName(clss);
             //Nos permitira abrir una conexion a nuestra Base de Datos.
-            con = DriverManager.getConnection(info);
+            con = java.sql.DriverManager.getConnection(url, user, pass);
             System.out.println("La conexión con la Base de Datos se realizó correctamente.");
-        } catch (ClassNotFoundException | SQLException e) {
+        } catch (Exception e) {
             System.out.println("Fallo al conectar " + e.getMessage());
         }
         return con;
@@ -45,15 +43,15 @@ public class ConnectionDB {
     
     /**
      * Método para realizar consultas con la Base de Datos.
-     * @param sql Sentencia SQL para consultas.
+     * @param SQL Sentencia SQL para consultas.
      * @return 
      */
-    public ResultSet queryConsult(String sql){
+    public ResultSet queryConsult(String SQL){
         try {
             //Nos permitira realizar sentencias sobre la Base de Datos
-            java.sql.Statement ejecutionQuery = con.createStatement();
+            java.sql.Statement ejecutorQuery = con.createStatement();
             //Variable que nos ayudara a realizar consultas a la Base de Datos
-            ResultSet r = ejecutionQuery.executeQuery(sql);
+            ResultSet r = ejecutorQuery.executeQuery(SQL);
             System.out.println("Se han obtenido datos.");
             return r;
             
@@ -66,12 +64,12 @@ public class ConnectionDB {
     
     /**
      * Método para realizar inserciones o modificaciones con la Base de Datos.
-     * @param sql Sentencia SQL para inserciones o modificaciones.
+     * @param SQL Sentencia SQL para inserciones o modificaciones.
      */
-    public void queryInsert(String sql){
+    public void queryInsert(String SQL){
         try {
             java.sql.Statement sentencia = con.createStatement();
-            sentencia.executeUpdate(sql);
+            sentencia.executeUpdate(SQL);
             System.out.println("Se ha Insertado/Modificado un registro.");
 
             
@@ -85,43 +83,39 @@ public class ConnectionDB {
     /**
      * Método para verificar si existe información en una tabla de la Base de Datos.
      * @param data Tabla que se va a evaluar.
-     * @return Devuelve valor integer; Si devuelve '-1' la tabla no tiene información, 
-     * pero si devuelve un valor distinto a '-1' quiere decir que la tabla sí tiene información.
+     * @return Devuelve 'verdadero' si existe al menos un valor en la tabla mencionada, 
+     * 'falso' para caso contrario.
      */
-    public int dataExist(String data){
+    public boolean dataExist(String data){
         
         // Se declara e inicializa la variable identificadora.
-        int id = -1;
+        int count = -1;
         
         try{
             
             connect();
           
             // Se declara una sentencia SQL.
-            String SQL = "SELECT \"id\" FROM \"" + data + "\";";
+            String SQL = "SELECT COUNT('id') FROM \"" + data + "\";";
             
             // Se realiza la consulta y se obtiene el resultado.
             ResultSet rs = queryConsult(SQL);
-            
+                        
+            // Si existe información.
+            while(rs.next())
+                count = rs.getInt("count");
+                        
             // Se desconecta la BD.
             disconnect();
-            
-            // Si existe información.
-            if(rs.next())
-                while(rs.next())
-                   id = rs.getInt("id");
-                 
-            // Si no existe información.
-            else
-                return id;
-            
-            
+                            
         } catch (java.sql.SQLException ex){
             System.out.println("No se pudo encontrar información. Error: " + ex);
         }
         
-        // Devuelve el id.
-        return id;
+        if (count > 0)
+            return true;
+        else
+            return false;
         
     }
     
@@ -134,7 +128,7 @@ public class ConnectionDB {
             con.close();
             System.out.println("Exito al Desconectar la Base de Datos.");
         } catch (Exception e) {
-            System.out.println("Fallo al desconectar. Error: "+ e.getMessage());
+            System.out.println("Fallo al desconectar Error: "+ e.getMessage());
         }
     }
     

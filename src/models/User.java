@@ -1,8 +1,8 @@
 
 package models;
 
-import java.awt.Image;
 import java.util.Date;
+import javax.swing.Icon;
 
 /**
  * Clase de Usuario.
@@ -22,8 +22,10 @@ public class User {
     private Date    firstSession,
                     lastSession;
     
-    private Image   photo;
-
+    private Icon    photo;
+    
+    public User() {}
+    
     /**
      * Constructor de la clase Usuario.
      * @param id Atributo identificador (Autoincrementable).
@@ -38,7 +40,7 @@ public class User {
      */
     public User(int id, int userTypeId, String email, String password,
             char rememberData, char state, Date firstSession, Date lastSession,
-            Image photo) {
+            Icon photo) {
         
         this.id = id;
         this.userTypeId = userTypeId;
@@ -116,11 +118,11 @@ public class User {
         this.lastSession = lastSession;
     }
 
-    public Image getPhoto() {
+    public Icon getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Image photo) {
+    public void setPhoto(Icon photo) {
         this.photo = photo;
     }
         

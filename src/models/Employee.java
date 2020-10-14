@@ -14,7 +14,7 @@ public class Employee extends Person{
     private String  dni;
     
     private Date    admissionDate;
-
+    
     /**
      * Constructor de la clase Empleado.
      * @param id Atributo identificador (Autoincrementable).

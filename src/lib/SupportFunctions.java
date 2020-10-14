@@ -2,8 +2,6 @@ package lib;
 
 // Se importan las librerías a utilizar.
 import java.awt.Image;
-import java.util.regex.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 /**
@@ -30,7 +28,7 @@ public class SupportFunctions {
      * Método para validar números enteros y positivos
      * @param evt Variable KeyEvent.
      */
-    public void integerPositiveKeyTyped(KeyEvent evt){
+    public void integerPositiveKeyTyped(java.awt.event.KeyEvent evt){
         // Se trae el caracter ingresado en el campo de texto correspondiente.
         char numbers = evt.getKeyChar();
         // Se aplica la condición para que se elimine o no el caracter.
@@ -43,7 +41,7 @@ public class SupportFunctions {
      * Método para validar letras del abecedario.
      * @param evt variable de tipo KeyEvent
      */
-    public void alphabetKeyTyped(KeyEvent evt){
+    public void alphabetKeyTyped(java.awt.event.KeyEvent evt){
         // Se trae el caracter ingresado en el campo de texto correspondiente.
         char letters = evt.getKeyChar();
         // Se aplica la condición para que se elimine o no el caracter.
@@ -126,7 +124,7 @@ public class SupportFunctions {
                                 "[a-zA-Z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$";
         
         // Se compila la expresión.
-        Pattern pattern = Pattern.compile(emailPattern);
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile(emailPattern);
         
         // El correo pasado por parámetro no puede encontrarse vacío.
         if(email != null){
@@ -136,7 +134,7 @@ public class SupportFunctions {
              * comprueba si cumple con este o no para mostrar por la salida es-
              * tándar el mensaje Valido.
              */
-            Matcher matcher = pattern.matcher(email);
+            java.util.regex.Matcher matcher = pattern.matcher(email);
             if (matcher.matches()){
                 System.out.println("Email válido");
                 return true;
@@ -246,7 +244,7 @@ public class SupportFunctions {
      * @param frame JFrame a modificar su opacidad.
      * @param evt Evento de Mouse.
      */
-    public void mousePressed(int xx, int xy, JFrame frame, MouseEvent evt){
+    public void mousePressed(int xx, int xy, JFrame frame, java.awt.event.MouseEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
@@ -289,7 +287,7 @@ public class SupportFunctions {
      * @param frame JFrame a reubicar.
      * @param evt Evento del Mouse
      */
-    public void mouseDragged(int xx, int xy, JFrame frame, MouseEvent evt){
+    public void mouseDragged(int xx, int xy, JFrame frame, java.awt.event.MouseEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
         /*
@@ -310,7 +308,6 @@ public class SupportFunctions {
     /**
      * Realiza las configuraciones visuales iniciales que debe tener el JFrame.
      * @param frame JFrame que se va a configurar.
-     * @param iconPath Ruta de la imagen que se colocará como ícono.
      */
     public void initialOps(JFrame frame){
                 
@@ -325,10 +322,9 @@ public class SupportFunctions {
                         
     }
     
-        /**
+    /**
      * Realiza las configuraciones visuales iniciales que debe tener el JFrame.
      * @param dialog JDialog que se va a configurar.
-     * @param iconPath Ruta de la imagen que se colocará como ícono.
      */
     public void initialOps(JDialog dialog){
                 
@@ -532,6 +528,25 @@ public class SupportFunctions {
         
         // Devuelve el ícono deseado.
         return icon;
+        
+    }
+    
+    /**
+     * Método que convierte una cadena de bytes en una imagen.
+     * @param bytes Array que contiene los binarios de la imagen.
+     * @return La imagen en formato Image.
+     * @throws java.io.IOException Excepción de lectura de archivo.
+     */
+    public Image convertImage(byte[] bytes) throws java.io.IOException {
+                
+        java.io.ByteArrayInputStream bis = new java.io.ByteArrayInputStream(bytes);
+        java.util.Iterator readers = javax.imageio.ImageIO.getImageReadersByFormatName("jpeg");
+        javax.imageio.ImageReader reader = (javax.imageio.ImageReader) readers.next();
+        Object source = bis;
+        javax.imageio.stream.ImageInputStream iis = javax.imageio.ImageIO.createImageInputStream(source);
+        reader.setInput(iis, true);
+        javax.imageio.ImageReadParam param = reader.getDefaultReadParam();
+        return reader.read(0, param);
         
     }
     
