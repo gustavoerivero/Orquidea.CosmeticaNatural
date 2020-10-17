@@ -15,33 +15,14 @@ import javax.swing.ImageIcon;
  */
 public class UserProfile extends javax.swing.JPanel {
 
-    private Icon photo;
-    
     /**
      * Creates new form userProfile
      * @param photo
      */
-    public UserProfile(Icon photo) {
+    public UserProfile() {
            
         initComponents();
-        
-        this.photo = photo;
-        
-        if(this.photo != null) {
-                          
-            this.photo  = new ImageIcon(
-                    ((ImageIcon) photo).getImage().getScaledInstance(                          
-                        lblProfilePhotoUser.getWidth(), 
-                        lblProfilePhotoUser.getHeight(), 
-                        Image.SCALE_DEFAULT
-                    )
-            );
-            
-            lblProfilePhotoUser.setText(null);
-            lblProfilePhotoUser.setIcon(this.photo);
-
-        }
-        
+             
     }
     
         /**

@@ -53,12 +53,27 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
         
         // Se instancian las variables a utilzar.
         support         = new SupportFunctions();
-        profile         = new UserProfile(this.user.getPhoto());
+        profile         = new UserProfile();
                 
-        support.cardSelection(parent, profile);
+        if(this.user.getPhoto() != null) {
+                          
+            Icon photo  = new ImageIcon(
+                    ((ImageIcon) this.user.getPhoto()).getImage().getScaledInstance(                          
+                        profile.lblProfilePhotoUser.getWidth(), 
+                        profile.lblProfilePhotoUser.getHeight(), 
+                        Image.SCALE_DEFAULT
+                    )
+            );
             
+            profile.lblProfilePhotoUser.setText(null);
+            profile.lblProfilePhotoUser.setIcon(photo);
+
+        }
+        
         profile.addActionEvents(this);
-                                     
+        
+        support.cardSelection(parent, profile);
+                              
     }
     
     @Override
