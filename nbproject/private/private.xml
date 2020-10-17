@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/controllers/ControllerMainMenu.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/lib/ConnectionDB.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/controllers/ControllerLogin.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/controllers/ControllerWelcomeForm.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/lib/SupportFunctions.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/views/MainMenu.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/controllers/mainMenuOptions/ControllerUserProfile.java</file>
+            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/controllers/ControllerMainMenu.java</file>
             <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/views/WelcomeForm.java</file>
-            <file>file:/C:/Users/Gustavo/Documents/NetBeansProjects/Orquidea.CosmeticaNatural/src/views/mainMenuOptions/Profile.java</file>
         </group>
     </open-files>
 </project-private>

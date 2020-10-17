@@ -2,6 +2,7 @@
 package controllers;
 
 // Se importan las views a utilizar
+import java.awt.image.BufferedImage;
 import views.Login;
 import views.PopupMessage;
 
@@ -16,6 +17,7 @@ import lib.Mail;
 
 // Se importan las librerías necesarias.
 import java.util.Date;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 /**
@@ -147,11 +149,11 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         System.out.println("Los datos de acceso del usuario son: " +
                                 "Tipo: " + user.getUserTypeId() + ". Correo: " + user.getEmail());
                         
-                        // Se oculta la view de Login.
-                        login.dispose();
-
                         // Se actualizan los datos de fechas sobre el inicio de sesión.
                         userDB.changeDateUser(email);
+                        
+                        // Se oculta la view de Login.
+                        login.dispose();
                         
                         // Se instancia el Controlador de MainMenu.
                         ctrlMainMenu = new ControllerMainMenu(user);
@@ -232,6 +234,8 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             
             result = userDB.getDataAccess(email);
             
+            ImageIcon photo = null;
+            
             while(result.next()){
                 supportUser = new User(
                         result.getInt("id"), 
@@ -242,10 +246,17 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         result.getString("state").charAt(0),
                         result.getDate("firstSession"),
                         result.getDate("lastSession"), 
-                        new ImageIcon(support.convertImage(result.getBytes("photo")))
+                        null
                 );
+                
+                java.io.InputStream is = result.getBinaryStream("photo");
+                
+                if(is != null)
+                    supportUser.setPhoto(new ImageIcon((BufferedImage) (ImageIO.read(is))));
+               
+                
             }
-                                    
+                                                
             System.out.println("Éxito.");
             
             return supportUser;

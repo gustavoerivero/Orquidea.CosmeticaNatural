@@ -286,7 +286,7 @@ public class UserDB {
             Date obtainedDate = rs.getDate("firstSession");
             
             java.util.Calendar nulleable = java.util.Calendar.getInstance();
-            nulleable.set(1900, 01, 01);
+            nulleable.set(1900, 02, 01);
             
             // Se comparan las fechas. Si no hay "primer inicio" retorna 'true'..
             if(obtainedDate == null || obtainedDate == nulleable.getTime())
@@ -317,8 +317,8 @@ public class UserDB {
             
         if(firstSessionUser(email)){
             
-            SQL = "UPDATE \"User\" SET \"firstSession\" = '" + new Date()
-                + "' WHERE \"email\" = '" + email + "';";
+            SQL = "UPDATE \"User\" SET \"firstSession\" = " + new Date()
+                + " WHERE \"email\" = '" + email + "';";
             
             // Se realiza la inserción de datos.
             con.queryInsert(SQL);
@@ -329,8 +329,8 @@ public class UserDB {
             
         }
             
-        SQL = "UPDATE \"User\" SET \"lastSession\" = '" + new Date()
-            + "' WHERE \"email\" = '" + email + "';";        
+        SQL = "UPDATE \"User\" SET \"lastSession\" = " + new Date()
+            + " WHERE \"email\" = '" + email + "';";        
         
         // Se realiza la inserción de datos.
         con.queryInsert(SQL);
@@ -372,6 +372,58 @@ public class UserDB {
     }
    
     /**
+     * Consulta de imagen de perfil de usuario por campo 'id'.
+     * @param id Campo identificador del usuario.
+     * @return Devuelve array de bytes.
+     */
+    public ResultSet consultPhoto(int id) {
+        
+        // Se declara e instancia la variable con la sentencia SQL para la consulta.
+        String SQL  = "SELECT \"photo\" FROM \"User\" WHERE \"id\" = '" + id + "' "
+                    + "AND \"state\" = 'A';";
+        
+        con.connect();
+        
+        // Se realiza y se recibe la consulta.
+        ResultSet result = con.queryConsult(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.disconnect();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    /**
+     * Consulta de imagen de perfil de usuario por campo 'email'.
+     * @param email Correo electrónico del usuario.
+     * @return Devuelve array de bytes.
+     */
+    public ResultSet consultPhoto(String email) {
+        
+        // Se declara e instancia la variable con la sentencia SQL para la consulta.
+        String SQL  = "SELECT \"photo\" FROM \"User\" WHERE \"email\" = '" + email + "' "
+                    + "AND \"state\" = 'A';";
+        
+        con.connect();
+        
+        // Se realiza y se recibe la consulta.
+        ResultSet result = con.queryConsult(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.disconnect();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    /**
      * Método que permite actualizar la foto de un usuario.
      * @param id Campo identificador del usuario.
      * @param photo Foto que se va a actualizar.
@@ -386,21 +438,18 @@ public class UserDB {
             
             fis = new java.io.FileInputStream(photo);
             
-            java.sql.PreparedStatement pstm = con.connect().prepareStatement(
+            try (java.sql.PreparedStatement pstm = con.connect().prepareStatement(
                     "UPDATE \"User\" SET \"photo\" = ? WHERE \"id\" = ?;"
-            );
-            
-            pstm.setBinaryStream(1, fis, (int) photo.length());
-            pstm.setInt(2, id);
-            
-            pstm.execute();
-            pstm.close();
+            )) {
+                pstm.setBinaryStream(1, fis, (int) photo.length());
+                pstm.setInt(2, id);
+                
+                pstm.execute();
+            }
             
             return true;
             
-        } catch (java.io.FileNotFoundException ex) {
-            System.out.println("Error: " + ex);
-        } catch (java.sql.SQLException ex) {
+        } catch (java.io.FileNotFoundException | java.sql.SQLException ex) {
             System.out.println("Error: " + ex);
         } finally {
             try {
@@ -429,21 +478,18 @@ public class UserDB {
             
             fis = new java.io.FileInputStream(photo);
             
-            java.sql.PreparedStatement pstm = con.connect().prepareStatement(
+            try (java.sql.PreparedStatement pstm = con.connect().prepareStatement(
                     "UPDATE \"User\" SET \"photo\" = ? WHERE \"email\" = ?;"
-            );
-            
-            pstm.setBinaryStream(1, fis, (int) photo.length());
-            pstm.setString(2, email);
-            
-            pstm.execute();
-            pstm.close();
+            )) {
+                pstm.setBinaryStream(1, fis, (int) photo.length());
+                pstm.setString(2, email);
+                
+                pstm.execute();
+            }
             
             return true;
             
-        } catch (java.io.FileNotFoundException ex) {
-            System.out.println("Error: " + ex);
-        } catch (java.sql.SQLException ex) {
+        } catch (java.io.FileNotFoundException | java.sql.SQLException ex) {
             System.out.println("Error: " + ex);
         } finally {
             try {
@@ -455,6 +501,26 @@ public class UserDB {
         
         return false;
         
+    }
+    
+    /**
+     * Método que permite actualizar la foto de un usuario.
+     * @param email Correo electrónico del usuario.
+     * @return 'Verdadero' si se pudo realizar la actualización de foto, 'Falso' 
+     * para caso contrario.
+     */
+    public void deletePhoto(String email) {
+                    
+        String SQL = "UPDATE \"User\" SET \"photo\" = NULL WHERE \"email\" = '" + email + "';";
+
+        con.connect();
+
+        con.queryInsert(SQL);
+
+        con.disconnect();
+        
+        System.out.println("La foto del usuario de correo '" + email + "' ha sido eliminada.");
+            
     }
     
 }

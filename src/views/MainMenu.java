@@ -41,6 +41,9 @@ public class MainMenu extends javax.swing.JFrame {
         btnSeeProfile.addActionListener(evt);
         btnSignOff.addActionListener(evt);
         
+        btnChangePhoto.addActionListener(evt);
+        btnDeletePhoto.addActionListener(evt);
+        
     }
     
     /**
@@ -77,6 +80,10 @@ public class MainMenu extends javax.swing.JFrame {
         btnSeeProfile = new javax.swing.JButton();
         btnSeeNotification = new javax.swing.JButton();
         panMainPanel = new javax.swing.JPanel();
+        panProfile = new javax.swing.JPanel();
+        lblProfilePhotoUser = new javax.swing.JLabel();
+        btnDeletePhoto = new javax.swing.JButton();
+        btnChangePhoto = new javax.swing.JButton();
         panLateralMenu = new javax.swing.JPanel();
         lblCaelestiDevelopment = new javax.swing.JLabel();
 
@@ -231,6 +238,84 @@ public class MainMenu extends javax.swing.JFrame {
 
         panMainPanel.setBackground(new java.awt.Color(255, 245, 249));
         panMainPanel.setLayout(new java.awt.CardLayout());
+
+        panProfile.setBackground(new java.awt.Color(255, 245, 249));
+
+        lblProfilePhotoUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblProfilePhotoUser.setText("Sin imagen");
+        lblProfilePhotoUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 144, 158)));
+
+        btnDeletePhoto.setBackground(new java.awt.Color(254, 220, 234));
+        btnDeletePhoto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnDeletePhoto.setForeground(new java.awt.Color(0, 0, 0));
+        btnDeletePhoto.setText("Eliminar");
+        btnDeletePhoto.setToolTipText("Eliminar foto");
+        btnDeletePhoto.setBorder(null);
+        btnDeletePhoto.setBorderPainted(false);
+        btnDeletePhoto.setContentAreaFilled(false);
+        btnDeletePhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletePhoto.setFocusPainted(false);
+        btnDeletePhoto.setOpaque(true);
+        btnDeletePhoto.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnDeletePhotoMouseMoved(evt);
+            }
+        });
+        btnDeletePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnDeletePhotoMouseExited(evt);
+            }
+        });
+
+        btnChangePhoto.setBackground(new java.awt.Color(254, 220, 234));
+        btnChangePhoto.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnChangePhoto.setForeground(new java.awt.Color(0, 0, 0));
+        btnChangePhoto.setText("Cambiar");
+        btnChangePhoto.setToolTipText("Cambiar foto");
+        btnChangePhoto.setBorder(null);
+        btnChangePhoto.setBorderPainted(false);
+        btnChangePhoto.setContentAreaFilled(false);
+        btnChangePhoto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnChangePhoto.setFocusPainted(false);
+        btnChangePhoto.setOpaque(true);
+        btnChangePhoto.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnChangePhotoMouseMoved(evt);
+            }
+        });
+        btnChangePhoto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnChangePhotoMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panProfileLayout = new javax.swing.GroupLayout(panProfile);
+        panProfile.setLayout(panProfileLayout);
+        panProfileLayout.setHorizontalGroup(
+            panProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panProfileLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(panProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panProfileLayout.createSequentialGroup()
+                        .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(425, Short.MAX_VALUE))
+        );
+        panProfileLayout.setVerticalGroup(
+            panProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panProfileLayout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+
+        panMainPanel.add(panProfile, "card2");
 
         panLateralMenu.setBackground(new java.awt.Color(255, 230, 240));
         panLateralMenu.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -424,16 +509,40 @@ public class MainMenu extends javax.swing.JFrame {
         setOpacity((float)1.0);
     }//GEN-LAST:event_panLateralMenuMouseReleased
 
+    private void btnDeletePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseMoved
+        btnDeletePhoto.setForeground(new java.awt.Color(255,230,240));
+        btnDeletePhoto.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnDeletePhotoMouseMoved
+
+    private void btnDeletePhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseExited
+        btnDeletePhoto.setForeground(new java.awt.Color(0, 0, 0));
+        btnDeletePhoto.setBackground(new java.awt.Color(254,220,234));
+    }//GEN-LAST:event_btnDeletePhotoMouseExited
+
+    private void btnChangePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePhotoMouseMoved
+        btnChangePhoto.setForeground(new java.awt.Color(255,230,240));
+        btnChangePhoto.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnChangePhotoMouseMoved
+
+    private void btnChangePhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePhotoMouseExited
+        btnChangePhoto.setForeground(new java.awt.Color(0, 0, 0));
+        btnChangePhoto.setBackground(new java.awt.Color(254,220,234));
+    }//GEN-LAST:event_btnChangePhotoMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnChangePhoto;
+    public javax.swing.JButton btnDeletePhoto;
     public javax.swing.JButton btnExit;
     public javax.swing.JButton btnMin;
     public javax.swing.JButton btnSeeNotification;
     public javax.swing.JButton btnSeeProfile;
     public javax.swing.JButton btnSignOff;
     public javax.swing.JLabel lblCaelestiDevelopment;
+    public javax.swing.JLabel lblProfilePhotoUser;
     private javax.swing.JPanel panLateralMenu;
     private javax.swing.JPanel panMainMenu;
     public javax.swing.JPanel panMainPanel;
+    public javax.swing.JPanel panProfile;
     private javax.swing.JPanel panTopBar;
     // End of variables declaration//GEN-END:variables
 }
