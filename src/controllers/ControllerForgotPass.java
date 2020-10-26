@@ -20,19 +20,17 @@ import views.SelectOption;
 public class ControllerForgotPass implements java.awt.event.ActionListener{
     
     // Se declaran las clases a utilizar.
-    
         // Views
-        private ForgotPass forgot;
-        private PopupMessage popup;
-        private SelectOption select;
+        private ForgotPass          forgot;
+        private PopupMessage        popup;
+        private SelectOption        select;
         
         // Librerías de soporte
-        private SupportFunctions support;
-        private Mail mail;
+        private SupportFunctions    support;
+        private Mail                mail;
         
         // Models
-        private UserDB userDB;
-    
+        private UserDB              userDB;
     
     // Se declaran las variables a utilizar.
     private String correo, codex;
@@ -56,7 +54,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                 
     }
     
-        @Override
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
@@ -136,10 +134,7 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                                 + "código de verificación no pudo ser enviado, "
                                     + "verifique los datos ingresados");
                                                   
-                    }   
-            
-                    // Si los correos proporcionados no son iguales o el usuario no está registrado.
-                    else{
+                    } else {
                         
                         // Si los correos proporcionados no son iguales.
                         if(!email.equals(emailConfirmation))
@@ -152,10 +147,8 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                                     + "no está registrado.");
 
                     }
-                }
-                
-                // Si uno de los correos electrónicos proporcionados no tienen formato válido.
-                else{
+                    
+                } else {
                     
                     // Se muestra un mensaje emergente de "Datos faltantes".
                     popup = new PopupMessage(forgot, true, 6, 
@@ -186,26 +179,17 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             
             if(forgot.txtEmailField2.getText().isEmpty() ^ 
                     forgot.txtEmailField2.getText().equals("Ingresa código de "
-                            + "verificación")){
-                
+                            + "verificación"))
                 popup = new PopupMessage(forgot, true, 6, "Ingrese el código de "
                         + "confirmación");
-                
-            }
             
-            else if (!forgot.txtEmailField2.getText().equals(codex)){
-                
+            else if (!forgot.txtEmailField2.getText().equals(codex))
                 popup = new PopupMessage(forgot, true, 6, "El código de "
                         + "confirmación es incorrecto.");
-                
-            }
             
-            else{
-                
+            else 
                 support.cardSelection(forgot.panContent, forgot.panStepThree);
-                
-            }
-            
+                           
         }
         
         //</editor-fold>
@@ -237,18 +221,9 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         
         // Para actualizar las contraseñas.
         else if(evt.getSource() == forgot.btnOk2){
-                           
-            // Se otienen las contraseñas.
-            char[] password = forgot.pssPasswordField.getPassword(),
-                   confirm  = forgot.pssPasswordField1.getPassword();
-            
-            /* 
-             * Se otienen sus variables de tipo String.
-             * Se hace esta transformación debido a que las contraseñas de por
-             * sí se encuentran encriptadas.
-             */
-            String  pass                = new String(password),
-                    passConfirmation    = new String(confirm);
+               
+            String  pass                = new String(forgot.pssPasswordField.getPassword()),
+                    passConfirmation    = new String(forgot.pssPasswordField1.getPassword());
             
             // Se muestra en consola las contraseñas ingresadas.
             System.out.println("La primera contraseña es: " + pass + " mientras"
@@ -258,44 +233,59 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
             if(support.isPasswordCorrect(forgot.pssPasswordField.getPassword(), 
                     forgot.pssPasswordField1.getPassword())){
                 
-                // Se muestra el aviso de que las contraseñas son iguales.
-                System.out.println("Contraseñas iguales. Se procede a actualizar.");
+                int min = 8, max = 16;
                 
-                // Se actualiza la contraseña.
-                userDB.insertNewPass(correo, pass);
+                if(support.verifyPassword(forgot.pssPasswordField.getPassword(), min, max, 0)) {
+                    
+                    // Se muestra el aviso de que las contraseñas son iguales.
+                    System.out.println("Contraseñas iguales. Se procede a actualizar.");
+
+                    // Se actualiza la contraseña.
+                    userDB.insertNewPass(correo, pass);
+
+                    // Se muestra mensaje de que la actualización fue exitosa.
+                    System.out.println("Al usuario " + correo + " se le ha actualizado "
+                            + "su contraseña por " + pass + ".");
+
+                    // Se muestra en pantalla mensaje de que la actualización fue exitosa.
+                    popup = new PopupMessage(forgot, true, 15, 
+                            "La contraseña ha sido actualizada.");
+
+                    // Se cierra pantalla.
+                    forgot.dispose();
+                    
+                } else {
+                                        
+                    if(pass.length() < min)
+                        popup = new PopupMessage(forgot, true, 6, 
+                                "La longitud mínima de la contraseña debe ser de " 
+                                        + min + " caracteres."
+                        );
+                    else if(pass.length() > max)
+                        popup = new PopupMessage(forgot, true, 6, 
+                                "La longitud máxima de la contraseña debe ser de " +
+                                        max + " caracteres."
+                        );
+                    else 
+                        popup = new PopupMessage(forgot, true, 6, 
+                                "Verifique que su contraseña tenga al menos "
+                                        + "una letra minúscula, una letra mayúscula,"
+                                        + " un número y un caracter especial "
+                                        + "(_ * . / & % -)."
+                        );
+                    
+                }
                 
-                // Se muestra mensaje de que la actualización fue exitosa.
-                System.out.println("Al usuario " + correo + " se le ha actualizado "
-                        + "su contraseña por " + pass + ".");
-                
-                // Se muestra en pantalla mensaje de que la actualización fue exitosa.
-                popup = new PopupMessage(forgot, true, 15, 
-                        "La contraseña ha sido actualizada.");
-                
-                // Se cierra pantalla.
-                forgot.dispose();
-                
-            }
-            // Si no se ha agregado ninguna contraseña
-            else if((forgot.pssPasswordField.getPassword().toString().equals(
-                    "Ingrese su nueva contraseña") ^ 
-                    forgot.pssPasswordField1.getPassword().toString().equals(
-                            "Ingrese su nueva contraseña")) ^ (
-                    forgot.pssPasswordField.getPassword().toString().isEmpty() ^ 
-                    forgot.pssPasswordField1.getPassword().toString().isEmpty())){
-                
+            } else if((pass.equals("Ingrese su nueva contraseña") ^ 
+                    pass.equals("Ingrese su nueva contraseña")) ^ (
+                    pass.isEmpty() ^ pass.isEmpty()))
                 popup = new PopupMessage(forgot, true, 6, 
                         "Debe ingresar una nueva contraseña.");
-                
-            }
-            // Si las contraseñas no son iguales.
-            else{
-                
+              
+            else
                 popup = new PopupMessage(forgot, true, 6, 
                         "Las contraseñas no son iguales.");
                 
-            }
-            
         }
         
         //</editor-fold>

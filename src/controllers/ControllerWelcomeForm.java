@@ -24,6 +24,9 @@ import java.util.Date;
 import java.io.File;
 import javax.swing.Icon;
 import java.awt.Image;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -220,46 +223,52 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
             calendar.add(Calendar.YEAR, 18);
             Date val = calendar.getTime(), date = new Date();
                         
-            if (!welcome.txtUserDNI.getText().equals("Ingresa tu documento de identificación") &&
-                    !welcome.txtUserDNI.getText().isEmpty() && 
-                    !welcome.txtUserName.getText().equals("Ingresa tu nombre") &&
-                    !welcome.txtUserName.getText().isEmpty() &&
-                    !welcome.txtUserSurname.getText().equals("Ingresa tu apellido") && 
-                    !welcome.txtUserSurname.getText().isEmpty() &&
-                    !welcome.txtUserPhone.getText().equals("Ingresa tu número telefónico") &&
-                    !welcome.txtUserPhone.getText().isEmpty() && welcome.txtUserPhone.getText().length() >= 10 &&
-                    !welcome.txtUserDirection.getText().equals("Ingresa tu dirección") &&
-                    !welcome.txtUserDirection.getText().isEmpty() && 
-                    (val.before(date) || val.equals(date))) {
+            try {
                 
-                welcome.panBtnAccountUser.setBackground(new java.awt.Color(254,220,234));
-                welcome.btnAccountUser.setForeground(new java.awt.Color(0, 0, 0));
-                welcome.btnAccountUser.setBackground(new java.awt.Color(254,220,234));
-                
-                dni = welcome.txtUserDNI.getText();
-                name = welcome.txtUserName.getText();
-                surname = welcome.txtUserSurname.getText();
-                phone = Long.valueOf(welcome.txtUserPhone.getText());
-                birthday = welcome.dtcUserBirthday.getDate();
-                direction = welcome.txtUserDirection.getText();
-                
-                support.cardSelection(welcome.panCard, welcome.panDataUserOp);
-
-                welcome.lblData.setForeground(new java.awt.Color(0, 0, 0));
-                welcome.panData.setBackground(new java.awt.Color(255,230,240));
-
-                welcome.panDataUser.setBackground(new java.awt.Color(194, 48, 111));
-                welcome.lblDataUser.setForeground(new java.awt.Color(255,230,240));
-
-                popup = new PopupMessage(welcome, true, 12, "Ingresa la información solicitada sobre la cuenta de usuario.");
-                
-            } else {
-                
-                if (val.after(date))
-                    popup = new PopupMessage(welcome, true, 6, "La fecha de nacimiento pertenece a un menor de edad.");
-                else
-                    popup = new PopupMessage(welcome, true, 6, "Ingrese toda la información solicitada en el formulario.");
-                
+                if (!welcome.txtUserDNI.getText().equals("Ingresa tu documento de identificación") &&
+                        !welcome.txtUserDNI.getText().isEmpty() &&
+                        !welcome.txtUserName.getText().equals("Ingresa tu nombre") &&
+                        !welcome.txtUserName.getText().isEmpty() &&
+                        !welcome.txtUserSurname.getText().equals("Ingresa tu apellido") &&
+                        !welcome.txtUserSurname.getText().isEmpty() &&
+                        !welcome.txtUserPhone.getText().equals("Ingresa tu número telefónico") &&
+                        !welcome.txtUserPhone.getText().isEmpty() && welcome.txtUserPhone.getText().length() >= 10 &&
+                        !welcome.txtUserDirection.getText().equals("Ingresa tu dirección") &&
+                        !welcome.txtUserDirection.getText().isEmpty() &&
+                        (val.before(date) || val.equals(date)) && 
+                        !employeeDB.consultOneEmployeeFromDNI(dni).next()) {
+                    
+                    welcome.panBtnAccountUser.setBackground(new java.awt.Color(254,220,234));
+                    welcome.btnAccountUser.setForeground(new java.awt.Color(0, 0, 0));
+                    welcome.btnAccountUser.setBackground(new java.awt.Color(254,220,234));
+                    
+                    dni = welcome.txtUserDNI.getText();
+                    name = welcome.txtUserName.getText();
+                    surname = welcome.txtUserSurname.getText();
+                    phone = Long.valueOf(welcome.txtUserPhone.getText());
+                    birthday = welcome.dtcUserBirthday.getDate();
+                    direction = welcome.txtUserDirection.getText();
+                    
+                    support.cardSelection(welcome.panCard, welcome.panDataUserOp);
+                    
+                    welcome.lblData.setForeground(new java.awt.Color(0, 0, 0));
+                    welcome.panData.setBackground(new java.awt.Color(255,230,240));
+                    
+                    welcome.panDataUser.setBackground(new java.awt.Color(194, 48, 111));
+                    welcome.lblDataUser.setForeground(new java.awt.Color(255,230,240));
+                    
+                    popup = new PopupMessage(welcome, true, 12, "Ingresa la información solicitada sobre la cuenta de usuario.");
+                    
+                } else {
+                    
+                    if (val.after(date))
+                        popup = new PopupMessage(welcome, true, 6, "La fecha de nacimiento pertenece a un menor de edad.");
+                    else
+                        popup = new PopupMessage(welcome, true, 6, "Ingrese toda la información solicitada en el formulario.");
+                    
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error: " + ex);
             }
             
         }
@@ -403,48 +412,68 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                 
                 if(welcome.txtUserEmail.getText().equals(welcome.txtUserConfirmEmail.getText())) {
                     
-                    if(pass.equals(confPass)) {
+                    if(support.isPasswordCorrect(welcome.pssUser.getPassword(), 
+                            welcome.pssUserConfirm.getPassword())) {
                         
-                        welcome.panBtnConfirmUser.setBackground(new java.awt.Color(254,220,234));
-                        welcome.btnConfirmUser.setForeground(new java.awt.Color(0, 0, 0));
-                        welcome.btnConfirmUser.setBackground(new java.awt.Color(254,220,234));
-
-                        email = welcome.txtUserEmail.getText();
-                        password = pass;
-                        photo = welcome.lblPhoto.getIcon();
-
-                        support.cardSelection(welcome.panCard, welcome.panConfirmOp);
+                        int min = 8, max = 16;
                         
-                        // Obtener el código de confirmación.
-                        codex = support.randomCharacterString('1', 6);
-                        
-                        System.out.println("El código de verificación " + codex +
-                                " ha sido enviado al correo '" + email + "' con éxito.");
+                        if(support.verifyPassword(welcome.pssUser.getPassword(), min, max, 0)) {
                             
-                        if(mail.sendMessage(email, 
-                                "Código de Verificación: Registro \"Orquídea. Cosmética Natural\"", 
-                                "Ya estamos por culminar el registro, para ello necesitaremos que "
-                                        + "ingreses el código de verificación " + codex + " en la "
-                                                + "aplicación y tendremos la información necesaria "
-                                                + "para preparar el entorno para ti."))
-                        
-                        popup = new PopupMessage(welcome, true, 15, "El correo con el "
-                                + "código de verificación ha sido enviado");
-                            
-                        else                            
-                            popup = new PopupMessage(welcome, true, 10, "El correo con el "
-                                + "código de verificación no pudo ser enviado, "
-                                    + "verifique los datos ingresados y/o su conexión a internet.");
-                                                                      
-                        welcome.lblDataUser.setForeground(new java.awt.Color(0, 0, 0));
-                        welcome.panDataUser.setBackground(new java.awt.Color(255,230,240));
+                            welcome.panBtnConfirmUser.setBackground(new java.awt.Color(254,220,234));
+                            welcome.btnConfirmUser.setForeground(new java.awt.Color(0, 0, 0));
+                            welcome.btnConfirmUser.setBackground(new java.awt.Color(254,220,234));
 
-                        welcome.panDataConfirm.setBackground(new java.awt.Color(194, 48, 111));
-                        welcome.lblDataConfirm.setForeground(new java.awt.Color(255,230,240));
-                        
-                        popup = new PopupMessage(welcome, true, 12, "Ingresa los datos solicitados en el formulario "
-                                + "para completar el registro.");
-                                       
+                            email = welcome.txtUserEmail.getText();
+                            password = pass;
+                            photo = welcome.lblPhoto.getIcon();
+
+                            support.cardSelection(welcome.panCard, welcome.panConfirmOp);
+
+                            // Obtener el código de confirmación.
+                            codex = support.randomCharacterString('1', 6);
+
+                            System.out.println("El código de verificación " + codex +
+                                    " ha sido enviado al correo '" + email + "' con éxito.");
+
+                            if(mail.sendMessage(email, 
+                                    "Código de Verificación: Registro \"Orquídea. Cosmética Natural\"", 
+                                    "Ya estamos por culminar el registro, para ello necesitaremos que "
+                                            + "ingreses el código de verificación " + codex + " en la "
+                                                    + "aplicación y tendremos la información necesaria "
+                                                    + "para preparar el entorno para ti."))
+
+                            popup = new PopupMessage(welcome, true, 15, "El correo con el "
+                                    + "código de verificación ha sido enviado");
+
+                            else                            
+                                popup = new PopupMessage(welcome, true, 10, "El correo con el "
+                                    + "código de verificación no pudo ser enviado, "
+                                        + "verifique los datos ingresados y/o su conexión a internet.");
+
+                            welcome.lblDataUser.setForeground(new java.awt.Color(0, 0, 0));
+                            welcome.panDataUser.setBackground(new java.awt.Color(255,230,240));
+
+                            welcome.panDataConfirm.setBackground(new java.awt.Color(194, 48, 111));
+                            welcome.lblDataConfirm.setForeground(new java.awt.Color(255,230,240));
+
+                            popup = new PopupMessage(welcome, true, 12, "Ingresa los datos solicitados en el formulario "
+                                    + "para completar el registro."); 
+                            
+                        } else {
+                            
+                            if(welcome.pssUser.getPassword().length < min)
+                                popup = new PopupMessage(welcome, true, 6, 
+                                        "La contraseña debe tener una longitud mínima de " + min + " caracteres.");
+                            else if(welcome.pssUser.getPassword().length > max)
+                                popup = new PopupMessage(welcome, true, 6, 
+                                        "La contraseña debe tener una longitud máxima de " + max + " caracteres.");
+                            else
+                                popup = new PopupMessage(welcome, true, 6, "Verifique que su contraseña tenga al menos "
+                                        + "una letra minúscula, una letra mayúscula, un número y un caracter especial "
+                                        + "(_ * . / & % -).");
+                            
+                        }
+                               
                     } else
                         popup = new PopupMessage(welcome, true, 6, "Las contraseñas ingresadas no son iguales.");
                     
@@ -511,9 +540,6 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                                     'A'
                             )
                         );
-                    
-                        Calendar nulleable = Calendar.getInstance();
-                        nulleable.set(1900, 01, 01);
 
                         userDB.registerUser(
                                 new User(
@@ -523,8 +549,8 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                                         password, 
                                         'A', 
                                         'A',
-                                        nulleable.getTime(),
-                                        nulleable.getTime(),
+                                        null, 
+                                        null,
                                         photo
                                 )
                         );
@@ -552,11 +578,11 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                         welcome.btnReady.setForeground(new java.awt.Color(0, 0, 0));
                         welcome.btnReady.setBackground(new java.awt.Color(254,220,234));
 
-                        welcome.lblReady.setBackground(new java.awt.Color(194, 48, 111));
-                        welcome.panReady.setForeground(new java.awt.Color(255,230,240));
+                        welcome.lblDataConfirm.setBackground(new java.awt.Color(194, 48, 111));
+                        welcome.panDataConfirm.setForeground(new java.awt.Color(255,230,240));
 
-                        welcome.panDataConfirm.setForeground(new java.awt.Color(0, 0, 0));
-                        welcome.lblDataConfirm.setBackground(new java.awt.Color(255,230,240));
+                        welcome.panReady.setForeground(new java.awt.Color(0, 0, 0));
+                        welcome.lblReady.setBackground(new java.awt.Color(255,230,240));
 
                         support.cardSelection(welcome.panCard, welcome.panReadyOp);  
                         
@@ -592,6 +618,6 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
         //</editor-fold>
         
     }
-    
+        
 }
 

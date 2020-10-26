@@ -58,40 +58,7 @@ public class SupportFunctions {
      * @return Variable booleana.
      */
     public boolean isPasswordCorrect(char[] passOne, char[] passTwo) {
-        
-        // Variable a retornar.
-        boolean valor = true;
-        
-        // Puntero iniciado en posición '0'.
-        int pointer = 0;
-        
-        // Primera validación; Si las contraseñas tienen el mismo largo.
-        if (passOne.length != passTwo.length)
-            valor = false; // -> Retornar 'true'.
-        
-        else{
-            
-            /*
-             * Mientras la variable a retornar sea verdadera y el puntero sea 
-             * menor al largo de las contraseñas.
-             */
-            while((valor) && (pointer < passOne.length)){
-                
-                /*
-                 * Si la primera contraseña en la posición del puntero es 
-                 * distinta a la segunda contraseña en la misma posición del 
-                 * puntero.
-                 */
-                if (passOne[pointer] != passTwo[pointer])
-                    valor = false; // -> Retornar 'false'.
-                
-                pointer++; // -> Se incrementa el puntero.
-                
-            }
-            
-        }
-        
-        return valor; // -> Retornar el valor obtenido ('true' o 'false').
+        return new String(passOne).equals(new String(passTwo));        
     }
         
     /**
@@ -140,7 +107,7 @@ public class SupportFunctions {
                 return true;
             }
             else{
-                System.out.println("Email no válido");
+                System.out.println("Email no válido. Error: Formato no válido.");
                 return false;
             }
         }
@@ -150,9 +117,67 @@ public class SupportFunctions {
         
     }
     
-    //</editor-fold>
+    /**
+     * Método para verificar que una contraseña tenga el formato solicitado
+     * por el sistema.
+     * @param password Contraseña ingresada en el sistema a verificar.
+     * @param minLength Longitud mínima permitida para la contraseña.
+     * @param maxLength Longitud máxima permitida para la contraseña.
+     * @param type Tipo de contraseña solicitada por el sistema:
+     * '0' Se permite el uso de caracteres alfanuméricos y especiales.
+     * '1' Se permite el uso de caracteres alfanuméricos.
+     * '2' Se permite el uso de caracteres alfabéticos.
+     * '3' Se permite el uso de caracteres numéricos.
+     * @return 'Verdadero' si la contraseña contiene el formato correcto, 
+     * 'falso' para caso contrario.
+     */
+    public boolean verifyPassword(char[] password, int minLength, int maxLength, int type){
+        
+        //<editor-fold defaultstate="collapsed" desc=" Explicación de la expresión regular utilizada ">
+        /*
+         * ^                 # Inicio de la expresión
+         * (?=.*[0-9])       # Un dígito numérico.
+         * (?=.*[a-z])       # Al menos una letra minúscula.
+         * (?=.*[A-Z])       # Al menos una letra mayúscula.
+         * (?=.*[@#$%^&+=])  # Al menos un caracter especial.
+         * (?=\S+$)          # No permitir espacios en blanco.
+         * .{8,}             # Al menos 8 caracteres.
+         * $                 # Fin de la expresión.
+         */
+        //</editor-fold>
+        String  passPattern = "";
+        
+        switch (type) {
+            case 0:
+                passPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=*-_])(?=\\S+$).{" +
+                        String.valueOf(minLength) + "," + String.valueOf(maxLength) + "}$";
+                break;
+            case 1:
+                passPattern = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{" +
+                        String.valueOf(minLength) + "," + String.valueOf(maxLength) + "}$";
+                break;
+            case 2:
+                passPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{" +
+                        String.valueOf(minLength) + "," + String.valueOf(maxLength) + "}$";
+                break;
+            case 3:
+                passPattern = "^(?=.*[0-9])(?=\\S+$).{" +
+                        String.valueOf(minLength) + "," + String.valueOf(maxLength) + "}$";
+                break;
+        }
+        
+        if(new String(password).matches(passPattern)){
+            System.out.println("Contraseña válida.");
+            return true;
+        } else {
+            System.out.println("Contraseña no válida. "
+                    + "Error: La contraseña no posee el formato correspondiente.");
+            return false;
+        }
+                    
+    }
     
-    // Método para dar formato a números.
+    //</editor-fold>
     
     /**
      * Método para dar formato a variables de tipo Double.
@@ -163,8 +188,6 @@ public class SupportFunctions {
     public Double numberDecimalFormat(Double number, Integer decimal){
         return Math.round(number * Math.pow(10, decimal)) / Math.pow(10, decimal);
     }
-    
-    // Método para obtener sentencias aleatorias de datos.
     
     /**
      * Método para obtener sentencia String con datos aleatorios.
@@ -236,7 +259,7 @@ public class SupportFunctions {
         
     }
     
-        /**
+    /**
      * Método para disminuir la opacidad de un JFrame y dar valores a variables
      * de ubicación del Mouse.
      * @param xx Posición del Mouse sobre el eje horizontal.
@@ -345,9 +368,7 @@ public class SupportFunctions {
      * @return Retorna imagen.
      */
     public Image imageResource(String imagePath){
-        
         return new ImageIcon(getClass().getResource(imagePath)).getImage();
-        
     }
     
     /**
@@ -356,9 +377,7 @@ public class SupportFunctions {
      * @return Retorna imagen.
      */
     public ImageIcon iconResource(String iconPath){
-        
         return new ImageIcon(getClass().getResource(iconPath));
-        
     }
         
     /**

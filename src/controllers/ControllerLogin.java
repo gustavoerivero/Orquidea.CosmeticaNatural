@@ -2,7 +2,6 @@
 package controllers;
 
 // Se importan las views a utilizar
-import java.awt.image.BufferedImage;
 import views.Login;
 import views.PopupMessage;
 
@@ -29,35 +28,33 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     // Se declaran las clases a utilizar.
     
         // Views
-        private Login login;
-        private PopupMessage popup;
+        private Login                   login;
+        private PopupMessage            popup;
         
         // Models
-        private User   user;
-        private UserDB userDB;
+        private User                    user;
+        private UserDB                  userDB;
         
         // Controllers
-        private ControllerForgotPass ctrlForgot;
-        private ControllerWelcomeForm ctrlWelcome;
-        private ControllerMainMenu ctrlMainMenu;
+        private ControllerForgotPass    ctrlForgot;
+        private ControllerWelcomeForm   ctrlWelcome;
+        private ControllerMainMenu      ctrlMainMenu;
     
         
     // Se declaran clases de soporte.
-    private SupportFunctions support;
-    private ConnectionDB con;
-    private Mail mail;
+    private SupportFunctions            support;
+    private ConnectionDB                con;
+    private Mail                        mail;
         
     // Constructor del Login
     public ControllerLogin(){
         
-        // Se instancian las clases de soporte.
-        support = new SupportFunctions();
-        userDB = new UserDB();
-        con = new ConnectionDB();
-        mail = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
+        support     = new SupportFunctions();
+        userDB      = new UserDB();
+        con         = new ConnectionDB();
+        mail        = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
                 
-        // Se instancia la view de Login.
-        login = new Login();
+        login       = new Login();
         
         // Se añaden los eventos.
         login.addEvents(this);
@@ -121,10 +118,11 @@ public class ControllerLogin implements java.awt.event.ActionListener {
             } else{
                                 
                 // Se verifica el formato del correo ingresado.
-                if(support.verifyEmail(email)){
+                if(support.verifyEmail(email) && 
+                        support.verifyPassword(login.pssPasswordField.getPassword(), 8, 16, 0)){
                     
                     // Si el usuario y la contraseña son correctos.
-                    if(userDB.signer(email, pass) == true){
+                    if(userDB.signer(email, pass)){
                         
                         // Se muestra quién ingresó al sistema.
                         System.out.println("El usuario '" + email + "' ha ingresado al"
@@ -147,7 +145,10 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         user = getDataAccess(email);
                         
                         System.out.println("Los datos de acceso del usuario son: " +
-                                "Tipo: " + user.getUserTypeId() + ". Correo: " + user.getEmail());
+                                "Tipo: " + user.getUserTypeId() +
+                                ". Correo: " + user.getEmail() +
+                                ". Contraseña: " + user.getPassword()
+                        );
                         
                         // Se actualizan los datos de fechas sobre el inicio de sesión.
                         userDB.changeDateUser(email);
@@ -158,10 +159,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         // Se instancia el Controlador de MainMenu.
                         ctrlMainMenu = new ControllerMainMenu(user);
 
-                    } 
-                    
-                    // Si el usuario y/o la contraseña son incorrectos.
-                    else{
+                    } else {
                     
                         // Se muestra un mensaje emergente de "Datos faltantes".
                         popup = new PopupMessage(login, true, 6, 
@@ -180,16 +178,10 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                         
                     }
                     
-                }
-                
-                else{
-                    
-                    // Se muestra un mensaje emergente de "Datos faltantes".
+                } else
                     popup = new PopupMessage(login, true, 6, 
                             "El correo electrónico no tiene un formato válido.");
                     
-                }
-                
             }
             
         }
@@ -226,16 +218,11 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         userDB = new UserDB();
         
         User supportUser = null;
-        
-        // Se declara la variable que devuelve el resultado.
-        java.sql.ResultSet result;
-                
+                        
         try {
             
-            result = userDB.getDataAccess(email);
-            
-            ImageIcon photo = null;
-            
+            java.sql.ResultSet result = userDB.getDataAccess(email);
+                        
             while(result.next()){
                 supportUser = new User(
                         result.getInt("id"), 
@@ -252,9 +239,8 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                 java.io.InputStream is = result.getBinaryStream("photo");
                 
                 if(is != null)
-                    supportUser.setPhoto(new ImageIcon((BufferedImage) (ImageIO.read(is))));
-               
-                
+                    supportUser.setPhoto(new ImageIcon((java.awt.image.BufferedImage) (ImageIO.read(is))));
+                               
             }
                                                 
             System.out.println("Éxito.");

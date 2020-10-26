@@ -178,7 +178,7 @@ public class UserDB {
     public void registerUser(User user) {
             
         con.connect();
-          
+        
         // Se desclara la sentencia SQL.
         String SQL = "INSERT INTO \"User\" (\"id\", \"email\", "
                     + "\"password\", \"UserTypeid\", \"firstSession\", \"lastSession\", "
@@ -188,8 +188,8 @@ public class UserDB {
                     + "'" + user.getEmail() + "', "
                     + "'" + user.getPassword() + "', "
                     + "'" + user.getUserTypeId() + "', "
-                    + "'" + user.getFirstSession() + "', "
-                    + "'" + user.getLastSession() + "', "
+                    + "NULL, "
+                    + "NULL, "
                     + "'" + user.getRememberData() + "', "
                     + "'" + user.getState() + "'"
                     + ");";
@@ -285,11 +285,8 @@ public class UserDB {
             // Se obtiene la fecha de la base de datos.
             Date obtainedDate = rs.getDate("firstSession");
             
-            java.util.Calendar nulleable = java.util.Calendar.getInstance();
-            nulleable.set(1900, 02, 01);
-            
             // Se comparan las fechas. Si no hay "primer inicio" retorna 'true'..
-            if(obtainedDate == null || obtainedDate == nulleable.getTime())
+            if(obtainedDate == null)
                 return true;
             
             // Se desconecta la BD.
@@ -327,6 +324,8 @@ public class UserDB {
             System.out.println("La actualización del primer inicio del usuario "
                     + "cuyo correo es '" + email + "' se ha efectuado con éxito.");
             
+            System.out.println("Primer inicio: " + new Date());
+            
         }
             
         SQL = "UPDATE \"User\" SET \"lastSession\" = " + new Date()
@@ -338,6 +337,8 @@ public class UserDB {
         // Se muestra mensaje de éxito.
         System.out.println("La actualización del último inicio del usuario "
                 + "cuyo correo es '" + email + "' se ha efectuado con éxito.");
+        
+        System.out.println("Último inicio: " + new Date());
           
         // Se desconecta la BD.
         con.disconnect();

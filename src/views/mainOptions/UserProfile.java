@@ -1,13 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package views.mainOptions;
 
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import lib.SupportFunctions;
 
 /**
  *
@@ -15,6 +9,8 @@ import javax.swing.ImageIcon;
  */
 public class UserProfile extends javax.swing.JPanel {
 
+    private SupportFunctions support = new SupportFunctions();
+    
     /**
      * Creates new form userProfile
      * @param photo
@@ -37,6 +33,9 @@ public class UserProfile extends javax.swing.JPanel {
                 
         btnChangePhoto.addActionListener(evt);
         btnDeletePhoto.addActionListener(evt);
+        tgbShowPass.addActionListener(evt);
+        btnClearData.addActionListener(evt);
+        btnUpdateData.addActionListener(evt);
         
     }
 
@@ -52,8 +51,31 @@ public class UserProfile extends javax.swing.JPanel {
         lblProfilePhotoUser = new javax.swing.JLabel();
         btnChangePhoto = new javax.swing.JButton();
         btnDeletePhoto = new javax.swing.JButton();
+        lblUserDNI = new javax.swing.JLabel();
+        txtUserDNI = new javax.swing.JTextField();
+        lblUserName = new javax.swing.JLabel();
+        txtUserName = new javax.swing.JTextField();
+        lblUserSurname = new javax.swing.JLabel();
+        txtUserSurname = new javax.swing.JTextField();
+        lblUserBirthday = new javax.swing.JLabel();
+        lblUserPhone = new javax.swing.JLabel();
+        txtUserPhone = new javax.swing.JTextField();
+        lblUserDirection = new javax.swing.JLabel();
+        txtUserDirection = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        lblUserEmail = new javax.swing.JLabel();
+        txtUserEmail = new javax.swing.JTextField();
+        lblUserPassword = new javax.swing.JLabel();
+        pssUser = new javax.swing.JPasswordField();
+        tgbShowPass = new javax.swing.JToggleButton();
+        btnClearData = new javax.swing.JButton();
+        btnUpdateData = new javax.swing.JButton();
+        dtcUserBirthday = new com.toedter.calendar.JDateChooser();
 
         setBackground(new java.awt.Color(255, 245, 249));
+        setMaximumSize(new java.awt.Dimension(748, 654));
+        setMinimumSize(new java.awt.Dimension(748, 654));
+        setPreferredSize(new java.awt.Dimension(748, 654));
 
         lblProfilePhotoUser.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblProfilePhotoUser.setText("Sin imagen");
@@ -103,57 +125,387 @@ public class UserProfile extends javax.swing.JPanel {
             }
         });
 
+        lblUserDNI.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserDNI.setText("Documento de Identificación: ");
+
+        txtUserDNI.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserDNI.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserDNI.setText("Ingresa tu documento de identificación");
+        txtUserDNI.setToolTipText("");
+        txtUserDNI.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserDNI.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserDNI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserDNIMouseClicked(evt);
+            }
+        });
+
+        lblUserName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserName.setText("Nombre:");
+
+        txtUserName.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserName.setText("Ingresa tu nombre");
+        txtUserName.setToolTipText("");
+        txtUserName.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserName.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserName.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserNameMouseClicked(evt);
+            }
+        });
+
+        lblUserSurname.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserSurname.setText("Apellido: ");
+
+        txtUserSurname.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserSurname.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserSurname.setText("Ingresa tu apellido");
+        txtUserSurname.setToolTipText("");
+        txtUserSurname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserSurname.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserSurname.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserSurnameMouseClicked(evt);
+            }
+        });
+
+        lblUserBirthday.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserBirthday.setText("Fecha de nacimiento:");
+
+        lblUserPhone.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserPhone.setText("Teléfono: ");
+
+        txtUserPhone.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserPhone.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserPhone.setText("Ingresa tu número telefónico");
+        txtUserPhone.setToolTipText("");
+        txtUserPhone.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserPhone.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserPhone.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserPhoneMouseClicked(evt);
+            }
+        });
+        txtUserPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUserPhoneKeyTyped(evt);
+            }
+        });
+
+        lblUserDirection.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserDirection.setText("Dirección: ");
+
+        txtUserDirection.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserDirection.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserDirection.setText("Ingresa tu dirección");
+        txtUserDirection.setToolTipText("");
+        txtUserDirection.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserDirection.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserDirection.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserDirectionMouseClicked(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Datos del Perfil");
+
+        lblUserEmail.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserEmail.setText("Correo electrónico: ");
+
+        txtUserEmail.setBackground(new java.awt.Color(255, 245, 249));
+        txtUserEmail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        txtUserEmail.setText("Ingresa tu correo electrónico");
+        txtUserEmail.setToolTipText("");
+        txtUserEmail.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        txtUserEmail.setSelectionColor(new java.awt.Color(0, 144, 158));
+        txtUserEmail.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtUserEmailMouseClicked(evt);
+            }
+        });
+
+        lblUserPassword.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserPassword.setText("Contraseña:");
+
+        pssUser.setBackground(new java.awt.Color(255, 245, 249));
+        pssUser.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        pssUser.setText("Ingresa tu contraseña");
+        pssUser.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        pssUser.setEchoChar('*');
+        pssUser.setSelectionColor(new java.awt.Color(0, 144, 158));
+        pssUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pssUserMouseClicked(evt);
+            }
+        });
+
+        tgbShowPass.setBackground(new java.awt.Color(255, 245, 249));
+        tgbShowPass.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/hideIcon.png"))); // NOI18N
+        tgbShowPass.setBorder(null);
+        tgbShowPass.setBorderPainted(false);
+        tgbShowPass.setContentAreaFilled(false);
+        tgbShowPass.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        tgbShowPass.setFocusPainted(false);
+        tgbShowPass.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/showIcon.png"))); // NOI18N
+
+        btnClearData.setBackground(new java.awt.Color(254, 220, 234));
+        btnClearData.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnClearData.setForeground(new java.awt.Color(0, 0, 0));
+        btnClearData.setText("Limpiar");
+        btnClearData.setToolTipText("Limpiar datos");
+        btnClearData.setBorder(null);
+        btnClearData.setBorderPainted(false);
+        btnClearData.setContentAreaFilled(false);
+        btnClearData.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClearData.setFocusPainted(false);
+        btnClearData.setOpaque(true);
+        btnClearData.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnClearDataMouseMoved(evt);
+            }
+        });
+        btnClearData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClearDataMouseExited(evt);
+            }
+        });
+
+        btnUpdateData.setBackground(new java.awt.Color(254, 220, 234));
+        btnUpdateData.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btnUpdateData.setForeground(new java.awt.Color(0, 0, 0));
+        btnUpdateData.setText("Actualizar");
+        btnUpdateData.setToolTipText("Actualizar datos");
+        btnUpdateData.setBorder(null);
+        btnUpdateData.setBorderPainted(false);
+        btnUpdateData.setContentAreaFilled(false);
+        btnUpdateData.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnUpdateData.setFocusPainted(false);
+        btnUpdateData.setOpaque(true);
+        btnUpdateData.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnUpdateDataMouseMoved(evt);
+            }
+        });
+        btnUpdateData.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnUpdateDataMouseExited(evt);
+            }
+        });
+
+        dtcUserBirthday.setBackground(new java.awt.Color(255, 245, 249));
+        dtcUserBirthday.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 144, 158)));
+        dtcUserBirthday.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        dtcUserBirthday.setOpaque(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblUserDNI, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserSurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserPhone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserDirection, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblUserPassword, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(425, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dtcUserBirthday, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(pssUser)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(tgbShowPass)))
+                        .addGap(27, 27, 27))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(19, 19, 19)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUserDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUserDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtUserName, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtUserSurname, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                            .addComponent(lblUserSurname, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(dtcUserBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                            .addComponent(lblUserBirthday, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtUserPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblUserPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProfilePhotoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnDeletePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnChangePhoto, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(287, Short.MAX_VALUE))
+                    .addComponent(lblUserDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUserDirection, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUserEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(pssUser, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblUserPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tgbShowPass, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnClearData, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateData, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnChangePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePhotoMouseMoved
-        btnChangePhoto.setForeground(new java.awt.Color(255,230,240));
-        btnChangePhoto.setBackground(new java.awt.Color(194, 48, 111));
-    }//GEN-LAST:event_btnChangePhotoMouseMoved
+    private void txtUserDNIMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserDNIMouseClicked
+        if(txtUserDNI.getText().equals("Ingresa tu documento de identificación"))
+        txtUserDNI.setText("");
+    }//GEN-LAST:event_txtUserDNIMouseClicked
+
+    private void txtUserNameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserNameMouseClicked
+        if(txtUserName.getText().equals("Ingresa tu nombre"))
+        txtUserName.setText("");
+    }//GEN-LAST:event_txtUserNameMouseClicked
+
+    private void txtUserSurnameMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserSurnameMouseClicked
+        if(txtUserSurname.getText().equals("Ingresa tu apellido"))
+        txtUserSurname.setText("");
+    }//GEN-LAST:event_txtUserSurnameMouseClicked
+
+    private void txtUserPhoneMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserPhoneMouseClicked
+        if(txtUserPhone.getText().equals("Ingresa tu número telefónico"))
+        txtUserPhone.setText("");
+    }//GEN-LAST:event_txtUserPhoneMouseClicked
+
+    private void txtUserPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUserPhoneKeyTyped
+        support.integerPositiveKeyTyped(evt);
+    }//GEN-LAST:event_txtUserPhoneKeyTyped
+
+    private void txtUserDirectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserDirectionMouseClicked
+        if(txtUserDirection.getText().equals("Ingresa tu dirección"))
+        txtUserDirection.setText("");
+    }//GEN-LAST:event_txtUserDirectionMouseClicked
 
     private void btnChangePhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePhotoMouseExited
         btnChangePhoto.setForeground(new java.awt.Color(0, 0, 0));
         btnChangePhoto.setBackground(new java.awt.Color(254,220,234));
     }//GEN-LAST:event_btnChangePhotoMouseExited
 
-    private void btnDeletePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseMoved
-        btnDeletePhoto.setForeground(new java.awt.Color(255,230,240));
-        btnDeletePhoto.setBackground(new java.awt.Color(194, 48, 111));
-    }//GEN-LAST:event_btnDeletePhotoMouseMoved
+    private void btnChangePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnChangePhotoMouseMoved
+        btnChangePhoto.setForeground(new java.awt.Color(255,230,240));
+        btnChangePhoto.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnChangePhotoMouseMoved
 
     private void btnDeletePhotoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseExited
         btnDeletePhoto.setForeground(new java.awt.Color(0, 0, 0));
         btnDeletePhoto.setBackground(new java.awt.Color(254,220,234));
     }//GEN-LAST:event_btnDeletePhotoMouseExited
 
+    private void btnDeletePhotoMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnDeletePhotoMouseMoved
+        btnDeletePhoto.setForeground(new java.awt.Color(255,230,240));
+        btnDeletePhoto.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnDeletePhotoMouseMoved
+
+    private void txtUserEmailMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUserEmailMouseClicked
+        if(txtUserEmail.getText().equals("Ingresa tu correo electrónico"))
+        txtUserEmail.setText("");
+    }//GEN-LAST:event_txtUserEmailMouseClicked
+
+    private void pssUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pssUserMouseClicked
+        if(String.valueOf(pssUser.getPassword()).equals("Ingresa tu contraseña"))
+        pssUser.setText("");
+    }//GEN-LAST:event_pssUserMouseClicked
+
+    private void btnClearDataMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearDataMouseMoved
+        btnClearData.setForeground(new java.awt.Color(255,230,240));
+        btnClearData.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnClearDataMouseMoved
+
+    private void btnClearDataMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClearDataMouseExited
+        btnClearData.setForeground(new java.awt.Color(0, 0, 0));
+        btnClearData.setBackground(new java.awt.Color(254,220,234));
+    }//GEN-LAST:event_btnClearDataMouseExited
+
+    private void btnUpdateDataMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateDataMouseMoved
+        btnUpdateData.setForeground(new java.awt.Color(255,230,240));
+        btnUpdateData.setBackground(new java.awt.Color(194, 48, 111));
+    }//GEN-LAST:event_btnUpdateDataMouseMoved
+
+    private void btnUpdateDataMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnUpdateDataMouseExited
+        btnUpdateData.setForeground(new java.awt.Color(0, 0, 0));
+        btnUpdateData.setBackground(new java.awt.Color(254,220,234));
+    }//GEN-LAST:event_btnUpdateDataMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnChangePhoto;
+    public javax.swing.JButton btnClearData;
     public javax.swing.JButton btnDeletePhoto;
+    public javax.swing.JButton btnUpdateData;
+    public com.toedter.calendar.JDateChooser dtcUserBirthday;
+    private javax.swing.JLabel jLabel1;
     public javax.swing.JLabel lblProfilePhotoUser;
+    private javax.swing.JLabel lblUserBirthday;
+    private javax.swing.JLabel lblUserDNI;
+    private javax.swing.JLabel lblUserDirection;
+    private javax.swing.JLabel lblUserEmail;
+    private javax.swing.JLabel lblUserName;
+    private javax.swing.JLabel lblUserPassword;
+    private javax.swing.JLabel lblUserPhone;
+    private javax.swing.JLabel lblUserSurname;
+    public javax.swing.JPasswordField pssUser;
+    public javax.swing.JToggleButton tgbShowPass;
+    public javax.swing.JTextField txtUserDNI;
+    public javax.swing.JTextField txtUserDirection;
+    public javax.swing.JTextField txtUserEmail;
+    public javax.swing.JTextField txtUserName;
+    public javax.swing.JTextField txtUserPhone;
+    public javax.swing.JTextField txtUserSurname;
     // End of variables declaration//GEN-END:variables
 }

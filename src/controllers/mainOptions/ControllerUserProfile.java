@@ -35,8 +35,12 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
     
     private SupportFunctions        support;
     
-    private User                    user;
-    private Employee                employee;
+    private User                    user, 
+                                    updateUser;
+    
+    private Employee                employee,
+                                    updateEmployee;
+    
     private UserDB                  userDB      = new UserDB();
     private EmployeeDB              employeeDB  = new EmployeeDB();
     
@@ -59,8 +63,8 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                           
             Icon photo  = new ImageIcon(
                     ((ImageIcon) this.user.getPhoto()).getImage().getScaledInstance(                          
-                        profile.lblProfilePhotoUser.getWidth(), 
-                        profile.lblProfilePhotoUser.getHeight(), 
+                        200, 
+                        200, 
                         Image.SCALE_DEFAULT
                     )
             );
@@ -69,6 +73,17 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
             profile.lblProfilePhotoUser.setIcon(photo);
 
         }
+        
+        profile.txtUserDNI.setText(employee.getDni());
+        profile.txtUserName.setText(employee.getName());
+        profile.txtUserSurname.setText(employee.getSurname());
+        profile.dtcUserBirthday.setDate(employee.getBirthday());
+        profile.txtUserPhone.setText(String.valueOf(employee.getPhone()));
+        profile.txtUserDirection.setText(employee.getDirection());
+        profile.txtUserEmail.setText(user.getEmail());
+        profile.pssUser.setText(user.getPassword());
+        
+        userPermits(user.getUserTypeId());
         
         profile.addActionEvents(this);
         
@@ -79,6 +94,7 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
     @Override
     public void actionPerformed(java.awt.event.ActionEvent evt) {
      
+        // Cambiar foto de perfil.
         if(evt.getSource() == profile.btnChangePhoto) {
             
             javax.swing.JFileChooser FileChooser = new javax.swing.JFileChooser();
@@ -135,30 +151,121 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
             
         }
         
+        // Eliminar foto de perfil.
         else if(evt.getSource() == profile.btnDeletePhoto) {
             
             if(user.getPhoto() != null) {
                             
-                userDB.deletePhoto(user.getEmail());
-
-                user.setPhoto(null);
-                profile.lblProfilePhotoUser.setText("Sin imagen");
-                profile.lblProfilePhotoUser.setIcon(null);
-
-                btnProfile.setIcon(
-                        support.iconResource(
-                                "/views/images/medium/accountProfileIcon32.png"
-                        )
-                );
-
-                popup = new PopupMessage(
+                select = new SelectOption(
                         frame, 
                         true, 
-                        15, 
-                        "La imagen de perfil ha sido actualizada."
+                        10, 
+                        "¿Desea realmente eliminar su foto de perfil?", 
+                        "Si", 
+                        "No"
+                );
+                
+                if(select.getOpc()) {
+                    
+                    userDB.deletePhoto(user.getEmail());
+
+                    user.setPhoto(null);
+                    profile.lblProfilePhotoUser.setText("Sin imagen");
+                    profile.lblProfilePhotoUser.setIcon(null);
+
+                    btnProfile.setIcon(
+                            support.iconResource(
+                                    "/views/images/medium/accountProfileIcon32.png"
+                            )
+                    );
+
+                    popup = new PopupMessage(
+                            frame, 
+                            true, 
+                            15, 
+                            "La imagen de perfil ha sido actualizada."
+                    );
+                    
+                }
+                               
+            } 
+            
+        }
+        
+        // Ver u ocultar contraseña
+        else if(evt.getSource() == profile.tgbShowPass) {
+            
+            // Si el toggleButton es seleccionado la contraseña será visible.
+            if(profile.tgbShowPass.isSelected())
+                profile.pssUser.setEchoChar((char) 0);
+            
+            // Caso contrario; Si se deselecciona el toggleButton, se oculta la contraseña.
+            else 
+                profile.pssUser.setEchoChar('*');
+            
+        }
+        
+        // Limpiar información.
+        else if(evt.getSource() == profile.btnClearData) {
+            
+            profile.txtUserDNI.setText(employee.getDni());
+            profile.txtUserName.setText(employee.getName());
+            profile.txtUserSurname.setText(employee.getSurname());
+            profile.dtcUserBirthday.setDate(employee.getBirthday());
+            profile.txtUserPhone.setText(String.valueOf(employee.getPhone()));
+            profile.txtUserDirection.setText(employee.getDirection());
+            profile.txtUserEmail.setText(user.getEmail());
+            profile.pssUser.setText(user.getPassword());
+            
+        }
+        
+        // Actualizar información.
+        else if(evt.getSource() == profile.btnUpdateData) {
+            
+            updateUser = new User(
+                    user.getId(), 
+                    user.getUserTypeId(), 
+                    profile.txtUserEmail.getText(),
+                    new String(profile.pssUser.getPassword()),
+                    user.getRememberData(),
+                    user.getState(),
+                    user.getFirstSession(),
+                    user.getLastSession(),
+                    user.getPhoto()
+            );
+            
+            updateEmployee = new Employee(
+                    employee.getEnterpriseId(),
+                    employee.getEnterpriseId(),
+                    profile.txtUserName.getText(),
+                    profile.txtUserSurname.getText(),
+                    profile.dtcUserBirthday.getDate(),
+                    Long.valueOf(profile.txtUserPhone.getText()),
+                    profile.txtUserDirection.getText(),
+                    profile.txtUserEmail.getText(),
+                    employee.getState(),
+                    profile.txtUserDNI.getText(),
+                    employee.getAdmissionDate()
+            );
+            
+            if(!user.equals(updateUser) && !employee.equals(updateEmployee)) {
+                
+                select = new SelectOption(
+                        frame, 
+                        true, 
+                        10, 
+                        "¿Desea actualizar sus datos?", 
+                        "Si", 
+                        "No"
                 );
 
-            } 
+                if(select.getOpc()) {
+
+                    
+
+                }
+                
+            }
             
         }
         
@@ -203,6 +310,25 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
         }
         
         return null;
+        
+    }
+    
+    /**
+     * Método para permitir al usuario modificar información dependiendo del 
+     * tipo de usuario.
+     * @param type Tipo de usuario.
+     */
+    private void userPermits(int type){
+        
+        if(type != 0) {
+            
+            profile.txtUserDNI.setEditable(false);
+            profile.txtUserName.setEditable(false);
+            profile.txtUserSurname.setEditable(false);
+            profile.dtcUserBirthday.setEnabled(false);
+            profile.txtUserEmail.setEditable(false);          
+            
+        }
         
     }
     
