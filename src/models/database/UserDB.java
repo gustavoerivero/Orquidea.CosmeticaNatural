@@ -28,32 +28,40 @@ public class UserDB {
      */
     public boolean signer(String email, String pass){
         
-        try{
+        if(userExist(email, 'A')) {
             
-            con.connect();
-          
-            // Se descrie la sentencia SQL.
-            String SQL =    "SELECT * FROM \"User\" WHERE \"email\" = '"
-                            + email + "' AND \"password\" = '" + pass + 
-                            "' AND \"state\" = 'A';";
+            try{
             
-            // Se realiza la consulta y se obtiene el resultado.
-            java.sql.ResultSet rs = con.queryConsult(SQL);
+                con.connect();
+
+                // Se descrie la sentencia SQL.
+                String SQL =    "SELECT * FROM \"User\" WHERE \"email\" = '"
+                                + email + "' AND \"password\" = '" + pass + 
+                                "' AND \"state\" = 'A';";
+
+                // Se realiza la consulta y se obtiene el resultado.
+                java.sql.ResultSet rs = con.queryConsult(SQL);
+
+                // Se desconecta la BD.
+                con.disconnect();
+
+                return rs.next();
+
+            } catch (java.sql.SQLException ex){
+                System.out.println("No se pudo encontrar el usuario. Error: " + ex);
+            }
+
+            // De no encontrarse ningún resultado, retorna 'false'.
+            return false;
             
-            // Se desconecta la BD.
-            con.disconnect();
+        } else {
             
-            // Si se obtuvo un resultado (que tiene que ser único) retorna 'true'.
-            return rs.next();
+            System.out.println("No se pudo encontrar el usuario.");
             
+            return false;
             
-        } catch (java.sql.SQLException ex){
-            System.out.println("No se pudo encontrar el usuario. Error: " + ex);
-        }
-        
-        // De no encontrarse ningún resultado, retorna 'false'.
-        return false;
-        
+        }    
+                
     }
     
     /**
@@ -142,6 +150,7 @@ public class UserDB {
 
     /**
      * Método para obtener los datos de un usuario.
+     * @param email
      * @return Devuelve consulta.
      */
     public ResultSet readUserData(String email){
@@ -206,18 +215,28 @@ public class UserDB {
         
     }
    
-    public void updateUser(User user, String id) {
+    /**
+     * Método para actualizar a un usuario en la Base de Datos.
+     * @param user Usuario que se desea actualizar.
+     */
+    public void updateUser(User user) {
          
         con.connect(); 
 
-        // Se descrie la sentencia SQL.
+        // Se describe la sentencia SQL.
         String SQL = "UPDATE \"User\" SET \"email\" = '" + user.getEmail() + 
                     "', \"password\" = '" + user.getPassword() + 
-                    "', \"userTypeId\" = '" + user.getUserTypeId() + 
+                    "', \"UserTypeId\" = '" + user.getUserTypeId() + 
                     "', \"state\" = '" + user.getState() + 
-                    "' WHERE \"id\" = " + id + ";";
+                    "', \"rememberData\" = '" + user.getRememberData() +
+                    "', \"firstSession\" = '" + user.getFirstSession() +
+                    "', \"lastSession\" = '" + user.getLastSession() +
+                    "' WHERE \"id\" = '" + user.getId() + "';";
             
         con.queryInsert(SQL);
+        
+        System.out.println("Se ha actualizado el usuario " + user.getEmail() + 
+                "con éxito.");
             
         // Se desconecta la BD.
         con.disconnect();
@@ -272,31 +291,27 @@ public class UserDB {
             
             con.connect();
           
-            // Se descrie la sentencia SQL.
             String SQL =    "SELECT \"firstSession\" FROM \"User\" WHERE \"email\" = '"
                             + email + "' AND \"state\" = 'A';";
             
-            // Se realiza la consulta y se obtiene el resultado.
             java.sql.ResultSet rs = con.queryConsult(SQL);
             
-            // Se ubica el resultado obtenido.
-            rs.next();
-            
-            // Se obtiene la fecha de la base de datos.
-            Date obtainedDate = rs.getDate("firstSession");
-            
-            // Se comparan las fechas. Si no hay "primer inicio" retorna 'true'..
-            if(obtainedDate == null)
-                return true;
-            
-            // Se desconecta la BD.
             con.disconnect();
             
+            rs.next();
+            
+            if(rs.getDate("firstSession") == null) {
+                System.out.println("El usuario '" + email + "' no ha iniciado "
+                        + "sesión por primera vez.");
+                return true;
+            }
+                            
         } catch (java.sql.SQLException ex){
             System.out.println("Error en la comparación de fechas: " + ex);
         }
         
-        // Si existe una fecha en el "primer inicio" retorna 'false'.
+        System.out.println("El usuario '" + email + "' ya ha iniciado "
+                + "sesión por primera vez.");
         return false;
         
     }
@@ -309,13 +324,15 @@ public class UserDB {
         
         // Se declara la variable de sentencia SQL.
         String SQL = "";
+        
+        Date date = new Date();
                 
-        con.connect();
-            
         if(firstSessionUser(email)){
             
-            SQL = "UPDATE \"User\" SET \"firstSession\" = " + new Date()
-                + " WHERE \"email\" = '" + email + "';";
+            con.connect();
+            
+            SQL = "UPDATE \"User\" SET \"firstSession\" = '" + date
+                + "' WHERE \"email\" = '" + email + "';";
             
             // Se realiza la inserción de datos.
             con.queryInsert(SQL);
@@ -324,12 +341,16 @@ public class UserDB {
             System.out.println("La actualización del primer inicio del usuario "
                     + "cuyo correo es '" + email + "' se ha efectuado con éxito.");
             
-            System.out.println("Primer inicio: " + new Date());
+            System.out.println("Primer inicio: " + date);
+            
+            con.disconnect();
             
         }
+        
+        con.connect();
             
-        SQL = "UPDATE \"User\" SET \"lastSession\" = " + new Date()
-            + " WHERE \"email\" = '" + email + "';";        
+        SQL = "UPDATE \"User\" SET \"lastSession\" = '" + date
+            + "' WHERE \"email\" = '" + email + "';";        
         
         // Se realiza la inserción de datos.
         con.queryInsert(SQL);
@@ -338,7 +359,7 @@ public class UserDB {
         System.out.println("La actualización del último inicio del usuario "
                 + "cuyo correo es '" + email + "' se ha efectuado con éxito.");
         
-        System.out.println("Último inicio: " + new Date());
+        System.out.println("Último inicio: " + date);
           
         // Se desconecta la BD.
         con.disconnect();

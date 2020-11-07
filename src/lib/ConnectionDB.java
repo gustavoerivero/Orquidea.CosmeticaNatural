@@ -87,9 +87,40 @@ public class ConnectionDB {
      * 'falso' para caso contrario.
      */
     public boolean dataExist(String data){
+                
+        try{
+            
+            connect();
+          
+            // Se declara una sentencia SQL.
+            String SQL = "SELECT COUNT('id') FROM \"" + data + "\";";
+            
+            // Se realiza la consulta y se obtiene el resultado.
+            ResultSet rs = queryConsult(SQL);
+                     
+            // Se desconecta la BD.
+            disconnect();
+            
+            // Si existe información.
+            return rs.next();
+                                                    
+        } catch (java.sql.SQLException ex){
+            System.out.println("No se pudo encontrar información. Error: " + ex);
+        }
+        
+        return false;
+        
+    }
+    
+    /**
+     * Método para conocer el siguiente registro que se va a añadir en una tabla de la Base de Datos.
+     * @param data Tabla que se va a evaluar.
+     * @return Devuelve el número que identificará el siguiente registro a añadir.
+     */
+    public int next(String data){
         
         // Se declara e inicializa la variable identificadora.
-        int count = -1;
+        int count = 0;
         
         try{
             
@@ -105,6 +136,8 @@ public class ConnectionDB {
             while(rs.next())
                 count = rs.getInt("count");
                         
+            System.out.println("Existe(n) " + count + " registro(s) en " + data + " actualmente.");
+            
             // Se desconecta la BD.
             disconnect();
                             
@@ -112,10 +145,7 @@ public class ConnectionDB {
             System.out.println("No se pudo encontrar información. Error: " + ex);
         }
         
-        if (count > 0)
-            return true;
-        else
-            return false;
+        return count;
         
     }
     

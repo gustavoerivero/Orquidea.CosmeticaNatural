@@ -7,13 +7,13 @@ package models;
  */
 public class Notification {
     
-    private int     id;
+    private int     id, 
+                    type;
     
     private String  name,
                     message;
     
     private char    showUp,
-                    type,
                     state;
 
     /**
@@ -26,7 +26,7 @@ public class Notification {
      * @param state Estado (Activo o Inactivo).
      */
     public Notification(int id, String name, String message, char showUp,
-            char type, char state) {
+            int type, char state) {
         
         this.id = id;
         this.name = name;
@@ -69,11 +69,11 @@ public class Notification {
         this.showUp = showUp;
     }
     
-    public char getType() {
+    public int getType() {
         return type;
     }
 
-    public void setType(char type) {
+    public void setType(int type) {
         this.type = type;
     }
 

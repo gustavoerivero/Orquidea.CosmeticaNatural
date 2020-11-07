@@ -7,7 +7,9 @@ import views.PopupMessage;
 
 // Se importan los models a utilizar
 import models.User;
+import models.Notification;
 import models.database.UserDB;
+import models.database.NotificationDB;
 
 // Se importan las clases de soporte.
 import lib.SupportFunctions;
@@ -34,6 +36,8 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Models
         private User                    user;
         private UserDB                  userDB;
+        private Notification            notification;
+        private NotificationDB          notificationDB;
         
         // Controllers
         private ControllerForgotPass    ctrlForgot;
@@ -49,12 +53,13 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     // Constructor del Login
     public ControllerLogin(){
         
-        support     = new SupportFunctions();
-        userDB      = new UserDB();
-        con         = new ConnectionDB();
-        mail        = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
+        support         = new SupportFunctions();
+        userDB          = new UserDB();
+        notificationDB  = new NotificationDB();
+        con             = new ConnectionDB();
+        mail            = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
                 
-        login       = new Login();
+        login           = new Login();
         
         // Se añaden los eventos.
         login.addEvents(this);
@@ -71,7 +76,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
      * Se describen los eventos provocados por las acciones de los botones.
      * @param evt parámetro que corresponde a la acción de los botónes.
      */
-        @Override
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent evt){
         
         //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
@@ -130,19 +135,29 @@ public class ControllerLogin implements java.awt.event.ActionListener {
 
                         // Se muestra un mensaje emergente de "Bienvenido".
                         popup = new PopupMessage(login, true, 2, "Bienvenido");
+                                
+                        user = getDataAccess(email);
                         
-                        // Se notifica al usuario vía correo que ha iniciado sesión en la aplicación.
-                        mail.sendMessage(
-                                email, 
+                        notification = new Notification(new ConnectionDB().next("Notification"),
                                 "Inicio de sesión " + new Date(), 
                                 "El usuario " + email + " ha iniciado sesión el "
                                         + new Date() + " en el gestor \"Caelesti Management\". "
                                         + "\n\nSi usted desconoce de esta actividad "
                                         + "póngase en contacto inmediatamente con el "
-                                        + "administrador del sistema."
+                                        + "administrador del sistema.",
+                                'A',
+                                0,
+                                'A'
                         );
-                                                
-                        user = getDataAccess(email);
+                        
+                        notificationDB.createAndLinkNotification(user.getId(), notification);
+                        
+                        // Se notifica al usuario vía correo que ha iniciado sesión en la aplicación.
+                        mail.sendMessage(
+                                email, 
+                                notification.getName(), 
+                                notification.getMessage()
+                        );      
                         
                         System.out.println("Los datos de acceso del usuario son: " +
                                 "Tipo: " + user.getUserTypeId() +
@@ -166,21 +181,46 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                                 "El correo electrónico o la contraseña son "
                                         + "incorrectos.");
                         
-                        // Se notifica al usuario vía correo que hubo un intento de inicio de sesión en la aplicación.
-                        mail.sendMessage(email, 
-                                "Inicio de sesión " + new Date() + " fallido.", 
-                                "Hubo un intento de inicio de sesión el " + new Date() + ""
-                                        + " en el gestor \"Caelesti Management\". \n\nSi "
-                                        + "desconoce esta actividad pónganse en"
-                                        + "contacto inmediatamente con el administrador"
-                                        + " del sistema."
-                        );
+                        if(userDB.userExist(email, 'A')) {
+                            
+                            notification = new Notification(new ConnectionDB().next("Notification"),
+                                    "Inicio de sesión " + new Date() + " fallido.", 
+                                    "Hubo un intento de inicio de sesión el " + new Date() + ""
+                                            + " en el gestor \"Caelesti Management\". \n\nSi "
+                                            + "desconoce esta actividad pónganse en"
+                                            + "contacto inmediatamente con el administrador"
+                                            + " del sistema.",
+                                    'A',
+                                    0,
+                                    'A'
+                            );
+
+                            notificationDB.createAndLinkNotification(getDataAccess(email).getId(), notification);
+
+                            // Se notifica al usuario vía correo que ha iniciado sesión en la aplicación.
+                            mail.sendMessage(
+                                    email, 
+                                    notification.getName(), 
+                                    notification.getMessage()
+                            );      
+                            
+                        }
+                        
+                        System.out.println("Inicio de sesión fallido. "
+                                + "Error: Correo electrónico o contraseña incorrectos.");
                         
                     }
                     
-                } else
+                } else {
+                    
                     popup = new PopupMessage(login, true, 6, 
-                            "El correo electrónico no tiene un formato válido.");
+                            "El correo electrónico o la contraseña no tienen un "
+                                    + "formato válido.");
+                    
+                    System.out.println("Inicio de sesión fallido. "
+                            + "Error: Correo electrónico o contraseña no válidos.");
+                
+                }
                     
             }
             

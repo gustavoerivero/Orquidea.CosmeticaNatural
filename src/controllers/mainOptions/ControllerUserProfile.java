@@ -4,8 +4,10 @@ package controllers.mainOptions;
 // Se importan las models a utilizar.
 import models.Employee;
 import models.User;
+import models.Notification;
 import models.database.EmployeeDB;
 import models.database.UserDB;
+import models.database.NotificationDB;
 
 // Se importan las views a utilizar.
 import views.PopupMessage;
@@ -14,6 +16,7 @@ import views.mainOptions.UserProfile;
 
 // Se importan las clases de soporte a utilizar.
 import lib.SupportFunctions;
+import lib.Mail;
 
 import java.awt.Image;
 import javax.swing.Icon;
@@ -34,6 +37,7 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
     private PopupMessage            popup;
     
     private SupportFunctions        support;
+    private Mail                    mail;
     
     private User                    user, 
                                     updateUser;
@@ -41,8 +45,11 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
     private Employee                employee,
                                     updateEmployee;
     
-    private UserDB                  userDB      = new UserDB();
-    private EmployeeDB              employeeDB  = new EmployeeDB();
+    private Notification            notification;
+    
+    private UserDB                  userDB          = new UserDB();
+    private EmployeeDB              employeeDB      = new EmployeeDB();
+    private NotificationDB          notificationDB  = new NotificationDB();
     
     private JFrame                  frame;
     private JButton                 btnProfile;
@@ -58,7 +65,8 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
         // Se instancian las variables a utilzar.
         support         = new SupportFunctions();
         profile         = new UserProfile();
-                
+        mail            = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
+                             
         if(this.user.getPhoto() != null) {
                           
             Icon photo  = new ImageIcon(
@@ -146,6 +154,18 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                         15, 
                         "La imagen de perfil ha sido actualizada."
                 );
+                
+                notification = new Notification(new lib.ConnectionDB().next("Notification"),
+                        "Imagen de perfil actualizada " + new java.util.Date(), 
+                        "El usuario " + user.getEmail() + " ha actualizado "
+                                + "su imagen de perfil el "
+                                + new java.util.Date() + ".",
+                        'A',
+                        0,
+                        'A'
+                );
+
+                notificationDB.createAndLinkNotification(user.getId(), notification);
                              
             }
             
@@ -185,6 +205,18 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                             15, 
                             "La imagen de perfil ha sido actualizada."
                     );
+                    
+                    notification = new Notification(new lib.ConnectionDB().next("Notification"),
+                            "Imagen de perfil eliminada " + new java.util.Date(), 
+                            "El usuario " + user.getEmail() + " ha eliminado "
+                                    + "su imagen de perfil el "
+                                    + new java.util.Date() + ".",
+                            'A',
+                            0,
+                            'A'
+                    );
+
+                    notificationDB.createAndLinkNotification(user.getId(), notification);
                     
                 }
                                
@@ -237,6 +269,7 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
             updateEmployee = new Employee(
                     employee.getEnterpriseId(),
                     employee.getEnterpriseId(),
+                    user.getId(),
                     profile.txtUserName.getText(),
                     profile.txtUserSurname.getText(),
                     profile.dtcUserBirthday.getDate(),
@@ -248,7 +281,7 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                     employee.getAdmissionDate()
             );
             
-            if(!user.equals(updateUser) && !employee.equals(updateEmployee)) {
+            if(!user.equals(updateUser) || !employee.equals(updateEmployee)) {
                 
                 select = new SelectOption(
                         frame, 
@@ -261,8 +294,62 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
 
                 if(select.getOpc()) {
 
+                    userDB.updateUser(updateUser);
+                    employeeDB.updateEmployee(updateEmployee);
                     
+                    popup = new PopupMessage(
+                            frame, 
+                            true, 
+                            15, 
+                            "Los datos del usuario han sido actualizados con éxito."
+                    );
+                    
+                    notification = new Notification(new lib.ConnectionDB().next("Notification"),
+                            "Datos de usuario actualizados " + new java.util.Date(), 
+                            "El usuario " + updateUser.getEmail() + " ha actualizado "
+                                    + "sus datos de usuario el "
+                                    + new java.util.Date() + ".",
+                            'A',
+                            0,
+                            'A'
+                    );
 
+                    notificationDB.createAndLinkNotification(user.getId(), notification);
+                    
+                    mail.sendMessage(
+                            updateUser.getEmail(), 
+                            notification.getName(), 
+                            notification.getMessage()
+                    );
+                                        
+                    if(!user.getPassword().equals(updateUser.getPassword())) {
+                        
+                        notification = new Notification(new lib.ConnectionDB().next("Notification"),
+                                "Contraseña del usuario actualizada " + new java.util.Date(), 
+                                "El usuario " + user.getEmail() + " ha actualizado "
+                                        + "su contraseña "
+                                        + new java.util.Date() + ".\n\nLa contraseña pasó de ser "
+                                        + user.getPassword() + " ha " + updateUser.getPassword() 
+                                        + "\n\nSi usted desconoce de esta actividad, póngase en contacto "
+                                        + "inmediatamente con el administrador del sistema.",
+                                'A',
+                                0,
+                                'A'
+                        );
+
+                        notificationDB.createAndLinkNotification(user.getId(), notification);
+                        
+                        mail.sendMessage(
+                                updateUser.getEmail(), 
+                                notification.getName(), 
+                                notification.getMessage()
+                        );
+                        
+                    }
+                    
+                    user = updateUser;
+                    employee = updateEmployee;
+                    
                 }
                 
             }
@@ -271,6 +358,11 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
         
     }
      
+    /**
+     * Método para consultar los datos de un usuario.
+     * @param email Correo electrónico del usuario a consultar.
+     * @return Datos del empleado.
+     */
     private Employee consultUserData(String email) {
         
         // Se instancia la clase a utilizar.
@@ -289,12 +381,13 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                 supportEmployee = new Employee(
                         result.getInt("id"), 
                         result.getInt("Enterpriseid"),
+                        result.getInt("Userid"),
                         result.getString("name"),
                         result.getString("surname"),
                         result.getDate("birthday"),
                         result.getLong("phone"), 
                         result.getString("direction"),
-                        result.getString("Useremail"), 
+                        email, 
                         result.getString("state").charAt(0),
                         result.getString("dni"),
                         result.getDate("admissionDate")

@@ -15,9 +15,13 @@ import controllers.mainOptions.*;
 
 // Se importan las clases de soporte a utilizar.
 import lib.SupportFunctions;
+import lib.NotificationPanel.NotificationPanel;
 
 import java.awt.Image;
 import java.awt.event.*;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -34,6 +38,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     private PopupMessage            popup;
     
     private SupportFunctions        support;
+    private NotificationPanel       notification;
     
     private User                    user;
     private Employee                employee;
@@ -42,6 +47,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     
     private ControllerLogin         ctrlLogin;
     private ControllerUserProfile   ctrlProfile;
+    private ControllerMainOptions   ctrlMainOptions;
             
     /**
      * Constructor del controlador del MainMenu.
@@ -52,7 +58,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Se instancian las variables a utilzar.
         support             = new SupportFunctions();
         mainMenu            = new MainMenu();
-                
+        
         mainMenu.addActionEvents(this);
         mainMenu.addMouseEvents(this);
                                 
@@ -72,6 +78,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             mainMenu.btnSeeProfile.setIcon(photo);
         
         }
+        
+        ctrlMainOptions = new ControllerMainOptions(mainMenu.panMainPanel);
                           
     }
 
@@ -141,6 +149,35 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                                       
         }
         
+        // Ver notificaciones
+        else if(evt.getSource() == mainMenu.btnSeeNotification) {
+            
+            try {
+                notification = new NotificationPanel(
+                        mainMenu,
+                        new models.database.NotificationDB().lastNotifications(
+                                user.getEmail(),
+                                10
+                        )
+                );
+            } catch (ParseException ex) {
+                System.out.println("Error: " + ex);
+            }
+            
+            
+        }
+        
+        //</editor-fold>
+        
+        //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Lateral ">
+        
+        // Home
+        else if(evt.getSource() == mainMenu.btnHome) {
+            
+            ctrlMainOptions = new ControllerMainOptions(mainMenu.panMainPanel);
+            
+        }
+        
         //</editor-fold>
                 
     }
@@ -196,12 +233,13 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                 supportEmployee = new Employee(
                         result.getInt("id"), 
                         result.getInt("Enterpriseid"),
+                        result.getInt("Userid"),
                         result.getString("name"),
                         result.getString("surname"),
                         result.getDate("birthday"),
                         result.getLong("phone"), 
                         result.getString("direction"),
-                        result.getString("Useremail"), 
+                        email, 
                         result.getString("state").charAt(0),
                         result.getString("dni"),
                         result.getDate("admissionDate")

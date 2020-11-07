@@ -1,0 +1,320 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package lib.NotificationPanel;
+
+import java.awt.GridLayout;
+import java.text.ParseException;
+
+/**
+ *
+ * @author Gustavo
+ */
+public class PanelGUI extends javax.swing.JDialog {
+
+    int xx = 0, xy = 0;
+    
+    /**
+     * Panel de notificaciones.
+     * @param parent
+     * @param modal
+     * @param notifications Listado de notificaciones a mostrar.
+     */
+    public PanelGUI(java.awt.Frame parent, boolean modal, java.util.ArrayList<Object> notifications) throws ParseException {
+                
+        super(parent, modal);
+        
+        initComponents();
+                
+        int iterator = (notifications.size()/4);
+        
+        System.out.println("Se tienen " + iterator + " notificaciones.");
+        
+        if(iterator > 0) {
+            pan.removeAll();
+            pan.setMaximumSize(new java.awt.Dimension(392, 383));
+            pan.setPreferredSize(new java.awt.Dimension(392, 383));
+            pan.setMinimumSize(new java.awt.Dimension(392, 383));
+            pan.setLayout(new GridLayout(iterator+1, 0));
+            for(int i = 0; i < iterator; i+=4) 
+                setInitial(pan, 
+                        (char) notifications.get(i),
+                        String.valueOf(notifications.get(i+1)),
+                        String.valueOf(notifications.get(i+2)),
+                        new java.text.SimpleDateFormat("yyyy-MM-dd").parse(String.valueOf(notifications.get(i+3)))
+                );
+        } else {
+            pan.removeAll();
+            pan.setLayout(new GridLayout(0, 0));
+            javax.swing.JLabel lab = new javax.swing.JLabel();
+            lab.setFont(new java.awt.Font("Arial", 1, 12));
+            lab.setText("<html><p align = 'justify'>Sin notificaciones a mostrar.</p></html>");
+            pan.add(lab);
+        }
+        
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+        
+    }
+    
+    /**
+     * Método para agregar las notificaciones.
+     * @param container Panel contenedor de las notificaciones.
+     * @param date Fecha de la notificación.
+     * @param text Texto de la notificación.
+     */
+    private void setInitial(javax.swing.JPanel container, char showUp, String name, String message, java.util.Date date) {
+        
+        javax.swing.JPanel panot = new javax.swing.JPanel();
+        panot.setMaximumSize(new java.awt.Dimension(380, 250));
+        panot.setPreferredSize(new java.awt.Dimension(380, 250));
+        panot.setMinimumSize(new java.awt.Dimension(380, 170));
+        panot.setBackground(new java.awt.Color(255, 245, 249));
+        
+        if(showUp == 'A')
+            panot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 204), 1, true));
+        else
+            panot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));
+        
+        panot.setLayout(new java.awt.GridLayout(3, 1));
+        
+        javax.swing.JLabel labName = new javax.swing.JLabel();
+        labName.setMaximumSize(new java.awt.Dimension(370, 150));
+        labName.setPreferredSize(new java.awt.Dimension(370, 150));
+        labName.setMinimumSize(new java.awt.Dimension(370, 150));
+        labName.setFont(new java.awt.Font("Arial", 1, 12));
+        labName.setText("<html><p align = 'left'>" + name + "</p></html>");
+        labName.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        
+        javax.swing.JLabel labMssg = new javax.swing.JLabel();
+        labMssg.setMaximumSize(new java.awt.Dimension(375, 150));
+        labMssg.setPreferredSize(new java.awt.Dimension(375, 150));
+        labMssg.setMinimumSize(new java.awt.Dimension(375, 150));
+        labMssg.setFont(new java.awt.Font("Arial", 0, 12));
+        labMssg.setText("<html><p align = 'justify'>" + message + "</p></html>");
+        labMssg.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        
+        javax.swing.JLabel labDate = new javax.swing.JLabel();
+        labDate.setMaximumSize(new java.awt.Dimension(370, 150));
+        labDate.setPreferredSize(new java.awt.Dimension(370, 150));
+        labDate.setMinimumSize(new java.awt.Dimension(370, 150));
+        labDate.setFont(new java.awt.Font("Arial", 1, 12));
+        labDate.setText("<html><p align = 'right'>" + new java.text.SimpleDateFormat("EEEE, MMM dd, yyyy").format(date) + "</p></html>");
+        labDate.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));   
+        
+        panot.add(labName);
+        panot.add(labMssg);
+        panot.add(labDate);
+        
+        container.add(panot);
+        
+    }
+    
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        panLogin = new javax.swing.JPanel();
+        panButtonsTopBar = new javax.swing.JPanel();
+        btnExit = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        scroll = new javax.swing.JScrollPane();
+        pan = new javax.swing.JPanel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+
+        panLogin.setBackground(new java.awt.Color(255, 245, 249));
+        panLogin.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 144, 158), 1, true));
+        panLogin.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                panLoginMouseDragged(evt);
+            }
+        });
+        panLogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                panLoginMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                panLoginMouseReleased(evt);
+            }
+        });
+
+        panButtonsTopBar.setBackground(new java.awt.Color(255, 245, 249));
+        panButtonsTopBar.setPreferredSize(new java.awt.Dimension(215, 40));
+
+        btnExit.setBackground(new java.awt.Color(255, 245, 249));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/closeIcon32.png"))); // NOI18N
+        btnExit.setToolTipText("Cerrar");
+        btnExit.setBorder(null);
+        btnExit.setBorderPainted(false);
+        btnExit.setContentAreaFilled(false);
+        btnExit.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnExit.setFocusPainted(false);
+        btnExit.setOpaque(true);
+        btnExit.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnExitMouseMoved(evt);
+            }
+        });
+        btnExit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnExitMouseExited(evt);
+            }
+        });
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setText("Notificaciones");
+
+        javax.swing.GroupLayout panButtonsTopBarLayout = new javax.swing.GroupLayout(panButtonsTopBar);
+        panButtonsTopBar.setLayout(panButtonsTopBarLayout);
+        panButtonsTopBarLayout.setHorizontalGroup(
+            panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panButtonsTopBarLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnExit)
+                .addGap(14, 14, 14))
+        );
+        panButtonsTopBarLayout.setVerticalGroup(
+            panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panButtonsTopBarLayout.createSequentialGroup()
+                .addGroup(panButtonsTopBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit))
+                .addContainerGap(8, Short.MAX_VALUE))
+        );
+
+        scroll.setBackground(new java.awt.Color(255, 245, 249));
+        scroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setViewportBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        pan.setBackground(new java.awt.Color(255, 245, 249));
+        pan.setMaximumSize(new java.awt.Dimension(392, 383));
+        pan.setMinimumSize(new java.awt.Dimension(392, 383));
+
+        javax.swing.GroupLayout panLayout = new javax.swing.GroupLayout(pan);
+        pan.setLayout(panLayout);
+        panLayout.setHorizontalGroup(
+            panLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 405, Short.MAX_VALUE)
+        );
+        panLayout.setVerticalGroup(
+            panLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
+
+        scroll.setViewportView(pan);
+
+        javax.swing.GroupLayout panLoginLayout = new javax.swing.GroupLayout(panLogin);
+        panLogin.setLayout(panLoginLayout);
+        panLoginLayout.setHorizontalGroup(
+            panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panButtonsTopBar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panLoginLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+        panLoginLayout.setVerticalGroup(
+            panLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panLoginLayout.createSequentialGroup()
+                .addComponent(panButtonsTopBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scroll)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panLogin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void btnExitMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseMoved
+        btnExit.setBackground(new java.awt.Color(255,183,183));
+    }//GEN-LAST:event_btnExitMouseMoved
+
+    private void btnExitMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnExitMouseExited
+        btnExit.setBackground(new java.awt.Color(255, 245, 249));
+    }//GEN-LAST:event_btnExitMouseExited
+
+    private void panLoginMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLoginMouseDragged
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método permite mover la aplicación por toda la pantalla del
+        * computador del usuario.
+        */
+
+        // Se declaran las variables que obtienen la ubicación de la aplicación.
+        //</editor-fold>
+        int x = evt.getXOnScreen(); // Ubicación con respecto al eje X.
+        int y = evt.getYOnScreen(); // Ubicación con respecto al eje Y.
+
+        // Se ubica la aplicación en la nueva ubicación.
+        setLocation(x - xx, y - xy);
+    }//GEN-LAST:event_panLoginMouseDragged
+
+    private void panLoginMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLoginMousePressed
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método posee dos características:
+        *      1) La opacidad de la aplicación disminuye un 20%.
+        *      2) Se obtiene la ubicación del Mouse en el momento.
+        */
+
+        // Se coloca la opacidad de la aplicación en 80%.
+        //</editor-fold>
+        setOpacity((float)0.8);
+
+        // Se obtiene la ubicación del Mouse en el momento.
+        xx = evt.getX(); // Ubicación con respecto al eje X.
+        xy = evt.getY(); // Ubicación con respecto al eje Y.
+    }//GEN-LAST:event_panLoginMousePressed
+
+    private void panLoginMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_panLoginMouseReleased
+        //<editor-fold defaultstate="collapsed" desc=" Explicación sobre el método ">
+        /*
+        * Este método devuelve la opacidad de la aplicación a su valor base.
+        */
+
+        // Se coloca la opacidad de la aplicación en 100%.
+        //</editor-fold>
+        setOpacity((float)1.0);
+    }//GEN-LAST:event_panLoginMouseReleased
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton btnExit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel pan;
+    private javax.swing.JPanel panButtonsTopBar;
+    private javax.swing.JPanel panLogin;
+    private javax.swing.JScrollPane scroll;
+    // End of variables declaration//GEN-END:variables
+}

@@ -9,7 +9,8 @@ import java.util.Date;
  */
 public class Employee extends Person{
     
-    private int     enterpriseId;
+    private int     enterpriseId,
+                    userId;
     
     private String  dni;
     
@@ -19,6 +20,7 @@ public class Employee extends Person{
      * Constructor de la clase Empleado.
      * @param id Atributo identificador (Autoincrementable).
      * @param enterpriseId Atributo identificador de la empresa.
+     * @param userId Atributo identificador del usuario.
      * @param name Nombre del empleado.
      * @param surname Apellido del empleado.
      * @param birthday Cumpleaños del empleado.
@@ -29,13 +31,14 @@ public class Employee extends Person{
      * @param dni Documento Nacional de Identidad del empleado.
      * @param admissionDate Fecha de ingreso del empleado.
      */
-    public Employee(int id, int enterpriseId, String name, String surname, 
+    public Employee(int id, int enterpriseId, int userId, String name, String surname, 
             Date birthday, long phone, String direction, String email, char state,
             String dni, Date admissionDate) {
         
         super(id, name, surname, birthday, phone, direction, email, state);
         
         this.enterpriseId = enterpriseId;
+        this.userId = userId;
         this.dni = dni;
         this.admissionDate = admissionDate;
         
@@ -47,6 +50,14 @@ public class Employee extends Person{
 
     public void setEnterpriseId(int enterpriseId) {
         this.enterpriseId = enterpriseId;
+    }
+    
+    public int getUserId() {
+        return userId;
+    }
+    
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
     
     public String getDni() {

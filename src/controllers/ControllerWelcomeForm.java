@@ -562,6 +562,7 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                                 new Employee(
                                         0,
                                         0,
+                                        0,
                                         name,
                                         surname,
                                         birthday,
