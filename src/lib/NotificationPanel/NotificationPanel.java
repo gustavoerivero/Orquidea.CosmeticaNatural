@@ -72,7 +72,7 @@ public class NotificationPanel extends javax.swing.JDialog {
         panot.setMinimumSize(new java.awt.Dimension(380, 170));
         panot.setBackground(new java.awt.Color(255, 245, 249));
         
-        if(showUp == 'A')
+        if(showUp == 'I')
             panot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 102, 204), 1, true));
         else
             panot.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 255), 1, true));

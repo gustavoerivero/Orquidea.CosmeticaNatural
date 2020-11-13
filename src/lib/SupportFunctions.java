@@ -569,4 +569,20 @@ public class SupportFunctions {
         
     }
     
+    /**
+     * Método para conocer si el usuario tiene notificaciones por leer o no.
+     * @param userId Atributo identificador del usuario que ha iniciado sesión.
+     * @param btn Botón a cambiar icono.
+     */
+    public void notifications(int userId, javax.swing.JButton btn) {
+        if(new models.database.NotificationDB().unread(userId))
+            btn.setIcon(
+                    new javax.swing.ImageIcon(getClass().getResource(
+                            "/views/images/medium/notificationOnIcon32.png")));
+        else
+            btn.setIcon(
+                    new javax.swing.ImageIcon(getClass().getResource(
+                            "/views/images/medium/notificationOffIcon32.png")));
+    }
+    
 }

@@ -144,6 +144,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             ctrlProfile = new ControllerUserProfile(
                     mainMenu,
+                    mainMenu,
                     mainMenu.panMainPanel, 
                     mainMenu.btnSeeProfile, 
                     user
@@ -159,7 +160,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                         mainMenu,
                         notificationDB.lastNotifications(
                                 user.getEmail(),
-                                100
+                                10
                         )
                 );
                 notificationDB.read(user.getId());
@@ -177,7 +178,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         // Home
         else if(evt.getSource() == mainMenu.btnHome) {
             
-            ctrlMainOptions = new ControllerMainOptions(mainMenu.panMainPanel);
+            ctrlMainOptions = new ControllerMainOptions(mainMenu, mainMenu.panMainPanel);
             
         }
         

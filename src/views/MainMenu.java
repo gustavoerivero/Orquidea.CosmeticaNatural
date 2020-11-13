@@ -156,7 +156,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnSignOff.setBackground(new java.awt.Color(255, 245, 249));
         btnSignOff.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/signOffIcon32.png"))); // NOI18N
-        btnSignOff.setToolTipText("Cerrar Sesión");
+        btnSignOff.setToolTipText("Cerrar sesión");
         btnSignOff.setBorder(null);
         btnSignOff.setBorderPainted(false);
         btnSignOff.setContentAreaFilled(false);
@@ -176,7 +176,7 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnSeeProfile.setBackground(new java.awt.Color(255, 245, 249));
         btnSeeProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/accountProfileIcon32.png"))); // NOI18N
-        btnSeeProfile.setToolTipText("Ver Perfil");
+        btnSeeProfile.setToolTipText("Ver perfil");
         btnSeeProfile.setBorder(null);
         btnSeeProfile.setBorderPainted(false);
         btnSeeProfile.setContentAreaFilled(false);
@@ -196,13 +196,23 @@ public class MainMenu extends javax.swing.JFrame {
 
         btnSeeNotification.setBackground(new java.awt.Color(255, 245, 249));
         btnSeeNotification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/medium/notificationOffIcon32.png"))); // NOI18N
-        btnSeeNotification.setToolTipText("Ver Perfil");
+        btnSeeNotification.setToolTipText("Ver notificaciones");
         btnSeeNotification.setBorder(null);
         btnSeeNotification.setBorderPainted(false);
         btnSeeNotification.setContentAreaFilled(false);
         btnSeeNotification.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnSeeNotification.setFocusPainted(false);
         btnSeeNotification.setOpaque(true);
+        btnSeeNotification.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnSeeNotificationMouseMoved(evt);
+            }
+        });
+        btnSeeNotification.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSeeNotificationMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout panTopBarLayout = new javax.swing.GroupLayout(panTopBar);
         panTopBar.setLayout(panTopBarLayout);
@@ -681,6 +691,14 @@ public class MainMenu extends javax.swing.JFrame {
         btnSettings.setForeground(new java.awt.Color(0, 0, 0));
         btnSettings.setBackground(new java.awt.Color(255,230,240));
     }//GEN-LAST:event_btnSettingsMouseExited
+
+    private void btnSeeNotificationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeNotificationMouseExited
+        btnSeeNotification.setBackground(new java.awt.Color(255,245,249));
+    }//GEN-LAST:event_btnSeeNotificationMouseExited
+
+    private void btnSeeNotificationMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSeeNotificationMouseMoved
+        btnSeeNotification.setBackground(new java.awt.Color(239,232,244));
+    }//GEN-LAST:event_btnSeeNotificationMouseMoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnClients;

@@ -58,11 +58,12 @@ public class NotificationDB {
         
         // Se desclara la sentencia SQL.
         String SQL = "INSERT INTO \"NotificationToUser\" (\"Userid\", \"Notificationid\", "
-                    + "\"receivesDate\") "
+                    + "\"receivesDate\", \"viewed\") "
                     + "VALUES ("
                     + "'" + userId + "', "
                     + "'" + notificationId + "', "
-                    + "'" + new java.util.Date() + "'"
+                    + "'" + new java.util.Date() + "', "
+                    + "'I'"
                     + ");";
     
         // Se insertan los datos en la BD.
@@ -99,7 +100,7 @@ public class NotificationDB {
         
         ResultSet result;
         
-        String SQL = "SELECT \"name\", \"message\", \"receivesDate\", \"showUp\" "
+        String SQL = "SELECT \"name\", \"message\", \"receivesDate\", \"viewed\" "
                 + "FROM \"User\", \"Notification\", \"NotificationToUser\" WHERE "
                 + "\"Notification\".\"id\" = \"Notificationid\" AND \"User\".\"id\""
                 + " = \"Userid\" AND \"email\" = '" + email + "' AND "

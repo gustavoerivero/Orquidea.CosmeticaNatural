@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import views.MainMenu;
 
 /**
  *
@@ -54,10 +55,13 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
     private JFrame                  frame;
     private JButton                 btnProfile;
     
-    public ControllerUserProfile(JFrame frame, JPanel parent, JButton btnProfile, User user) {
+    private MainMenu                main;
+    
+    public ControllerUserProfile(MainMenu main, JFrame frame, JPanel parent, JButton btnProfile, User user) {
         
         this.frame      = frame;
         this.btnProfile = btnProfile;
+        this.main       = main;
                                 
         this.user = user;
         this.employee = consultUserData(this.user.getEmail());
@@ -166,6 +170,8 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                 );
 
                 notificationDB.createAndLinkNotification(user.getId(), notification);
+                
+                main.notifications(user.getId());
                              
             }
             
@@ -218,8 +224,10 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
 
                     notificationDB.createAndLinkNotification(user.getId(), notification);
                     
+                    main.notifications(user.getId());
+                    
                 }
-                               
+                
             } 
             
         }
@@ -350,8 +358,10 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
                     user = updateUser;
                     employee = updateEmployee;
                     
+                    main.notifications(user.getId());
+                    
                 }
-                
+                                
             }
             
         }

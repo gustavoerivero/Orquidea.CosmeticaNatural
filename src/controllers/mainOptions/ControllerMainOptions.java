@@ -1,6 +1,7 @@
 
 package controllers.mainOptions;
 
+import views.MainMenu;
 import views.mainOptions.*;
 
 import lib.SupportFunctions;
@@ -15,17 +16,21 @@ public class ControllerMainOptions implements java.awt.event.ActionListener{
     
     private MainOptions         main;
     
+    private MainMenu            menu;
+    
     private SupportFunctions    support;
     
-    public ControllerMainOptions(JPanel parent){
+    public ControllerMainOptions(MainMenu menu, JPanel parent){
         
-        main    = new MainOptions();
-        support = new SupportFunctions();
+        this.menu   = menu;
+        
+        main        = new MainOptions();
+        support     = new SupportFunctions();
         
         main.addActionEvents(this);
         
         support.cardSelection(parent, main);
-        
+                
     }
     
     @Override
