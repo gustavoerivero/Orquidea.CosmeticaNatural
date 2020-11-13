@@ -65,7 +65,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         login.addEvents(this);
         
         // Si no existen registros en la tabla 'User'.
-        if(!con.dataExist("User")) {
+        if(!con.dataExist("Enterprise")) {
             ctrlWelcome = new ControllerWelcomeForm();
             login.dispose();
         }

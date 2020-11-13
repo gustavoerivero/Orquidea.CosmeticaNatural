@@ -116,8 +116,11 @@
                   <Component id="btnMin" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnSignOff" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnSeeProfile" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnSeeNotification" alignment="0" max="32767" attributes="0"/>
                   <Component id="btnExit" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnSeeNotification" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -242,7 +245,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/views/images/medium/notificationOffIcon32.png"/>
                 </Property>
-                <Property name="toolTipText" type="java.lang.String" value="Ver notificaciones"/>
+                <Property name="toolTipText" type="java.lang.String" value="Ver Perfil"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="null"/>
                 </Property>
@@ -254,10 +257,6 @@
                 <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
-              <Events>
-                <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="btnSeeNotificationMouseMoved"/>
-                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSeeNotificationMouseExited"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>

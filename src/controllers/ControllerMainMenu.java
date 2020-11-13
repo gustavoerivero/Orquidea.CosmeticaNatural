@@ -6,6 +6,7 @@ import models.Employee;
 import models.User;
 import models.database.EmployeeDB;
 import models.database.UserDB;
+import models.database.NotificationDB;
 
 // Se importan las views a utilizar.
 import views.*;
@@ -20,8 +21,6 @@ import lib.NotificationPanel.NotificationPanel;
 import java.awt.Image;
 import java.awt.event.*;
 import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -42,8 +41,9 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
     
     private User                    user;
     private Employee                employee;
-    private UserDB                  userDB      = new UserDB();
-    private EmployeeDB              employeeDB  = new EmployeeDB();
+    private UserDB                  userDB          = new UserDB();
+    private EmployeeDB              employeeDB      = new EmployeeDB();
+    private NotificationDB          notificationDB  = new NotificationDB();
     
     private ControllerLogin         ctrlLogin;
     private ControllerUserProfile   ctrlProfile;
@@ -78,6 +78,8 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             mainMenu.btnSeeProfile.setIcon(photo);
         
         }
+        
+        mainMenu.notifications(this.user.getId());
         
         ctrlMainOptions = new ControllerMainOptions(mainMenu.panMainPanel);
                           
@@ -146,7 +148,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
                     mainMenu.btnSeeProfile, 
                     user
             );
-                                      
+                                                  
         }
         
         // Ver notificaciones
@@ -155,15 +157,16 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             try {
                 notification = new NotificationPanel(
                         mainMenu,
-                        new models.database.NotificationDB().lastNotifications(
+                        notificationDB.lastNotifications(
                                 user.getEmail(),
-                                10
+                                100
                         )
                 );
+                notificationDB.read(user.getId());
+                mainMenu.notifications(this.user.getId());
             } catch (ParseException ex) {
                 System.out.println("Error: " + ex);
             }
-            
             
         }
         
@@ -257,5 +260,5 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         return null;
         
     }
-        
+      
 }

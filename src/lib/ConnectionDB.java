@@ -101,9 +101,12 @@ public class ConnectionDB {
             // Se desconecta la BD.
             disconnect();
             
-            // Si existe información.
-            return rs.next();
-                                                    
+            while(rs.next())
+                if(rs.getInt("count") > 0)
+                    return true; 
+                else
+                    return false;
+                                                                
         } catch (java.sql.SQLException ex){
             System.out.println("No se pudo encontrar información. Error: " + ex);
         }

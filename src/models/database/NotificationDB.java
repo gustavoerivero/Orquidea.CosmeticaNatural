@@ -138,7 +138,7 @@ public class NotificationDB {
             result = readLastNotifications(email, quantity);
                         
             while(result.next()){
-                notifications.add(result.getString("showUp").charAt(0));
+                notifications.add(result.getString("viewed").charAt(0));
                 notifications.add(result.getString("name"));
                 notifications.add(result.getString("message"));
                 notifications.add(result.getDate("receivesDate"));
@@ -164,7 +164,7 @@ public class NotificationDB {
         
         // Se define la sentencia SQL a aplicar en la BD.
         String SQL  = "SELECT \"Notification\".\"id\", \"name\", \"message\", "
-                    + "\"receivesDate\", \"type\", \"showUp\", "
+                    + "\"receivesDate\", \"type\", \"viewed\", "
                     + "\"Notification\".\"state\" FROM \"Notification\", "
                     + "\"NotificationToUser\", \"User\" WHERE \"User\".\"id\" = '" 
                     + userId + "' AND \"User\".\"id\" = \"Userid\" AND "
@@ -185,5 +185,65 @@ public class NotificationDB {
         return result;
         
     }
-       
+    
+    /**
+     * Método para saber si el usuario tiene notificaciones por leer.
+     * @param userId Atributo identificador del usuario.
+     * @return Devuelve 'verdadero' si el usuario tiene notificaciones por leer, 
+     * 'falso' para caso contrario.
+     */
+    public boolean unread(int userId){
+        
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL  = "SELECT COUNT(\"Notificationid\") FROM \"NotificationToUser\", "
+                    + "\"Notification\", \"User\" WHERE \"Userid\" = \"User\".\"id\" "
+                    + "AND \"Notificationid\" = \"Notification\".\"id\" AND "
+                    + "\"User\".\"state\" = 'A' AND \"Notification\".\"state\" = 'A' "
+                    + "AND \"User\".\"id\" = " + userId + " AND \"viewed\" = 'I';";
+        
+        int count = -1;
+        
+        con.connect();
+        
+        ResultSet result = con.queryConsult(SQL);
+        
+        try {
+            while(result.next()) 
+                count = result.getInt("count");
+            
+        } catch (java.sql.SQLException ex) {
+            System.out.println("Error en la lectura de notificaciones. Error: " + ex);
+        }
+        
+        con.disconnect();
+        
+        if (count > 0) {
+            System.out.println("El usuario de id = '" + userId + "' tiene " + 
+                    count + " notificaciones por leer.");
+            return true;
+        }
+        
+        System.out.println("El usuario de id = '" + userId + "' no tiene notificaciones por leer.");
+        return false;
+                
+    }
+    
+    /**
+     * Método para que un usuario lea sus notificaciones.
+     * @param userId Atributo identificador del usuario.
+     */
+    public void read(int userId) {
+        
+        String SQL = "UPDATE \"NotificationToUser\" SET \"viewed\" = 'A' WHERE \"Userid\" = '" + userId + "';";
+
+        con.connect();
+
+        con.queryInsert(SQL);
+
+        con.disconnect();
+        
+        System.out.println("El usuario de id '" + userId + "' ha leído sus notificaciones.");
+        
+    }
+        
 }
