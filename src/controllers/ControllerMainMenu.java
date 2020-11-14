@@ -81,7 +81,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         mainMenu.notifications(this.user.getId());
         
-        ctrlMainOptions = new ControllerMainOptions(mainMenu.panMainPanel);
+        ctrlMainOptions = new ControllerMainOptions(mainMenu, mainMenu.panMainPanel);
                           
     }
 
