@@ -32,7 +32,7 @@ public class User {
      * @param userTypeId Atributo identificador del Tipo de Usuario.
      * @param email Correo electrónico del usuario.
      * @param password Contraseña del usuario.
-     * @param type Tipo de usuario.
+     * @param rememberData Indicar si el usuario guardará sus datos en el sistema.
      * @param state Estado (Activo o Inactivo).
      * @param firstSession Primer inicio de sesión del usuario.
      * @param lastSession Último inicio de sesión del usuario.

@@ -25,8 +25,6 @@ import java.io.File;
 import javax.swing.Icon;
 import java.awt.Image;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -84,10 +82,7 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
         
         // Se instancian las clases de soporte.
         support = new SupportFunctions();
-        mail    = new Mail(
-                "caelestidevelopment@gmail.com", 
-                "tavo9712pipox"
-        );
+        mail    = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
                 
         // Se instancia la view de Login.
         welcome = new WelcomeForm();
@@ -97,7 +92,7 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                 
     }
     
-        @Override
+    @Override
     public void actionPerformed(java.awt.event.ActionEvent evt) {
         
         //<editor-fold defaultstate="collapsed" desc=" Botones de la Barra Superior ">
@@ -547,7 +542,7 @@ public class ControllerWelcomeForm implements java.awt.event.ActionListener{
                                         0, 
                                         email, 
                                         password, 
-                                        'A', 
+                                        'I', 
                                         'A',
                                         null, 
                                         null,

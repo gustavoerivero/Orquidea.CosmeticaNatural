@@ -64,12 +64,17 @@ public class ControllerLogin implements java.awt.event.ActionListener {
         // Se añaden los eventos.
         login.addEvents(this);
         
-        // Si no existen registros en la tabla 'User'.
+        // Si no existen registros en la tabla 'Enterprise'.
         if(!con.dataExist("Enterprise")) {
             ctrlWelcome = new ControllerWelcomeForm();
             login.dispose();
         }
-            
+        
+        // Si existe un usuario recordado.
+        if(userDB.rememberUser())
+            login(userDB.getRememberedUserData(), 
+                    userDB.getPassword(userDB.getRememberedUserData()));
+          
     }
     
     /**
@@ -129,50 +134,7 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                     // Si el usuario y la contraseña son correctos.
                     if(userDB.signer(email, pass)){
                         
-                        // Se muestra quién ingresó al sistema.
-                        System.out.println("El usuario '" + email + "' ha ingresado al"
-                                + " sistema con la contraseña '" + pass + "'.");
-
-                        // Se muestra un mensaje emergente de "Bienvenido".
-                        popup = new PopupMessage(login, true, 2, "Bienvenido");
-                                
-                        user = getDataAccess(email);
-                        
-                        notification = new Notification(new ConnectionDB().next("Notification"),
-                                "Inicio de sesión " + new Date(), 
-                                "El usuario " + email + " ha iniciado sesión el "
-                                        + new Date() + " en el gestor \"Caelesti Management\". "
-                                        + "\n\nSi usted desconoce de esta actividad "
-                                        + "póngase en contacto inmediatamente con el "
-                                        + "administrador del sistema.",
-                                'A',
-                                0,
-                                'A'
-                        );
-                        
-                        notificationDB.createAndLinkNotification(user.getId(), notification);
-                        
-                        // Se notifica al usuario vía correo que ha iniciado sesión en la aplicación.
-                        mail.sendMessage(
-                                email, 
-                                notification.getName(), 
-                                notification.getMessage()
-                        );      
-                        
-                        System.out.println("Los datos de acceso del usuario son: " +
-                                "Tipo: " + user.getUserTypeId() +
-                                ". Correo: " + user.getEmail() +
-                                ". Contraseña: " + user.getPassword()
-                        );
-                        
-                        // Se actualizan los datos de fechas sobre el inicio de sesión.
-                        userDB.changeDateUser(email);
-                        
-                        // Se oculta la view de Login.
-                        login.dispose();
-                        
-                        // Se instancia el Controlador de MainMenu.
-                        ctrlMainMenu = new ControllerMainMenu(user);
+                        login(email, pass);
 
                     } else {
                     
@@ -249,6 +211,56 @@ public class ControllerLogin implements java.awt.event.ActionListener {
     }
      
     /**
+     * Método genérico para iniciar sesión en el sistema.
+     * @param email Correo electrónico del usuario.
+     * @param pass Contraseña del usuario.
+     */
+    private void login(String email, String pass) {
+        
+        // Se muestra quién ingresó al sistema.
+        System.out.println("El usuario '" + email + "' ha ingresado al"
+                + " sistema con la contraseña '" + pass + "'.");
+
+        // Se muestra un mensaje emergente de "Bienvenido".
+        popup = new PopupMessage(login, true, 2, "Bienvenido");
+
+        user = getDataAccess(email);
+
+        notification = new Notification(new ConnectionDB().next("Notification"),
+                "Inicio de sesión " + new Date(), 
+                "El usuario " + email + " ha iniciado sesión el "
+                        + new Date() + " en el gestor \"Caelesti Management\". "
+                        + "\n\nSi usted desconoce de esta actividad "
+                        + "póngase en contacto inmediatamente con el "
+                        + "administrador del sistema.",
+                'A',
+                0,
+                'A'
+        );
+
+        notificationDB.createAndLinkNotification(user.getId(), notification);
+
+        mail.sendMessage(
+                email, 
+                notification.getName(), 
+                notification.getMessage()
+        );      
+
+        System.out.println("Los datos de acceso del usuario son: " +
+                "Tipo: " + user.getUserTypeId() +
+                ". Correo: " + user.getEmail() +
+                ". Contraseña: " + user.getPassword()
+        );
+
+        userDB.changeDateUser(email, login.chkbRememberMe.isSelected());
+
+        login.dispose();
+
+        ctrlMainMenu = new ControllerMainMenu(user);
+                        
+    }
+    
+    /**
      * Método para obtener los datos de acceso de un usuario.
      * @param email Correo electrónico del usuario que va a ingresar al sistema.
      */
@@ -283,12 +295,13 @@ public class ControllerLogin implements java.awt.event.ActionListener {
                                
             }
                                                 
-            System.out.println("Éxito.");
+            System.out.println("Se han obtenido los datos del usuario " + 
+                    supportUser.getEmail() + " con éxito.");
             
             return supportUser;
                                     
         } catch (java.sql.SQLException | java.io.IOException e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error en acceso a Base de Datos: " + e);
         }
         
         return null;

@@ -2,6 +2,7 @@
 package models.database;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 import lib.ConnectionDB;
 import models.User;
@@ -146,6 +147,142 @@ public class UserDB {
         // Se desconecta la BD.
         con.disconnect();
                  
+    }
+    
+    /**
+     * Método para obtener el atributo identificador de un usuario.
+     * @param email Correo electrónico del usuario.
+     * @return Devuelve el atributo identificador del usuario.
+     */
+    public int getId(String email) {
+        
+        int id = -1;
+        
+        try {
+            
+            String  SQL  = "SELECT \"id\" FROM \"User\" WHERE \"email\" = '" + email + "';";
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next())
+                id = result.getInt("id");
+
+            System.out.println("El usuario '" + email + "' tiene como id = '" + id + "'");
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+                
+        return id;
+        
+    }
+    
+    /**
+     * Método para obtener el correo electrónico de un usuario.
+     * @param id Atributo identificador de un usuario.
+     * @return Devuelve el correo electrónico del usuario.
+     */
+    public String getEmail(int id) {
+        
+        String email = null;
+        
+        try {
+            
+            String  SQL  = "SELECT \"email\" FROM \"User\" WHERE \"id\" = '" + id + "';";
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next())
+                email = result.getString("email");
+
+            System.out.println("El usuario '" + id + "' tiene como correo electrónico = '" + email + "'");
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+                
+        return email;
+        
+    }
+    
+    /**
+     * Método para obtener la contraseña de un usuario.
+     * @param email Correo electrónico de un usuario.
+     * @return Devuelve la contraseña del usuario.
+     */
+    public String getPassword(String email) {
+        
+        String pass = null;
+        
+        try {
+            
+            String  SQL  = "SELECT \"password\" FROM \"User\" WHERE \"email\" = '" + email + "';";
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next())
+                pass = result.getString("password");
+
+            System.out.println("El usuario '" + email + "' tiene como contraseña = '" + pass + "'");
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+                
+        return pass;
+        
+    }
+    
+        /**
+     * Método para obtener la contraseña de un usuario.
+     * @param id Atributo identificador del usuario.
+     * @return Devuelve la contraseña del usuario.
+     */
+    public String getPassword(int id) {
+        
+        String pass = null;
+        
+        try {
+            
+            String  SQL  = "SELECT \"password\" FROM \"User\" WHERE \"id\" = '" + id + "';";
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next())
+                pass = result.getString("password");
+
+            System.out.println("El usuario '" + id + "' tiene como contraseña = '" + pass + "'");
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+                
+        return pass;
+        
     }
 
     /**
@@ -317,10 +454,32 @@ public class UserDB {
     }
     
     /**
+     * Método para olvidar los datos de acceso del sistema.
+     */
+    public void forgetCredentials() {
+        
+        con.connect();
+            
+        String  SQL = "UPDATE \"User\" SET \"rememberData\" = 'I' "
+                + "WHERE \"rememberData\" = 'A';";        
+
+        // Se realiza la inserción de datos.
+        con.queryInsert(SQL);
+
+        // Se muestra mensaje de éxito.
+        System.out.println("Se olvidan los datos de usuarios.");
+
+        // Se desconecta la BD.
+        con.disconnect();
+        
+    }
+    
+    /**
      * Método para actualizar fechas de un usuario.
      * @param email Correo del usuario a actualizar fecha.
+     * @param rememberData Recordar datos del usuario en el sistema.
      */
-    public void changeDateUser(String email) {
+    public void changeDateUser(String email, boolean rememberData) {
         
         // Se declara la variable de sentencia SQL.
         String SQL = "";
@@ -363,6 +522,28 @@ public class UserDB {
           
         // Se desconecta la BD.
         con.disconnect();
+        
+        if(rememberData) {
+            
+            // Se olvidan todos los datos de accesos recordados.
+            forgetCredentials();
+            
+            con.connect();
+            
+            SQL = "UPDATE \"User\" SET \"rememberData\" = 'A' "
+                    + "WHERE \"email\" = '" + email + "';";        
+
+            // Se realiza la inserción de datos.
+            con.queryInsert(SQL);
+
+            // Se muestra mensaje de éxito.
+            System.out.println("El usuario '" + email + "' mantendrá sus datos "
+                    + "de usuario recordados en el sistema.");
+
+            // Se desconecta la BD.
+            con.disconnect();
+            
+        }
         
     }
  
@@ -528,8 +709,6 @@ public class UserDB {
     /**
      * Método que permite actualizar la foto de un usuario.
      * @param email Correo electrónico del usuario.
-     * @return 'Verdadero' si se pudo realizar la actualización de foto, 'Falso' 
-     * para caso contrario.
      */
     public void deletePhoto(String email) {
                     
@@ -543,6 +722,68 @@ public class UserDB {
         
         System.out.println("La foto del usuario de correo '" + email + "' ha sido eliminada.");
             
+    }
+    
+    /**
+     * Método para saber si existe un usuario con datos guardados en la Base de Datos.
+     * @return Devuelve 'Verdadero' por si existe un usuario con datos guardados, 'falso' para caso contrario.
+     */
+    public boolean rememberUser() {
+        
+        try {
+            
+            String  SQL  = "SELECT \"email\" FROM \"User\" WHERE \"rememberData\" = 'A';";                
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+        
+            return result.next();
+            
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+            return false;
+
+    }
+    
+    /**
+     * Método para obtener el correo electrónico de un usuario que mantiene sus datos almacenados en el sistema.
+     * @return Devuelve correo electrónico de un usuario.
+     */
+    public String getRememberedUserData() {
+        
+        try {
+            
+            String  SQL  = "SELECT \"email\" FROM \"User\" WHERE \"rememberData\" = 'A';",
+                    data = null;
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next())
+                data = result.getString("email");
+
+            System.out.println("El usuario '" + data + "' mantiene sus datos recordados en el sistema.");
+
+            // Retorna consulta.
+            return data;
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de inicio de sesión: " + ex);
+        }
+        
+        return null;
+        
     }
     
 }

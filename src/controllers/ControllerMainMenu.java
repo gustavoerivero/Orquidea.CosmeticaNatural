@@ -13,6 +13,7 @@ import views.*;
 
 // Se importan los controllers a utilizar.
 import controllers.mainOptions.*;
+import controllers.mainOptions.enterprise.*;
 
 // Se importan las clases de soporte a utilizar.
 import lib.SupportFunctions;
@@ -31,23 +32,24 @@ import javax.swing.ImageIcon;
 public class ControllerMainMenu implements ActionListener, MouseListener{
     
     // Se declaran las variables a utilizar.
-    private MainMenu                mainMenu;
+    private MainMenu                    mainMenu;
     
-    private SelectOption            select;
-    private PopupMessage            popup;
+    private SelectOption                select;
+    private PopupMessage                popup;
     
-    private SupportFunctions        support;
-    private NotificationPanel       notification;
+    private SupportFunctions            support;
+    private NotificationPanel           notification;
     
-    private User                    user;
-    private Employee                employee;
-    private UserDB                  userDB          = new UserDB();
-    private EmployeeDB              employeeDB      = new EmployeeDB();
-    private NotificationDB          notificationDB  = new NotificationDB();
+    private User                        user;
+    private Employee                    employee;
+    private UserDB                      userDB          = new UserDB();
+    private EmployeeDB                  employeeDB      = new EmployeeDB();
+    private NotificationDB              notificationDB  = new NotificationDB();
     
-    private ControllerLogin         ctrlLogin;
-    private ControllerUserProfile   ctrlProfile;
-    private ControllerMainOptions   ctrlMainOptions;
+    private ControllerLogin             ctrlLogin;
+    private ControllerUserProfile       ctrlProfile;
+    private ControllerMainOptions       ctrlMainOptions;
+    private ControllerEnterpriseMenu    ctrlEnterpriseMenu;
             
     /**
      * Constructor del controlador del MainMenu.
@@ -113,7 +115,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             if(select.getOpc())
                 System.exit(0);
             
-        } 
+        }
         
         // Cerrar sesión
         else if(evt.getSource() == mainMenu.btnSignOff) {
@@ -129,6 +131,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
             
             if(select.getOpc()) {
                 
+                userDB.forgetCredentials();
                 mainMenu.btnSignOff.setBackground(new java.awt.Color(255,245,249));
                 mainMenu.dispose();
                 ctrlLogin = new ControllerLogin();
@@ -177,9 +180,12 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         // Home
         else if(evt.getSource() == mainMenu.btnHome) {
-            
             ctrlMainOptions = new ControllerMainOptions(mainMenu, mainMenu.panMainPanel);
-            
+        }
+        
+        // Enterprise
+        else if(evt.getSource() == mainMenu.btnEnterprise) {
+            ctrlEnterpriseMenu = new ControllerEnterpriseMenu(mainMenu, mainMenu.panMainPanel);
         }
         
         //</editor-fold>

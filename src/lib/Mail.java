@@ -10,11 +10,12 @@ public class Mail {
     /**
      * Variables String para el correo electrónico y contraseña.
      */
-    private String  email,
-                    pass;
+    private String  email   = null,
+                    pass    = null;
         
     /**
      * Constructor de la clase Mail.
+     * Recibe correo electrónico y contraseña del emisor.
      * @param email Correo electrónico.
      * @param pass Contraseña.
      */
@@ -31,7 +32,8 @@ public class Mail {
      * @param pass Contraseña del correo electrónico emisor.
      * @param to Correo electrónico receptor.
      * @param subject Asunto del correo a enviar.
-     * @param content Contenido del correo a enviar
+     * @param content Contenido del correo a enviar.
+     * Se instancia el emisor y envía correo a un receptor.
      */
     public Mail(String email, String pass, String to, String subject, String content) {
         
@@ -105,7 +107,7 @@ public class Mail {
         } catch (javax.mail.MessagingException ex) {
             
             // Se notifica que el correo no pudo ser enviado.
-            System.out.println("El correo no pudo ser enviado. Error: " + ex);
+            System.out.println("Error de envío de correo. Error: " + ex);
             
             return false;
             

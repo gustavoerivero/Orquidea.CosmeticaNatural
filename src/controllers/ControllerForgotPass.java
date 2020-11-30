@@ -6,7 +6,10 @@ import lib.SupportFunctions;
 import lib.Mail;
 
 // Se importan los models a utilizar.
+import models.Notification;
+
 import models.database.UserDB;
+import models.database.NotificationDB;
 
 // Se importan las views a utilizar.
 import views.ForgotPass;
@@ -30,6 +33,8 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
         private Mail                mail;
         
         // Models
+        private Notification        notification;
+        private NotificationDB      notificationDB;
         private UserDB              userDB;
     
     // Se declaran las variables a utilizar.
@@ -38,19 +43,20 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
     public ControllerForgotPass(){
     
         // Se instancia clase de soporte.
-        support     = new SupportFunctions();
-        userDB      = new UserDB();
-        mail        = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
+        support         = new SupportFunctions();
+        notificationDB  = new NotificationDB();
+        userDB          = new UserDB();
+        mail            = new Mail("caelestidevelopment@gmail.com", "tavo9712pipox");
         
         // Se instancia view a utilizar.
-        forgot      = new ForgotPass();
+        forgot          = new ForgotPass();
         
         // Se activan los eventos de los botones.
         forgot.addEvents(this);
         
         // Se inicializan las variables.
-        correo      = null;
-        codex       = null;
+        correo          = null;
+        codex           = null;
                 
     }
     
@@ -246,6 +252,27 @@ public class ControllerForgotPass implements java.awt.event.ActionListener{
                     // Se muestra mensaje de que la actualización fue exitosa.
                     System.out.println("Al usuario " + correo + " se le ha actualizado "
                             + "su contraseña por " + pass + ".");
+                    
+                    notification = new Notification(new lib.ConnectionDB().next("Notification"),
+                            "Cambio de contraseña " + new java.util.Date(), 
+                            "El usuario " + correo + " ha cambiado de contraseña el "
+                                    + new java.util.Date() + " en el gestor \"Caelesti Management\"."
+                                    + " La nueva contraseña es " + pass
+                                    + "\n\nSi usted desconoce de esta actividad "
+                                    + "póngase en contacto inmediatamente con el "
+                                    + "administrador del sistema.",
+                            'A',
+                            0,
+                            'A'
+                    );
+                    
+                    notificationDB.createAndLinkNotification(userDB.getId(correo), notification);
+
+                    mail.sendMessage(
+                            correo, 
+                            notification.getName(), 
+                            notification.getMessage()
+                    );   
 
                     // Se muestra en pantalla mensaje de que la actualización fue exitosa.
                     popup = new PopupMessage(forgot, true, 15, 

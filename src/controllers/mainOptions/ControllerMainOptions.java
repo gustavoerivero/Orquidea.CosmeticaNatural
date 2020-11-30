@@ -47,6 +47,54 @@ public class ControllerMainOptions implements java.awt.event.ActionListener{
             
             
         }
+        
+        else if(evt.getSource() == main.btnSell) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnBuy) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnBuild) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnFixedExpenses) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnClient) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnProvider) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnEmployee) {
+            
+            
+            
+        }
+        
+        else if(evt.getSource() == main.btnEnterprise) {
+            
+            
+            
+        }
     
     }
     

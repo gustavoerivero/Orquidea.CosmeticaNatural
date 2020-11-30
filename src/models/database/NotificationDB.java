@@ -219,12 +219,12 @@ public class NotificationDB {
         con.disconnect();
         
         if (count > 0) {
-            System.out.println("El usuario de id = '" + userId + "' tiene " + 
+            System.out.println("El usuario de id '" + userId + "' tiene " + 
                     count + " notificaciones por leer.");
             return true;
         }
         
-        System.out.println("El usuario de id = '" + userId + "' no tiene notificaciones por leer.");
+        System.out.println("El usuario de id '" + userId + "' no tiene notificaciones por leer.");
         return false;
                 
     }

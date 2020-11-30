@@ -17,6 +17,12 @@ public class MainOptions extends javax.swing.JPanel {
         btnStats.addActionListener(evt);
         btnSell.addActionListener(evt);
         btnBuy.addActionListener(evt);
+        btnBuild.addActionListener(evt);
+        btnFixedExpenses.addActionListener(evt);
+        btnClient.addActionListener(evt);
+        btnProvider.addActionListener(evt);
+        btnEmployee.addActionListener(evt);
+        btnEnterprise.addActionListener(evt);
         
     }
 
@@ -39,6 +45,16 @@ public class MainOptions extends javax.swing.JPanel {
         btnBuy = new javax.swing.JButton();
         panBtnBuild = new javax.swing.JPanel();
         btnBuild = new javax.swing.JButton();
+        panBtnClient = new javax.swing.JPanel();
+        btnClient = new javax.swing.JButton();
+        panBtnEmployee = new javax.swing.JPanel();
+        btnEmployee = new javax.swing.JButton();
+        panBtnFixedExpenses = new javax.swing.JPanel();
+        btnFixedExpenses = new javax.swing.JButton();
+        panBtnProvider = new javax.swing.JPanel();
+        btnProvider = new javax.swing.JButton();
+        panBtnEnterprise = new javax.swing.JPanel();
+        btnEnterprise = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 249));
         setMaximumSize(new java.awt.Dimension(748, 654));
@@ -251,8 +267,212 @@ public class MainOptions extends javax.swing.JPanel {
         panBtnBuildLayout.setVerticalGroup(
             panBtnBuildLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBtnBuildLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addComponent(btnBuild))
+        );
+
+        panBtnClient.setBackground(new java.awt.Color(255, 245, 249));
+        panBtnClient.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        btnClient.setBackground(new java.awt.Color(255, 245, 249));
+        btnClient.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnClient.setForeground(new java.awt.Color(0, 0, 0));
+        btnClient.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/clientIcon.png"))); // NOI18N
+        btnClient.setText("<html><b><p align = 'center'><FONT SIZE=4>Clientes</font></p></b><br><p align = 'justify'>Lleva un directorio de todos tus clientes, de forma que podrás enlazar las compras a ellos fácilmente.</p></html>");
+        btnClient.setToolTipText("");
+        btnClient.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        btnClient.setBorderPainted(false);
+        btnClient.setContentAreaFilled(false);
+        btnClient.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnClient.setFocusPainted(false);
+        btnClient.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnClient.setIconTextGap(30);
+        btnClient.setMargin(new java.awt.Insets(30, 50, 30, 50));
+        btnClient.setOpaque(true);
+        btnClient.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnClientMouseMoved(evt);
+            }
+        });
+        btnClient.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnClientMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panBtnClientLayout = new javax.swing.GroupLayout(panBtnClient);
+        panBtnClient.setLayout(panBtnClientLayout);
+        panBtnClientLayout.setHorizontalGroup(
+            panBtnClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnClient, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panBtnClientLayout.setVerticalGroup(
+            panBtnClientLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnClient)
+        );
+
+        panBtnEmployee.setBackground(new java.awt.Color(255, 245, 249));
+        panBtnEmployee.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        btnEmployee.setBackground(new java.awt.Color(255, 245, 249));
+        btnEmployee.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEmployee.setForeground(new java.awt.Color(0, 0, 0));
+        btnEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/employeeIcon.png"))); // NOI18N
+        btnEmployee.setText("<html><b><p align = 'center'><FONT SIZE=4>Empleados</font></p></b><br><p align = 'justify'>Gestion la información de los empleados de tu empresa y los usuarios que les corresponde.</p></html>");
+        btnEmployee.setToolTipText("");
+        btnEmployee.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        btnEmployee.setBorderPainted(false);
+        btnEmployee.setContentAreaFilled(false);
+        btnEmployee.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEmployee.setFocusPainted(false);
+        btnEmployee.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnEmployee.setIconTextGap(30);
+        btnEmployee.setMargin(new java.awt.Insets(30, 50, 30, 50));
+        btnEmployee.setOpaque(true);
+        btnEmployee.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnEmployeeMouseMoved(evt);
+            }
+        });
+        btnEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEmployeeMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panBtnEmployeeLayout = new javax.swing.GroupLayout(panBtnEmployee);
+        panBtnEmployee.setLayout(panBtnEmployeeLayout);
+        panBtnEmployeeLayout.setHorizontalGroup(
+            panBtnEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnEmployee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panBtnEmployeeLayout.setVerticalGroup(
+            panBtnEmployeeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnEmployee, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        panBtnFixedExpenses.setBackground(new java.awt.Color(255, 245, 249));
+        panBtnFixedExpenses.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        btnFixedExpenses.setBackground(new java.awt.Color(255, 245, 249));
+        btnFixedExpenses.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnFixedExpenses.setForeground(new java.awt.Color(0, 0, 0));
+        btnFixedExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/fixedExpenseIcon.png"))); // NOI18N
+        btnFixedExpenses.setText("<html><b><p align = 'center'><FONT SIZE=4>Gastos Fijos</font></p></b><br><p align = 'justify'>Mantén un control de todos los gastos fijos que genera tu empresa durante todo el mes.</p></html>");
+        btnFixedExpenses.setToolTipText("");
+        btnFixedExpenses.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        btnFixedExpenses.setBorderPainted(false);
+        btnFixedExpenses.setContentAreaFilled(false);
+        btnFixedExpenses.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnFixedExpenses.setFocusPainted(false);
+        btnFixedExpenses.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnFixedExpenses.setIconTextGap(30);
+        btnFixedExpenses.setMargin(new java.awt.Insets(30, 50, 30, 50));
+        btnFixedExpenses.setOpaque(true);
+        btnFixedExpenses.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnFixedExpensesMouseMoved(evt);
+            }
+        });
+        btnFixedExpenses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnFixedExpensesMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panBtnFixedExpensesLayout = new javax.swing.GroupLayout(panBtnFixedExpenses);
+        panBtnFixedExpenses.setLayout(panBtnFixedExpensesLayout);
+        panBtnFixedExpensesLayout.setHorizontalGroup(
+            panBtnFixedExpensesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnFixedExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panBtnFixedExpensesLayout.setVerticalGroup(
+            panBtnFixedExpensesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnFixedExpenses, javax.swing.GroupLayout.Alignment.TRAILING)
+        );
+
+        panBtnProvider.setBackground(new java.awt.Color(255, 245, 249));
+        panBtnProvider.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        btnProvider.setBackground(new java.awt.Color(255, 245, 249));
+        btnProvider.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnProvider.setForeground(new java.awt.Color(0, 0, 0));
+        btnProvider.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/providerIcon.png"))); // NOI18N
+        btnProvider.setText("<html><b><p align = 'center'><FONT SIZE=4>Proveedores</font></p></b><br><p align = 'justify'>Siempre es bueno y muy recomendable tener un listado de tus proveedores de confianza.</p></html>");
+        btnProvider.setToolTipText("");
+        btnProvider.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        btnProvider.setBorderPainted(false);
+        btnProvider.setContentAreaFilled(false);
+        btnProvider.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnProvider.setFocusPainted(false);
+        btnProvider.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnProvider.setIconTextGap(30);
+        btnProvider.setMargin(new java.awt.Insets(30, 50, 30, 50));
+        btnProvider.setOpaque(true);
+        btnProvider.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnProviderMouseMoved(evt);
+            }
+        });
+        btnProvider.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnProviderMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panBtnProviderLayout = new javax.swing.GroupLayout(panBtnProvider);
+        panBtnProvider.setLayout(panBtnProviderLayout);
+        panBtnProviderLayout.setHorizontalGroup(
+            panBtnProviderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnProvider, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panBtnProviderLayout.setVerticalGroup(
+            panBtnProviderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBtnProviderLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnBuild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        panBtnEnterprise.setBackground(new java.awt.Color(255, 245, 249));
+        panBtnEnterprise.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 204, 255), 1, true));
+
+        btnEnterprise.setBackground(new java.awt.Color(255, 245, 249));
+        btnEnterprise.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnEnterprise.setForeground(new java.awt.Color(0, 0, 0));
+        btnEnterprise.setIcon(new javax.swing.ImageIcon(getClass().getResource("/views/images/large/enterpriseIcon.png"))); // NOI18N
+        btnEnterprise.setText("<html><b><p align = 'center'><FONT SIZE=4>Empresa</font></p></b><br><p align = 'justify'>Visualiza la información de la empresa y de ser necesario, realiza los ajustes que creas correspondientes.</p></html>");
+        btnEnterprise.setToolTipText("");
+        btnEnterprise.setBorder(javax.swing.BorderFactory.createEmptyBorder(15, 30, 15, 30));
+        btnEnterprise.setBorderPainted(false);
+        btnEnterprise.setContentAreaFilled(false);
+        btnEnterprise.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEnterprise.setFocusPainted(false);
+        btnEnterprise.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        btnEnterprise.setIconTextGap(30);
+        btnEnterprise.setMargin(new java.awt.Insets(30, 50, 30, 50));
+        btnEnterprise.setOpaque(true);
+        btnEnterprise.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btnEnterpriseMouseMoved(evt);
+            }
+        });
+        btnEnterprise.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEnterpriseMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panBtnEnterpriseLayout = new javax.swing.GroupLayout(panBtnEnterprise);
+        panBtnEnterprise.setLayout(panBtnEnterpriseLayout);
+        panBtnEnterpriseLayout.setHorizontalGroup(
+            panBtnEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panBtnEnterpriseLayout.setVerticalGroup(
+            panBtnEnterpriseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panBtnEnterpriseLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnEnterprise, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -262,29 +482,44 @@ public class MainOptions extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panBtnEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panBtnBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panBtnSell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panBtnWallet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panBtnStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panBtnBuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panBtnBuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnFixedExpenses, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnProvider, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(12, 12, 12))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panBtnWallet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panBtnStats, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(panBtnStats, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(panBtnBuy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(panBtnSell, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(panBtnBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(297, 297, 297))
+                    .addComponent(panBtnSell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panBtnBuild, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnFixedExpenses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panBtnProvider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panBtnClient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panBtnEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panBtnEmployee, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -328,15 +563,65 @@ public class MainOptions extends javax.swing.JPanel {
         panBtnBuild.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
     }//GEN-LAST:event_btnBuildMouseExited
 
+    private void btnClientMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientMouseMoved
+        panBtnClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+    }//GEN-LAST:event_btnClientMouseMoved
+
+    private void btnClientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnClientMouseExited
+        panBtnClient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
+    }//GEN-LAST:event_btnClientMouseExited
+
+    private void btnEmployeeMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeMouseMoved
+        panBtnEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+    }//GEN-LAST:event_btnEmployeeMouseMoved
+
+    private void btnEmployeeMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmployeeMouseExited
+        panBtnEmployee.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
+    }//GEN-LAST:event_btnEmployeeMouseExited
+
+    private void btnFixedExpensesMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFixedExpensesMouseMoved
+        panBtnFixedExpenses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+    }//GEN-LAST:event_btnFixedExpensesMouseMoved
+
+    private void btnFixedExpensesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnFixedExpensesMouseExited
+        panBtnFixedExpenses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
+    }//GEN-LAST:event_btnFixedExpensesMouseExited
+
+    private void btnProviderMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProviderMouseMoved
+        panBtnProvider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+    }//GEN-LAST:event_btnProviderMouseMoved
+
+    private void btnProviderMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProviderMouseExited
+        panBtnProvider.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
+    }//GEN-LAST:event_btnProviderMouseExited
+
+    private void btnEnterpriseMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseMouseMoved
+        panBtnEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(194, 48, 111)));
+    }//GEN-LAST:event_btnEnterpriseMouseMoved
+
+    private void btnEnterpriseMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEnterpriseMouseExited
+        panBtnEnterprise.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255,204,255)));
+    }//GEN-LAST:event_btnEnterpriseMouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuild;
     public javax.swing.JButton btnBuy;
+    public javax.swing.JButton btnClient;
+    public javax.swing.JButton btnEmployee;
+    public javax.swing.JButton btnEnterprise;
+    public javax.swing.JButton btnFixedExpenses;
+    public javax.swing.JButton btnProvider;
     public javax.swing.JButton btnSell;
     public javax.swing.JButton btnStats;
     public javax.swing.JButton btnWalletManagement;
     private javax.swing.JPanel panBtnBuild;
     private javax.swing.JPanel panBtnBuy;
+    private javax.swing.JPanel panBtnClient;
+    private javax.swing.JPanel panBtnEmployee;
+    private javax.swing.JPanel panBtnEnterprise;
+    private javax.swing.JPanel panBtnFixedExpenses;
+    private javax.swing.JPanel panBtnProvider;
     private javax.swing.JPanel panBtnSell;
     private javax.swing.JPanel panBtnStats;
     private javax.swing.JPanel panBtnWallet;
