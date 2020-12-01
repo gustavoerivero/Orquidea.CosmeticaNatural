@@ -116,6 +116,38 @@ public class ConnectionDB {
     }
     
     /**
+     * Método saber cuantos registros existen en una tabla.
+     * @param data Tabla que se va a evaluar.
+     * @return Devuelve 'verdadero' si existe al menos un valor en la tabla mencionada, 
+     * 'falso' para caso contrario.
+     */
+    public int count(String data){
+                
+        try{
+            
+            connect();
+          
+            // Se declara una sentencia SQL.
+            String SQL = "SELECT COUNT('id') FROM \"" + data + "\";";
+            
+            // Se realiza la consulta y se obtiene el resultado.
+            ResultSet rs = queryConsult(SQL);
+                     
+            // Se desconecta la BD.
+            disconnect();
+            
+            while(rs.next())
+                return rs.getInt("count");
+            
+        } catch (java.sql.SQLException ex){
+            System.out.println("No se pudo encontrar información. Error: " + ex);
+        }
+        
+        return -1;
+        
+    }
+    
+    /**
      * Método para conocer el siguiente registro que se va a añadir en una tabla de la Base de Datos.
      * @param data Tabla que se va a evaluar.
      * @return Devuelve el número que identificará el siguiente registro a añadir.

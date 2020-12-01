@@ -1,9 +1,14 @@
 
 package models.database;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import lib.ConnectionDB;
 import models.User;
 
@@ -784,6 +789,64 @@ public class UserDB {
         
         return null;
         
+    }
+    
+    /**
+     * Método para obtener un listado de todos los usuarios activos de la empresa.
+     * @return Listado de todos los usuarios.
+     */
+    public java.util.ArrayList<User> getAllUsers() {
+        
+        java.util.ArrayList<User> users = new java.util.ArrayList<>();
+        
+        try {
+            
+            String  SQL  = "SELECT * FROM \"User\" WHERE \"state\" = 'A';";
+
+            con.connect();
+
+            // Se realiza y se recibe la consulta.
+            ResultSet result = con.queryConsult(SQL);
+
+            // Se desconecta la BD.
+            con.disconnect();
+
+            while(result.next()) {
+                
+                User supportUser = new User(result.getInt("id"), 
+                        result.getInt("UserTypeid"), 
+                        result.getString("email"), 
+                        result.getString("password"),
+                        result.getString("rememberData").charAt(0),
+                        result.getString("state").charAt(0),
+                        result.getDate("firstSession"),
+                        result.getDate("lastSession"), 
+                        null);
+                
+                java.io.InputStream is = result.getBinaryStream("photo");
+                
+                if(is != null)
+                    try {
+                        supportUser.setPhoto(new ImageIcon((java.awt.image.BufferedImage) (ImageIO.read(is))));
+                    } catch (IOException ex) {
+                        System.out.println("Error de conversión de imágenes de usuario. Error: " + ex);
+                    }
+                               
+                users.add(supportUser);
+                
+            }
+            
+            System.out.println("Se ha obtenido la información de todos los usuarios activos con éxito.");
+
+            // Retorna consulta.
+            return users;
+                           
+        } catch (SQLException ex) {
+            System.out.println("Error de obtención de datos de usuarios. Error: " + ex);
+        }
+        
+        return null;
+                
     }
     
 }

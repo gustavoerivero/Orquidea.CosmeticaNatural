@@ -1,6 +1,8 @@
 
 package controllers.mainOptions.enterprise;
 
+import models.User;
+
 import views.MainMenu;
 import views.mainOptions.enterprise.EnterpriseMenu;
 
@@ -14,15 +16,20 @@ import javax.swing.JPanel;
  */
 public class ControllerEnterpriseMenu implements java.awt.event.ActionListener{ 
     
-    private EnterpriseMenu      enterpriseMenu;
+    private EnterpriseMenu                  enterpriseMenu;
     
-    private MainMenu            menu;
+    private MainMenu                        main;
     
-    private SupportFunctions    support;
+    private SupportFunctions                support;
     
-    public ControllerEnterpriseMenu(MainMenu menu, JPanel parent){
+    private User                            user;
+    
+    private ControllerEnterpriseManagement  CtrlEnterpriseManagement;
+    
+    public ControllerEnterpriseMenu(MainMenu main, JPanel parent, User user){
         
-        this.menu       = menu;
+        this.main       = main;
+        this.user       = user;
         
         enterpriseMenu  = new EnterpriseMenu();
         support         = new SupportFunctions();
@@ -62,7 +69,7 @@ public class ControllerEnterpriseMenu implements java.awt.event.ActionListener{
         
         else if(evt.getSource() == enterpriseMenu.btnEnterprise) {
             
-            
+            CtrlEnterpriseManagement = new ControllerEnterpriseManagement(main, user);
             
         }
     

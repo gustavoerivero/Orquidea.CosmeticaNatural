@@ -1,6 +1,7 @@
 
 package models.database;
 
+import java.sql.ResultSet;
 import lib.ConnectionDB;
 import models.Enterprise;
 
@@ -47,6 +48,58 @@ public class EnterpriseDB {
         // Se desconecta la BD.
         con.disconnect();
                 
+    }
+    
+    /**
+     * Método para obtener los datos de la empresa.
+     * @return Devuelve consulta.
+     */
+    public ResultSet consultEnterprise() {
+                
+        // Se define la sentencia SQL a aplicar en la BD.
+        String SQL = "SELECT * FROM \"Enterprise\" AND \"state\" = 'A';";
+        
+        // Se establece una conexión con la BD.
+        con.connect();
+        
+        // Se realiza y se recibe la consulta.
+        ResultSet result = con.queryConsult(SQL);
+        
+        System.out.println("La consulta se realizó con éxito.");
+        
+        // Se desconecta la BD.
+        con.disconnect();
+        
+        // Retorna consulta.
+        return result;
+        
+    }
+    
+    /**
+     * Método para actualizar los datos de una Empresa en la Base de Datos.
+     * @param enterprise Datos que serán actualizados.
+     */
+    public void updateEnterprise(Enterprise enterprise) {
+        
+        con.connect(); 
+
+        // Se describe la sentencia SQL.
+        String SQL = "UPDATE \"Enterprise\" SET \"name\" = '" + enterprise.getName() + 
+                    "', \"description\" = '" + enterprise.getDescription() + 
+                    "', \"email\" = '" + enterprise.getEmail() +
+                    "', \"direction\" = '" + enterprise.getDirection() +
+                    "', \"phone\" = '" + enterprise.getPhone() +
+                    "', \"dni\" = '" + enterprise.getDni() +
+                    "', \"state\" = '" + enterprise.getState() +
+                    "' WHERE \"id\" = '" + enterprise.getId() + "';";
+            
+        con.queryInsert(SQL);
+        
+        System.out.println("Se ha actualizado la empresa " + enterprise.getName() +
+                " con éxito.");
+            
+        // Se desconecta la BD.
+        con.disconnect();
     }
     
     /**

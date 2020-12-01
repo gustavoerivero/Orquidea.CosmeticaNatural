@@ -431,6 +431,14 @@ public class ControllerUserProfile implements java.awt.event.ActionListener{
             profile.dtcUserBirthday.setEnabled(false);
             profile.txtUserEmail.setEditable(false);          
             
+        } else if(type == 0) {
+            
+            profile.txtUserDNI.setEditable(true);
+            profile.txtUserName.setEditable(true);
+            profile.txtUserSurname.setEditable(true);
+            profile.dtcUserBirthday.setEnabled(true);
+            profile.txtUserEmail.setEditable(true);  
+            
         }
         
     }

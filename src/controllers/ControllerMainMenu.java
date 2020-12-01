@@ -185,7 +185,7 @@ public class ControllerMainMenu implements ActionListener, MouseListener{
         
         // Enterprise
         else if(evt.getSource() == mainMenu.btnEnterprise) {
-            ctrlEnterpriseMenu = new ControllerEnterpriseMenu(mainMenu, mainMenu.panMainPanel);
+            ctrlEnterpriseMenu = new ControllerEnterpriseMenu(mainMenu, mainMenu.panMainPanel, user);
         }
         
         //</editor-fold>
