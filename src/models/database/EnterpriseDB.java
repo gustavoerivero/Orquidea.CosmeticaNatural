@@ -57,7 +57,7 @@ public class EnterpriseDB {
     public ResultSet consultEnterprise() {
                 
         // Se define la sentencia SQL a aplicar en la BD.
-        String SQL = "SELECT * FROM \"Enterprise\" AND \"state\" = 'A';";
+        String SQL = "SELECT * FROM \"Enterprise\" WHERE \"state\" = 'A';";
         
         // Se establece una conexión con la BD.
         con.connect();
